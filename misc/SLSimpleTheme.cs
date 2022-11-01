@@ -542,9 +542,12 @@ internal class SLSimpleTheme
         }
     }
 
-    /// <exception cref="PlatformNotSupportedException"></exception>
     internal void CalculateRowColumnInfo()
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            return;
+
+#pragma warning disable CA1416
         System.Drawing.Font usablefont = SLTool.GetUsableNormalFont(this.MinorLatinFont, SLConstants.DefaultFontSize, System.Drawing.FontStyle.Regular, this.ThrowExceptionsIfAny);
 
         // WARNING: The following algorithm is not guaranteed to work for all fonts.
@@ -584,9 +587,6 @@ internal class SLSimpleTheme
         // I think Tw Cen MT at 96 DPI has an edge pixel of total RGB of 615 or something, which
         // will throw off the calculations.
         int iColorCheck = 610;
-
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
-            throw new PlatformNotSupportedException("Bitmap manipulation only supported on Windows.");
 
         using (System.Drawing.Bitmap bmGraphics = new System.Drawing.Bitmap(iBitmapWidth, iBitmapHeight))
         {
@@ -764,6 +764,7 @@ internal class SLSimpleTheme
             this.fThemeRowHeight = SLTool.GetDefaultRowHeight(this.MinorLatinFont);
             this.lThemeRowHeightInEMU = Convert.ToInt64(this.fThemeRowHeight * SLConstants.PointToEMU);
         }
+#pragma warning restore CA1416
     }
 
     internal void LoadBuiltinTheme(SLThemeTypeValues themetype)

@@ -30,17 +30,24 @@ public partial class SLDocument
                                 cell = slws.CellWarehouse.Cells[iRowIndex][iColumnIndex].Clone();
                                 if (iRowIndex == scf.BaseCellRowIndex && iColumnIndex == scf.BaseCellColumnIndex)
                                 {
-                                    cell.CellFormula = new SLCellFormula();
-                                    cell.CellFormula.FormulaType = CellFormulaValues.Normal;
-                                    cell.CellFormula.FormulaText = scf.FormulaText;
+                                    cell.CellFormula = new()
+                                    {
+                                        FormulaType = CellFormulaValues.Normal,
+                                        FormulaText = scf.FormulaText
+                                    };
+
                                     cell.CellText = "";
                                 }
                                 else
                                 {
                                     bHasError = false;
-                                    cell.CellFormula = new SLCellFormula();
-                                    cell.CellFormula.FormulaType = CellFormulaValues.Normal;
-                                    cell.CellFormula.FormulaText = AdjustCellFormulaDelta(scf.FormulaText, false, scf.BaseCellRowIndex, scf.BaseCellColumnIndex, iRowIndex, iColumnIndex, false, false, false, false, 0, 0, out bHasError);
+                                    
+                                    cell.CellFormula = new()
+                                    {
+                                        FormulaType = CellFormulaValues.Normal,
+                                        FormulaText = AdjustCellFormulaDelta(scf.FormulaText, false, scf.BaseCellRowIndex, scf.BaseCellColumnIndex, iRowIndex, iColumnIndex, false, false, false, false, 0, 0, out bHasError)
+                                    };
+
                                     if (bHasError)
                                     {
                                         cell.CellText = SLConstants.ErrorReference;

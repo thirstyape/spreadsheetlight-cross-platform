@@ -1,4 +1,6 @@
-﻿namespace SpreadsheetLight;
+﻿using System.Runtime.InteropServices;
+
+namespace SpreadsheetLight;
 
 internal partial class SLTool
 {
@@ -58,6 +60,11 @@ internal partial class SLTool
         string fontcheck = string.Empty;
         double fDefaultRowHeadingWidth = 20.4;
         float fResolution = 96;
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            return fDefaultRowHeadingWidth;
+
+#pragma warning disable CA1416
         System.Drawing.Bitmap bm = new System.Drawing.Bitmap(32, 32);
         fResolution = bm.VerticalResolution;
         bm.Dispose();
@@ -304,5 +311,6 @@ internal partial class SLTool
         }
 
         return fDefaultRowHeadingWidth;
+#pragma warning restore CA1416
     }
 }

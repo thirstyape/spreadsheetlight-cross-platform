@@ -27,6 +27,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Drawing;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Linq;
 using X14 = DocumentFormat.OpenXml.Office2010.Excel;
@@ -687,9 +688,11 @@ public partial class SLDocument : IDisposable
     {
         this.dictAutoFitSharedStringCache = new Dictionary<string, SizeF>();
         this.dictAutoFitTextCache = new Dictionary<string, SizeF>();
-        this.dictAutoFitFontCache = new Dictionary<int, System.Drawing.Font>();
         this.dictAutoFitFormatCodeCache = new Dictionary<int, string>();
         this.dictAutoFitTextRotationCache = new Dictionary<int, int>();
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            this.dictAutoFitFontCache = new Dictionary<int, System.Drawing.Font>();
     }
 
     private void InitialiseStylesheetWhatNots(SLThemeTypeValues ThemeType)

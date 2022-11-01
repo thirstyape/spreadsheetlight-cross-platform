@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml;
 using System.Drawing;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Excel = DocumentFormat.OpenXml.Office.Excel;
@@ -554,9 +555,15 @@ internal partial class SLTool
         return result;
     }
 
+#pragma warning disable CA1416
+    /// <exception cref="PlatformNotSupportedException"></exception>
     internal static System.Drawing.Imaging.ImageFormat TranslateImageContentType(string ContentType)
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            throw new PlatformNotSupportedException("Bitmap functions only avaialble on Windows.");
+
         System.Drawing.Imaging.ImageFormat imgtype = System.Drawing.Imaging.ImageFormat.Jpeg;
+
         switch (ContentType.ToLowerInvariant())
         {
             case "image/bmp":
@@ -591,6 +598,7 @@ internal partial class SLTool
 
         return imgtype;
     }
+#pragma warning restore CA1416
 
     internal static double CalculateDaysFromEpoch(DateTime Data, bool For1904Epoch)
     {
@@ -670,11 +678,11 @@ internal partial class SLTool
             xtw.Close();
             sw.Close();
         }
-        catch (Exception e)
+        catch
         {
             if (ThrowExceptionsIfAny)
             {
-                throw e;
+                throw;
             }
             else
             {
@@ -702,11 +710,11 @@ internal partial class SLTool
             xtr.Close();
             sr.Close();
         }
-        catch (Exception e)
+        catch
         {
             if (ThrowExceptionsIfAny)
             {
-                throw e;
+                throw;
             }
             else
             {
@@ -718,8 +726,13 @@ internal partial class SLTool
         return result;
     }
 
+#pragma warning disable CA1416
+    /// <exception cref="PlatformNotSupportedException"></exception>
     internal static Font GetUsableNormalFont(string FontName, double FontSize, FontStyle DrawStyle, bool ThrowExceptionsIfAny)
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            throw new PlatformNotSupportedException("Bitmap functions only avaialble on Windows.");
+
         Font usablefont = new Font(FontFamily.GenericSansSerif, (float)FontSize);
 
         // there's this elaborate dance of try-catch-if-else because apparently certain typefaces
@@ -730,11 +743,11 @@ internal partial class SLTool
         {
             usablefont = new Font(FontName, (float)FontSize, DrawStyle);
         }
-        catch (Exception e)
+        catch
         {
             if (ThrowExceptionsIfAny)
             {
-                throw e;
+                throw;
             }
             else
             {
@@ -794,6 +807,7 @@ internal partial class SLTool
 
         return usablefont;
     }
+#pragma warning restore CA1416
 
     internal static string ToDotNetFormatCode(string FormatCode)
     {
@@ -984,11 +998,11 @@ internal partial class SLTool
                 result = result.Replace(SLConstants.ElapsedMinuteFormatPlaceholder, ts.TotalMinutes.ToString("f0", CultureInfo.InvariantCulture));
                 result = result.Replace(SLConstants.ElapsedSecondFormatPlaceholder, ts.TotalSeconds.ToString("f0", CultureInfo.InvariantCulture));
             }
-            catch (Exception e)
+            catch
             {
                 if (ThrowExceptionsIfAny)
                 {
-                    throw e;
+                    throw;
                 }
                 else
                 {
@@ -1004,11 +1018,11 @@ internal partial class SLTool
                 result = Data.ToString(FormatCode);
                 result = result.Replace(SLConstants.GeneralFormatPlaceholder, sGeneralResult);
             }
-            catch (Exception e)
+            catch
             {
                 if (ThrowExceptionsIfAny)
                 {
-                    throw e;
+                    throw;
                 }
                 else
                 {
@@ -1060,8 +1074,13 @@ internal partial class SLTool
         return szf;
     }
 
+#pragma warning disable CA1416
+    /// <exception cref="PlatformNotSupportedException"></exception>
     internal static SizeF MeasureText(Bitmap bm, Graphics g, string Text, Font UsableFont)
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            throw new PlatformNotSupportedException("Bitmap functions only avaialble on Windows.");
+
         string[] saText = Text.Replace("\r\n", "\n").Split('\n');
         SizeF[] szfa = new SizeF[saText.Length];
 
@@ -1100,6 +1119,7 @@ internal partial class SLTool
 
         return szf;
     }
+#pragma warning restore CA1416
 
     internal static SLCellPointRange TranslateReferenceToCellPointRange(string Reference)
     {

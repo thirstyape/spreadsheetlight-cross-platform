@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using Xdr = DocumentFormat.OpenXml.Drawing.Spreadsheet;
 
 namespace SpreadsheetLight;
@@ -176,9 +177,15 @@ public partial class SLDocument
         bool bItalic;
         bool bStrike;
         bool bUnderline;
-        System.Drawing.FontStyle drawstyle = System.Drawing.FontStyle.Regular;
+        
         System.Drawing.Font ftUsableFont;
         System.Drawing.SizeF szf;
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            return;
+
+#pragma warning disable CA1416
+        System.Drawing.FontStyle drawstyle = System.Drawing.FontStyle.Regular;
 
         using (System.Drawing.Bitmap bm = new System.Drawing.Bitmap(4096, 2048))
         {
@@ -286,6 +293,7 @@ public partial class SLDocument
                 // end of Graphics
             }
         }
+#pragma warning restore CA1416
     }
 
     /// <summary>
@@ -4976,6 +4984,10 @@ public partial class SLDocument
         // too large...
         // If you're doing this in some distant future where you can do spreadsheets on the
         // freaking wall with screens of cosmic proportions, feel free to increase the dimensions.
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            return pixellength;
+
+#pragma warning disable CA1416
         using (System.Drawing.Bitmap bm = new System.Drawing.Bitmap(4096, 2048))
         {
             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bm))
@@ -5359,6 +5371,7 @@ public partial class SLDocument
                 // end of Graphics
             }
         }
+#pragma warning restore CA1416
 
         return pixellength;
     }

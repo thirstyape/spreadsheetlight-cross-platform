@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
+using System.Runtime.InteropServices;
 using A = DocumentFormat.OpenXml.Drawing;
 
 namespace SpreadsheetLight.Drawing;
@@ -401,6 +402,10 @@ public class SLPicture
 
     private void SetResolution(bool HasTarget, float TargetHorizontalResolution, float TargetVerticalResolution)
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            return;
+
+#pragma warning disable CA1416
         // this is used to sort of get the current computer's screen DPI
         System.Drawing.Bitmap bmResolution = new System.Drawing.Bitmap(32, 32);
 
@@ -445,6 +450,7 @@ public class SLPicture
         this.ResizeInPixels(img.Width, img.Height);
         img.Dispose();
         bmResolution.Dispose();
+#pragma warning restore CA1416
     }
 
     /// <summary>

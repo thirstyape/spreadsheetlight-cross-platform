@@ -4,7 +4,6 @@ namespace SpreadsheetLight;
 
 internal partial class SLTool
 {
-    /// <exception cref="PlatformNotSupportedException"></exception>
     internal static double GetDefaultRowHeight(string FontName)
     {
         // Yes, this is a long list of hard-coded values. The reason is that
@@ -49,8 +48,9 @@ internal partial class SLTool
         double fDefaultRowHeight;
         
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
-            throw new PlatformNotSupportedException("Bitmap manipulation only supported on Windows.");
+            return 15;
 
+#pragma warning disable CA1416
         // it seems the resolution obtained this way is either 96 or 120,
         // but whatever... I'm including 144 as well.
         System.Drawing.Bitmap bm = new System.Drawing.Bitmap(32, 32);
@@ -2473,5 +2473,6 @@ internal partial class SLTool
         }
 
         return fDefaultRowHeight;
+#pragma warning restore CA1416
     }
 }

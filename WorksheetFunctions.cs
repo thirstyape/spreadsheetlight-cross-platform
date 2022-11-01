@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using A = DocumentFormat.OpenXml.Drawing;
 using C = DocumentFormat.OpenXml.Drawing.Charts;
@@ -915,6 +916,10 @@ public partial class SLDocument
 
     internal void FeedDataImagePart(ImagePart NewPart, ImagePart ExistingPart)
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == false)
+            return;
+
+#pragma warning disable CA1416
         System.Drawing.Imaging.ImageFormat imgtype = SLTool.TranslateImageContentType(ExistingPart.ContentType);
         using (System.Drawing.Bitmap bm = new System.Drawing.Bitmap(ExistingPart.GetStream()))
         {
@@ -925,6 +930,7 @@ public partial class SLDocument
                 NewPart.FeedData(ms);
             }
         }
+#pragma warning restore CA1416
     }
 
     internal void FeedDataSlidePart(SlidePart NewPart, SlidePart ExistingPart)
