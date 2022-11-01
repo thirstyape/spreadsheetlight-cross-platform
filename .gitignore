@@ -1,0 +1,71 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+.vscode/
+*.code-workspace
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Publish directories
+.config/
+[Pp]ublish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+*.publishproj
+
+# NuGet Packages
+*.nupkg
+
+# The packages folder can be ignored because of Package Restore except build/, which is used as an MSBuild target.
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# Ignore generated web files
+*/wwwroot/css/*
+*/wwwroot/js/*
+*/wwwroot/fonts/*
+*/wwwroot/*.json
+
+# Windows thumbnail file
+Thumbs.db
+
+# Apple directory info file
+.DS_Store
+
+# Temporary MS Office files
+~$*.xls*
+~$*.doc*
+*.~vsd*
+~$*.ppt*
