@@ -1,56 +1,54 @@
-﻿using System;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace SpreadsheetLight
+namespace SpreadsheetLight;
+
+internal class SLCalculatedItem
 {
-    internal class SLCalculatedItem
+    internal SLPivotArea PivotArea { get; set; }
+
+    internal uint? Field { get; set; }
+    internal string Formula { get; set; }
+
+    internal SLCalculatedItem()
     {
-        internal SLPivotArea PivotArea { get; set; }
+        this.SetAllNull();
+    }
 
-        internal uint? Field { get; set; }
-        internal string Formula { get; set; }
+    private void SetAllNull()
+    {
+        this.PivotArea = new SLPivotArea();
+        this.Field = null;
+        this.Formula = "";
+    }
 
-        internal SLCalculatedItem()
-        {
-            this.SetAllNull();
-        }
+    internal void FromCalculatedItem(CalculatedItem ci)
+    {
+        this.SetAllNull();
 
-        private void SetAllNull()
-        {
-            this.PivotArea = new SLPivotArea();
-            this.Field = null;
-            this.Formula = "";
-        }
+        if (ci.Field != null) this.Field = ci.Field.Value;
+        if (ci.Formula != null) this.Formula = ci.Formula.Value;
 
-        internal void FromCalculatedItem(CalculatedItem ci)
-        {
-            this.SetAllNull();
+        if (ci.PivotArea != null) this.PivotArea.FromPivotArea(ci.PivotArea);
+    }
 
-            if (ci.Field != null) this.Field = ci.Field.Value;
-            if (ci.Formula != null) this.Formula = ci.Formula.Value;
+    internal CalculatedItem ToCalculatedItem()
+    {
+        CalculatedItem ci = new CalculatedItem();
+        if (this.Field != null) ci.Field = this.Field.Value;
+        if (this.Formula != null && this.Formula.Length > 0) ci.Formula = this.Formula;
 
-            if (ci.PivotArea != null) this.PivotArea.FromPivotArea(ci.PivotArea);
-        }
+        ci.PivotArea = this.PivotArea.ToPivotArea();
 
-        internal CalculatedItem ToCalculatedItem()
-        {
-            CalculatedItem ci = new CalculatedItem();
-            if (this.Field != null) ci.Field = this.Field.Value;
-            if (this.Formula != null && this.Formula.Length > 0) ci.Formula = this.Formula;
+        return ci;
+    }
 
-            ci.PivotArea = this.PivotArea.ToPivotArea();
+    internal SLCalculatedItem Clone()
+    {
+        SLCalculatedItem ci = new SLCalculatedItem();
+        ci.Field = this.Field;
+        ci.Formula = this.Formula;
+        ci.PivotArea = this.PivotArea.Clone();
 
-            return ci;
-        }
-
-        internal SLCalculatedItem Clone()
-        {
-            SLCalculatedItem ci = new SLCalculatedItem();
-            ci.Field = this.Field;
-            ci.Formula = this.Formula;
-            ci.PivotArea = this.PivotArea.Clone();
-
-            return ci;
-        }
+        return ci;
     }
 }

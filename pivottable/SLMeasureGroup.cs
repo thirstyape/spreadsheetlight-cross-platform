@@ -1,48 +1,46 @@
-﻿using System;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace SpreadsheetLight
+namespace SpreadsheetLight;
+
+internal class SLMeasureGroup
 {
-    internal class SLMeasureGroup
+    internal string Name { get; set; }
+    internal string Caption { get; set; }
+
+    internal SLMeasureGroup()
     {
-        internal string Name { get; set; }
-        internal string Caption { get; set; }
+        this.SetAllNull();
+    }
 
-        internal SLMeasureGroup()
-        {
-            this.SetAllNull();
-        }
+    private void SetAllNull()
+    {
+        this.Name = "";
+        this.Caption = "";
+    }
 
-        private void SetAllNull()
-        {
-            this.Name = "";
-            this.Caption = "";
-        }
+    internal void FromMeasureGroup(MeasureGroup mg)
+    {
+        this.SetAllNull();
 
-        internal void FromMeasureGroup(MeasureGroup mg)
-        {
-            this.SetAllNull();
+        if (mg.Name != null) this.Name = mg.Name.Value;
+        if (mg.Caption != null) this.Caption = mg.Caption.Value;
+    }
 
-            if (mg.Name != null) this.Name = mg.Name.Value;
-            if (mg.Caption != null) this.Caption = mg.Caption.Value;
-        }
+    internal MeasureGroup ToMeasureGroup()
+    {
+        MeasureGroup mg = new MeasureGroup();
+        mg.Name = this.Name;
+        mg.Caption = this.Caption;
 
-        internal MeasureGroup ToMeasureGroup()
-        {
-            MeasureGroup mg = new MeasureGroup();
-            mg.Name = this.Name;
-            mg.Caption = this.Caption;
+        return mg;
+    }
 
-            return mg;
-        }
+    internal SLMeasureGroup Clone()
+    {
+        SLMeasureGroup mg = new SLMeasureGroup();
+        mg.Name = this.Name;
+        mg.Caption = this.Caption;
 
-        internal SLMeasureGroup Clone()
-        {
-            SLMeasureGroup mg = new SLMeasureGroup();
-            mg.Name = this.Name;
-            mg.Caption = this.Caption;
-
-            return mg;
-        }
+        return mg;
     }
 }

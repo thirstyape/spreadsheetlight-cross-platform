@@ -1,133 +1,130 @@
-﻿using System;
-using System.Collections.Generic;
-using DocumentFormat.OpenXml;
+﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace SpreadsheetLight
+namespace SpreadsheetLight;
+
+internal class SLFieldGroup
 {
-    internal class SLFieldGroup
+    internal bool HasRangeProperties;
+    internal SLRangeProperties RangeProperties { get; set; }
+
+    internal List<uint> DiscreteProperties { get; set; }
+
+    internal bool HasGroupItems;
+    internal SLGroupItems GroupItems { get; set; }
+
+    internal uint? ParentId { get; set; }
+    internal uint? Base { get; set; }
+
+    internal SLFieldGroup()
     {
-        internal bool HasRangeProperties;
-        internal SLRangeProperties RangeProperties { get; set; }
+        this.SetAllNull();
+    }
 
-        internal List<uint> DiscreteProperties { get; set; }
+    private void SetAllNull()
+    {
+        this.HasRangeProperties = false;
+        this.RangeProperties = new SLRangeProperties();
 
-        internal bool HasGroupItems;
-        internal SLGroupItems GroupItems { get; set; }
+        this.DiscreteProperties = new List<uint>();
 
-        internal uint? ParentId { get; set; }
-        internal uint? Base { get; set; }
+        this.HasGroupItems = false;
+        this.GroupItems = new SLGroupItems();
 
-        internal SLFieldGroup()
+        this.ParentId = null;
+        this.Base = null;
+    }
+
+    internal void FromFieldGroup(FieldGroup fg)
+    {
+        this.SetAllNull();
+
+        if (fg.ParentId != null) this.ParentId = fg.ParentId.Value;
+        if (fg.Base != null) this.Base = fg.Base.Value;
+
+        using (OpenXmlReader oxr = OpenXmlReader.Create(fg))
         {
-            this.SetAllNull();
-        }
-
-        private void SetAllNull()
-        {
-            this.HasRangeProperties = false;
-            this.RangeProperties = new SLRangeProperties();
-
-            this.DiscreteProperties = new List<uint>();
-
-            this.HasGroupItems = false;
-            this.GroupItems = new SLGroupItems();
-
-            this.ParentId = null;
-            this.Base = null;
-        }
-
-        internal void FromFieldGroup(FieldGroup fg)
-        {
-            this.SetAllNull();
-
-            if (fg.ParentId != null) this.ParentId = fg.ParentId.Value;
-            if (fg.Base != null) this.Base = fg.Base.Value;
-
-            using (OpenXmlReader oxr = OpenXmlReader.Create(fg))
+            while (oxr.Read())
             {
-                while (oxr.Read())
+                if (oxr.ElementType == typeof(RangeProperties))
                 {
-                    if (oxr.ElementType == typeof(RangeProperties))
+                    this.RangeProperties.FromRangeProperties((RangeProperties)oxr.LoadCurrentElement());
+                    this.HasRangeProperties = true;
+                }
+                else if (oxr.ElementType == typeof(DiscreteProperties))
+                {
+                    DiscreteProperties dp = (DiscreteProperties)oxr.LoadCurrentElement();
+                    FieldItem fi;
+                    using (OpenXmlReader oxrDiscrete = OpenXmlReader.Create(dp))
                     {
-                        this.RangeProperties.FromRangeProperties((RangeProperties)oxr.LoadCurrentElement());
-                        this.HasRangeProperties = true;
-                    }
-                    else if (oxr.ElementType == typeof(DiscreteProperties))
-                    {
-                        DiscreteProperties dp = (DiscreteProperties)oxr.LoadCurrentElement();
-                        FieldItem fi;
-                        using (OpenXmlReader oxrDiscrete = OpenXmlReader.Create(dp))
+                        while (oxrDiscrete.Read())
                         {
-                            while (oxrDiscrete.Read())
+                            if (oxrDiscrete.ElementType == typeof(FieldItem))
                             {
-                                if (oxrDiscrete.ElementType == typeof(FieldItem))
-                                {
-                                    fi = (FieldItem)oxrDiscrete.LoadCurrentElement();
-                                    this.DiscreteProperties.Add(fi.Val);
-                                }
+                                fi = (FieldItem)oxrDiscrete.LoadCurrentElement();
+                                this.DiscreteProperties.Add(fi.Val);
                             }
                         }
                     }
-                    else if (oxr.ElementType == typeof(GroupItems))
-                    {
-                        this.GroupItems.FromGroupItems((GroupItems)oxr.LoadCurrentElement());
-                        this.HasGroupItems = true;
-                    }
                 }
-            }
-        }
-
-        internal FieldGroup ToFieldGroup()
-        {
-            FieldGroup fg = new FieldGroup();
-            if (this.ParentId != null) fg.ParentId = this.ParentId.Value;
-            if (this.Base != null) fg.Base = this.Base.Value;
-
-            if (this.HasRangeProperties)
-            {
-                fg.Append(this.RangeProperties.ToRangeProperties());
-            }
-
-            if (this.DiscreteProperties.Count > 0)
-            {
-                DiscreteProperties dp = new DiscreteProperties();
-                dp.Count = (uint)this.DiscreteProperties.Count;
-                foreach (uint i in this.DiscreteProperties)
+                else if (oxr.ElementType == typeof(GroupItems))
                 {
-                    dp.Append(new FieldItem() { Val = i });
+                    this.GroupItems.FromGroupItems((GroupItems)oxr.LoadCurrentElement());
+                    this.HasGroupItems = true;
                 }
-
-                fg.Append(dp);
             }
+        }
+    }
 
-            if (this.HasGroupItems)
-            {
-                fg.Append(this.GroupItems.ToGroupItems());
-            }
+    internal FieldGroup ToFieldGroup()
+    {
+        FieldGroup fg = new FieldGroup();
+        if (this.ParentId != null) fg.ParentId = this.ParentId.Value;
+        if (this.Base != null) fg.Base = this.Base.Value;
 
-            return fg;
+        if (this.HasRangeProperties)
+        {
+            fg.Append(this.RangeProperties.ToRangeProperties());
         }
 
-        internal SLFieldGroup Clone()
+        if (this.DiscreteProperties.Count > 0)
         {
-            SLFieldGroup fg = new SLFieldGroup();
-            fg.ParentId = this.ParentId;
-            fg.Base = this.Base;
-
-            fg.HasRangeProperties = this.HasRangeProperties;
-            fg.RangeProperties = this.RangeProperties.Clone();
-
-            fg.DiscreteProperties = new List<uint>();
+            DiscreteProperties dp = new DiscreteProperties();
+            dp.Count = (uint)this.DiscreteProperties.Count;
             foreach (uint i in this.DiscreteProperties)
             {
-                fg.DiscreteProperties.Add(i);
+                dp.Append(new FieldItem() { Val = i });
             }
 
-            fg.HasGroupItems = this.HasGroupItems;
-            fg.GroupItems = this.GroupItems.Clone();
-
-            return fg;
+            fg.Append(dp);
         }
+
+        if (this.HasGroupItems)
+        {
+            fg.Append(this.GroupItems.ToGroupItems());
+        }
+
+        return fg;
+    }
+
+    internal SLFieldGroup Clone()
+    {
+        SLFieldGroup fg = new SLFieldGroup();
+        fg.ParentId = this.ParentId;
+        fg.Base = this.Base;
+
+        fg.HasRangeProperties = this.HasRangeProperties;
+        fg.RangeProperties = this.RangeProperties.Clone();
+
+        fg.DiscreteProperties = new List<uint>();
+        foreach (uint i in this.DiscreteProperties)
+        {
+            fg.DiscreteProperties.Add(i);
+        }
+
+        fg.HasGroupItems = this.HasGroupItems;
+        fg.GroupItems = this.GroupItems.Clone();
+
+        return fg;
     }
 }

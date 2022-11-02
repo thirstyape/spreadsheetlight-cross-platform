@@ -276,68 +276,6 @@ partial class SLDocument
             hsUniqueSharedString.Add(sHash);
         }
 
-        #region To be deleted once stable
-        //Text t;
-        //Run r;
-        //PhoneticRun phr;
-        //int iTextCount = 0;
-        //string sText = string.Empty;
-        //foreach (var child in Data)
-        //{
-        //    if (child is Text)
-        //    {
-        //        t = (Text)child;
-        //        sText = t.Text;
-        //        ++iTextCount;
-        //    }
-        //    else if (child is Run)
-        //    {
-        //        r = (Run)child;
-        //        foreach (var runchild in r.ChildElements)
-        //        {
-        //            if (runchild is Text)
-        //            {
-        //                t = (Text)runchild;
-        //                sText = t.Text;
-        //                ++iTextCount;
-        //            }
-        //        }
-        //    }
-        //    else if (child is PhoneticRun)
-        //    {
-        //        phr = (PhoneticRun)child;
-        //        foreach (var phrchild in phr.ChildElements)
-        //        {
-        //            if (phrchild is Text)
-        //            {
-        //                t = (Text)phrchild;
-        //                sText = t.Text;
-        //                ++iTextCount;
-        //            }
-        //        }
-        //    }
-        //}
-
-        //if (iTextCount == 1)
-        //{
-        //    // this should track unique text strings, disregarding styles.
-        //    // But only if the entire text is formatted, and not partially formatted.
-        //    if (!hsUniqueSharedString.Contains(sText))
-        //    {
-        //        hsUniqueSharedString.Add(sText);
-        //    }
-        //}
-        //else if (iTextCount > 1)
-        //{
-        //    // if there are multiple text elements, we assume different parts of the text
-        //    // are formatted, therefore we just hash the whole internal XML thing
-        //    if (!hsUniqueSharedString.Contains(sHash))
-        //    {
-        //        hsUniqueSharedString.Add(sHash);
-        //    }
-        //}
-        #endregion
-
         return index;
     }
 }

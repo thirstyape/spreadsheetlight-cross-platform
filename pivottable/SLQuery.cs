@@ -1,60 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace SpreadsheetLight
+namespace SpreadsheetLight;
+
+internal class SLQuery
 {
-    internal class SLQuery
+    internal bool HasTuples;
+    internal SLTuplesType Tuples { get; set; }
+
+    internal string Mdx { get; set; }
+
+    internal SLQuery()
     {
-        internal bool HasTuples;
-        internal SLTuplesType Tuples { get; set; }
+        this.SetAllNull();
+    }
 
-        internal string Mdx { get; set; }
+    private void SetAllNull()
+    {
+        this.HasTuples = false;
+        this.Tuples = new SLTuplesType();
 
-        internal SLQuery()
+        this.Mdx = "";
+    }
+
+    internal void FromQuery(Query q)
+    {
+        this.SetAllNull();
+
+        if (q.Mdx != null) this.Mdx = q.Mdx.Value;
+
+        if (q.Tuples != null)
         {
-            this.SetAllNull();
+            this.Tuples.FromTuples(q.Tuples);
+            this.HasTuples = true;
         }
+    }
 
-        private void SetAllNull()
-        {
-            this.HasTuples = false;
-            this.Tuples = new SLTuplesType();
+    internal Query ToQuery()
+    {
+        Query q = new Query();
+        q.Mdx = this.Mdx;
 
-            this.Mdx = "";
-        }
+        if (this.HasTuples) q.Tuples = this.Tuples.ToTuples();
 
-        internal void FromQuery(Query q)
-        {
-            this.SetAllNull();
+        return q;
+    }
 
-            if (q.Mdx != null) this.Mdx = q.Mdx.Value;
+    internal SLQuery Clone()
+    {
+        SLQuery q = new SLQuery();
+        q.Mdx = this.Mdx;
+        q.HasTuples = this.HasTuples;
+        q.Tuples = this.Tuples.Clone();
 
-            if (q.Tuples != null)
-            {
-                this.Tuples.FromTuples(q.Tuples);
-                this.HasTuples = true;
-            }
-        }
-
-        internal Query ToQuery()
-        {
-            Query q = new Query();
-            q.Mdx = this.Mdx;
-
-            if (this.HasTuples) q.Tuples = this.Tuples.ToTuples();
-
-            return q;
-        }
-
-        internal SLQuery Clone()
-        {
-            SLQuery q = new SLQuery();
-            q.Mdx = this.Mdx;
-            q.HasTuples = this.HasTuples;
-            q.Tuples = this.Tuples.Clone();
-
-            return q;
-        }
+        return q;
     }
 }

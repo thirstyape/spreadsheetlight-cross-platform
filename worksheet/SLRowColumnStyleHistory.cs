@@ -1,16 +1,13 @@
-﻿using System;
+﻿namespace SpreadsheetLight;
 
-namespace SpreadsheetLight
+internal struct SLRowColumnStyleHistory
 {
-    internal struct SLRowColumnStyleHistory
-    {
-        internal bool IsRow;
-        internal int Index;
+    internal bool IsRow;
+    internal int Index;
 
-        internal SLRowColumnStyleHistory(bool IsRow, int Index)
-        {
-            this.IsRow = IsRow;
-            this.Index = Index;
-        }
+    internal SLRowColumnStyleHistory(bool IsRow, int Index)
+    {
+        this.IsRow = IsRow;
+        this.Index = Index;
     }
 }

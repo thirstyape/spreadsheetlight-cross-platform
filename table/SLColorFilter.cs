@@ -1,48 +1,46 @@
-﻿using System;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace SpreadsheetLight
+namespace SpreadsheetLight;
+
+internal class SLColorFilter
 {
-    internal class SLColorFilter
+    internal uint? FormatId { get; set; }
+    internal bool? CellColor { get; set; }
+
+    internal SLColorFilter()
     {
-        internal uint? FormatId { get; set; }
-        internal bool? CellColor { get; set; }
+        this.SetAllNull();
+    }
 
-        internal SLColorFilter()
-        {
-            this.SetAllNull();
-        }
+    private void SetAllNull()
+    {
+        this.FormatId = null;
+        this.CellColor = null;
+    }
 
-        private void SetAllNull()
-        {
-            this.FormatId = null;
-            this.CellColor = null;
-        }
+    internal void FromColorFilter(ColorFilter cf)
+    {
+        this.SetAllNull();
 
-        internal void FromColorFilter(ColorFilter cf)
-        {
-            this.SetAllNull();
+        if (cf.FormatId != null) this.FormatId = cf.FormatId.Value;
+        if (cf.CellColor != null && !cf.CellColor.Value) this.CellColor = cf.CellColor.Value;
+    }
 
-            if (cf.FormatId != null) this.FormatId = cf.FormatId.Value;
-            if (cf.CellColor != null && !cf.CellColor.Value) this.CellColor = cf.CellColor.Value;
-        }
+    internal ColorFilter ToColorFilter()
+    {
+        ColorFilter cf = new ColorFilter();
+        if (this.FormatId != null) cf.FormatId = this.FormatId.Value;
+        if (this.CellColor != null && !this.CellColor.Value) cf.CellColor = this.CellColor.Value;
 
-        internal ColorFilter ToColorFilter()
-        {
-            ColorFilter cf = new ColorFilter();
-            if (this.FormatId != null) cf.FormatId = this.FormatId.Value;
-            if (this.CellColor != null && !this.CellColor.Value) cf.CellColor = this.CellColor.Value;
+        return cf;
+    }
 
-            return cf;
-        }
+    internal SLColorFilter Clone()
+    {
+        SLColorFilter cf = new SLColorFilter();
+        cf.FormatId = this.FormatId;
+        cf.CellColor = this.CellColor;
 
-        internal SLColorFilter Clone()
-        {
-            SLColorFilter cf = new SLColorFilter();
-            cf.FormatId = this.FormatId;
-            cf.CellColor = this.CellColor;
-
-            return cf;
-        }
+        return cf;
     }
 }

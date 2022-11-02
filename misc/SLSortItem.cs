@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace SpreadsheetLight;
 
-namespace SpreadsheetLight
+internal struct SLSortItem
 {
-    internal struct SLSortItem
-    {
-        internal double Number;
-        internal string Text;
-        internal int Index;
+    internal double Number;
+    internal string Text;
+    internal int Index;
 
-        internal SLSortItem(double SortNumber, string SortText, int SortIndex)
-        {
-            Number = SortNumber;
-            Text = SortText;
-            Index = SortIndex;
-        }
+    internal SLSortItem(double SortNumber, string SortText, int SortIndex)
+    {
+        Number = SortNumber;
+        Text = SortText;
+        Index = SortIndex;
     }
+}
 
-    internal class SLSortItemNumberComparer : IComparer<SLSortItem>
+internal class SLSortItemNumberComparer : IComparer<SLSortItem>
+{
+    public int Compare(SLSortItem si1, SLSortItem si2)
     {
-        public int Compare(SLSortItem si1, SLSortItem si2)
-        {
-            return si1.Number.CompareTo(si2.Number);
-        }
+        return si1.Number.CompareTo(si2.Number);
     }
+}
 
-    internal class SLSortItemTextComparer : IComparer<SLSortItem>
+internal class SLSortItemTextComparer : IComparer<SLSortItem>
+{
+    public int Compare(SLSortItem si1, SLSortItem si2)
     {
-        public int Compare(SLSortItem si1, SLSortItem si2)
-        {
-            return si1.Text.CompareTo(si2.Text);
-        }
+        return si1.Text.CompareTo(si2.Text);
     }
 }

@@ -1,84 +1,82 @@
-﻿using System;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace SpreadsheetLight
+namespace SpreadsheetLight;
+
+internal class SLNumberingFormat
 {
-    internal class SLNumberingFormat
+    private uint iNumberFormatId;
+    internal uint NumberFormatId
     {
-        private uint iNumberFormatId;
-        internal uint NumberFormatId
+        get { return iNumberFormatId; }
+        set { iNumberFormatId = value; }
+    }
+
+    private string sFormatCode;
+    internal string FormatCode
+    {
+        get { return sFormatCode; }
+        set { sFormatCode = value; }
+    }
+
+    internal SLNumberingFormat()
+    {
+        this.SetAllNull();
+    }
+
+    private void SetAllNull()
+    {
+        this.iNumberFormatId = 0;
+        this.sFormatCode = string.Empty;
+    }
+
+    internal void FromNumberingFormat(NumberingFormat nf)
+    {
+        this.SetAllNull();
+
+        if (nf.NumberFormatId != null)
         {
-            get { return iNumberFormatId; }
-            set { iNumberFormatId = value; }
+            this.NumberFormatId = nf.NumberFormatId.Value;
+        }
+        else
+        {
+            this.NumberFormatId = 0;
         }
 
-        private string sFormatCode;
-        internal string FormatCode
+        if (nf.FormatCode != null)
         {
-            get { return sFormatCode; }
-            set { sFormatCode = value; }
+            this.FormatCode = nf.FormatCode.Value;
         }
-
-        internal SLNumberingFormat()
+        else
         {
-            this.SetAllNull();
+            this.FormatCode = string.Empty;
         }
+    }
 
-        private void SetAllNull()
-        {
-            this.iNumberFormatId = 0;
-            this.sFormatCode = string.Empty;
-        }
+    internal NumberingFormat ToNumberingFormat()
+    {
+        NumberingFormat nf = new NumberingFormat();
+        nf.NumberFormatId = this.NumberFormatId;
+        nf.FormatCode = this.FormatCode;
 
-        internal void FromNumberingFormat(NumberingFormat nf)
-        {
-            this.SetAllNull();
+        return nf;
+    }
 
-            if (nf.NumberFormatId != null)
-            {
-                this.NumberFormatId = nf.NumberFormatId.Value;
-            }
-            else
-            {
-                this.NumberFormatId = 0;
-            }
+    internal void FromHash(string Hash)
+    {
+        this.FormatCode = Hash;
+    }
 
-            if (nf.FormatCode != null)
-            {
-                this.FormatCode = nf.FormatCode.Value;
-            }
-            else
-            {
-                this.FormatCode = string.Empty;
-            }
-        }
+    internal string ToHash()
+    {
+        return this.FormatCode;
+    }
 
-        internal NumberingFormat ToNumberingFormat()
-        {
-            NumberingFormat nf = new NumberingFormat();
-            nf.NumberFormatId = this.NumberFormatId;
-            nf.FormatCode = this.FormatCode;
+    internal SLNumberingFormat Clone()
+    {
+        SLNumberingFormat nf = new SLNumberingFormat();
+        nf.iNumberFormatId = this.iNumberFormatId;
+        nf.sFormatCode = this.sFormatCode;
 
-            return nf;
-        }
-
-        internal void FromHash(string Hash)
-        {
-            this.FormatCode = Hash;
-        }
-
-        internal string ToHash()
-        {
-            return this.FormatCode;
-        }
-
-        internal SLNumberingFormat Clone()
-        {
-            SLNumberingFormat nf = new SLNumberingFormat();
-            nf.iNumberFormatId = this.iNumberFormatId;
-            nf.sFormatCode = this.sFormatCode;
-
-            return nf;
-        }
+        return nf;
     }
 }

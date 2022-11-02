@@ -334,77 +334,6 @@ public partial class SLDocument
         }
     }
 
-    // merging spreadsheets is kinda like importing data, right? So it's here then.
-
-//        public void MergeSpreadsheet(string SpreadsheetFileName)
-//        {
-//            this.MergeSpreadsheet(true, SpreadsheetFileName, null);
-//        }
-
-//        public void MergeSpreadsheet(Stream SpreadsheetStream)
-//        {
-//            this.MergeSpreadsheet(false, null, SpreadsheetStream);
-//        }
-
-//        private void MergeSpreadsheet(bool IsFile, string SpreadsheetFileName, Stream SpreadsheetStream)
-//        {
-//            using (MemoryStream msAnother = new MemoryStream())
-//            {
-//                if (IsFile)
-//                {
-//                    byte[] baData = File.ReadAllBytes(SpreadsheetFileName);
-//                    msAnother.Write(baData, 0, baData.Length);
-//                }
-//                else
-//                {
-//                    SpreadsheetStream.Position = 0;
-//                    byte[] baData = new byte[SpreadsheetStream.Length];
-//                    SpreadsheetStream.Read(baData, 0, baData.Length);
-//                    msAnother.Write(baData, 0, baData.Length);
-//                }
-
-//                using (SpreadsheetDocument xlAnother = SpreadsheetDocument.Open(msAnother, false))
-//                {
-//                    HashSet<string> hsCurrentSheetNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-//                    foreach (SLSheet sheet in slwb.Sheets)
-//                    {
-//                        // current sheet names supposed to be unique, so I'm not checking for collisions.
-//                        hsCurrentSheetNames.Add(sheet.Name);
-//                    }
-
-//                    HashSet<string> hsAnotherSheetNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-//                    List<string> listAnotherSheetNames = new List<string>();
-//                    using (OpenXmlReader oxr = OpenXmlReader.Create(xlAnother.WorkbookPart.Workbook.Sheets))
-//                    {
-//                        string sSheetName;
-//                        while (oxr.Read())
-//                        {
-//                            if (oxr.ElementType == typeof(Sheet))
-//                            {
-//                                sSheetName = ((Sheet)oxr.LoadCurrentElement()).Name.Value;
-//                                hsAnotherSheetNames.Add(sSheetName);
-//                                listAnotherSheetNames.Add(sSheetName);
-//                            }
-//                        }
-//                    }
-
-////Sheet1
-////Sheet2
-////Sheet3
-
-////Sheet1 -> Sheet7 -> Sheet8
-////Sheet6
-////Sheet7
-
-//                    Dictionary<string, string> dictAnotherNewSheetNames = new Dictionary<string, string>();
-//                    foreach (string s in listAnotherSheetNames)
-//                    {
-//                    }
-//                }
-//                // end of using SpreadsheetDocument
-//            }
-//        }
-
     /// <summary>
     /// Import a System.Data.DataTable as a data source, with the first data row and first data column at a specific cell.
     /// </summary>
@@ -564,10 +493,6 @@ public partial class SLDocument
                         // what do you do with TimeSpans?
                         this.SetCellValue(iRowIndex, iColumnIndex, ((TimeSpan)dr.ItemArray[j]).ToString());
                     }
-                    // what do you do with byte[]?
-                    //else if (taColumns[j] == typeof(byte[]))
-                    //{
-                    //}
                     else
                     {
                         this.SetCellValue(iRowIndex, iColumnIndex, dr.ItemArray[j].ToString());

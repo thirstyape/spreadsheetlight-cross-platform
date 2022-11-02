@@ -334,65 +334,6 @@ public partial class SLDocument
         return tbl;
     }
 
-    //Not ready yet!
-    //public SLPivotTable CreatePivotTable(string StartCellReference, string EndCellReference)
-    //{
-    //    int iStartRowIndex = -1;
-    //    int iStartColumnIndex = -1;
-    //    int iEndRowIndex = -1;
-    //    int iEndColumnIndex = -1;
-    //    if (!SLTool.FormatCellReferenceToRowColumnIndex(StartCellReference, out iStartRowIndex, out iStartColumnIndex))
-    //    {
-    //        iStartRowIndex = -1;
-    //        iStartColumnIndex = -1;
-    //    }
-    //    if (!SLTool.FormatCellReferenceToRowColumnIndex(EndCellReference, out iEndRowIndex, out iEndColumnIndex))
-    //    {
-    //        iEndRowIndex = -1;
-    //        iEndColumnIndex = -1;
-    //    }
-
-    //    return CreatePivotTable(iStartRowIndex, iStartColumnIndex, iEndRowIndex, iEndColumnIndex);
-    //}
-
-    //public SLPivotTable CreatePivotTable(int StartRowIndex, int StartColumnIndex, int EndRowIndex, int EndColumnIndex)
-    //{
-    //    int iStartRowIndex = 1, iEndRowIndex = 1, iStartColumnIndex = 1, iEndColumnIndex = 1;
-    //    if (StartRowIndex < EndRowIndex)
-    //    {
-    //        iStartRowIndex = StartRowIndex;
-    //        iEndRowIndex = EndRowIndex;
-    //    }
-    //    else
-    //    {
-    //        iStartRowIndex = EndRowIndex;
-    //        iEndRowIndex = StartRowIndex;
-    //    }
-
-    //    if (StartColumnIndex < EndColumnIndex)
-    //    {
-    //        iStartColumnIndex = StartColumnIndex;
-    //        iEndColumnIndex = EndColumnIndex;
-    //    }
-    //    else
-    //    {
-    //        iStartColumnIndex = EndColumnIndex;
-    //        iEndColumnIndex = StartColumnIndex;
-    //    }
-
-    //    // not checking bounds because we're going to be more stringent on the data source range.
-
-    //    SLPivotTable pivot = new SLPivotTable();
-    //    slwb.RefreshPossiblePivotTableCacheId();
-    //    pivot.CacheId = slwb.PossiblePivotTableCacheId;
-    //    pivot.Name = slwb.GetNextPossiblePivotTableName();
-
-    //    pivot.IsDataSourceTable = false;
-    //    pivot.SheetTableName = gsSelectedWorksheetName;
-
-    //    return pivot;
-    //}
-
     /// <summary>
     /// Creates an instance of SLSparklineGroup, given cell references of opposite cells in a cell range.
     /// </summary>
