@@ -5,11 +5,49 @@
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>$(MSBuildProjectName.Replace("-", "_"))</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <Copyright>Copyright 2011 Vincent Tan Wai Lip</Copyright>
+	<Version>3.5.1</Version>
+    <Authors>Vincent Tan, Nathanael Frey</Authors>
+	  <Description>
+		  SpreadsheetLight is an open source Open XML spreadsheet .NET library written in C#, and is released under the MIT License. You can create new Open XML spreadsheets, or work with existing Open XML spreadsheets that are compatible with Microsoft Excel 2007/2010/2013 and LibreOffice Calc.
+
+		  No Office/Excel Interop needed. You do not need Microsoft Office/Excel to be installed.
+		  
+		  This is a fork of the original code designed to run on .NET 6.0+. It also includes OS platform checks so that code requiring Windows will not execute on other platforms. Some features may not work on non-Windows platforms.
+	  </Description>
+	  <PackageLicenseFile>license.txt</PackageLicenseFile>
+	  <PackageTags>spreadsheetlight, openxml, excel</PackageTags>
+	  <PackageId>SpreadsheetLight.Cross.Platform</PackageId>
+	  <RepositoryUrl>https://github.com/thirstyape/spreadsheetlight-cross-platform</RepositoryUrl>
+	  <PackageReleaseNotes>
+		  3.5.1
+		  Update to move to .NET 6.0 and improve cross platform compatibility
+
+		  3.5.0
+		  Original release from https://spreadsheetlight.com/
+	  </PackageReleaseNotes>
+	  <AssemblyVersion>3.5.1.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.18.0" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="license.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
