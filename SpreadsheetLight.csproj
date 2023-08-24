@@ -24,7 +24,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
 		3.5.2
-		Add project icon
+		Add project icon, include XML documentation
 
 		3.5.1
 		Update to move to .NET 6.0 and improve cross platform compatibility
@@ -34,8 +34,13 @@
 	</PackageReleaseNotes>
     <AssemblyVersion>3.5.2.0</AssemblyVersion>
     <FileVersion>3.5.2.0</FileVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+	<PropertyGroup>
+		<DocumentationFile>$(ProjectDir)SpreadsheetLight.xml</DocumentationFile>
+	</PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>

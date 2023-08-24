@@ -69,3 +69,6 @@ Thumbs.db
 ~$*.doc*
 *.~vsd*
 ~$*.ppt*
+
+# XML Documentation file
+SpreadsheetLight.xml
