@@ -2209,7 +2209,7 @@ public partial class SLDocument : IDisposable
                 }
                 else if (slws.BackgroundPictureDataIsInFile != null)
                 {
-                    ImagePart imgp = wsp.AddImagePart(slws.BackgroundPictureImagePartType);
+                    ImagePart imgp = wsp.AddImagePart(slws.BackgroundPictureImageContentType);
                     if (slws.BackgroundPictureDataIsInFile.Value)
                     {
                         using (FileStream fs = new FileStream(slws.BackgroundPictureFileName, FileMode.Open))
@@ -2910,7 +2910,7 @@ public partial class SLDocument : IDisposable
             #region Picture
             if (slws.BackgroundPictureDataIsInFile != null)
             {
-                ImagePart imgp = wsp.AddImagePart(slws.BackgroundPictureImagePartType);
+                ImagePart imgp = wsp.AddImagePart(slws.BackgroundPictureImageContentType);
                 if (slws.BackgroundPictureDataIsInFile.Value)
                 {
                     using (FileStream fs = new FileStream(slws.BackgroundPictureFileName, FileMode.Open))

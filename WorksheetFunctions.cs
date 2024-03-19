@@ -1895,7 +1895,7 @@ public partial class SLDocument
 
         slws.BackgroundPictureDataIsInFile = true;
         slws.BackgroundPictureFileName = FileName;
-        slws.BackgroundPictureImagePartType = SLA.SLDrawingTool.GetImagePartType(FileName);
+        slws.BackgroundPictureImageContentType = SLA.SLDrawingTool.GetImageContentType(FileName);
     }
 
     /// <summary>
@@ -1903,8 +1903,8 @@ public partial class SLDocument
     /// If there's an existing background picture, that will be deleted first.
     /// </summary>
     /// <param name="PictureByteData">The picture's data in a byte array.</param>
-    /// <param name="PictureType">The image type of the picture.</param>
-    public void AddBackgroundPicture(byte[] PictureByteData, ImagePartType PictureType)
+    /// <param name="ContentType">The image type of the picture.</param>
+    public void AddBackgroundPicture(byte[] PictureByteData, string ContentType)
     {
         // delete any background picture first
         this.DeleteBackgroundPicture();
@@ -1915,7 +1915,7 @@ public partial class SLDocument
         {
             slws.BackgroundPictureByteData[i] = PictureByteData[i];
         }
-        slws.BackgroundPictureImagePartType = PictureType;
+        slws.BackgroundPictureImageContentType = ContentType;
     }
 
     /// <summary>
@@ -2254,7 +2254,7 @@ public partial class SLDocument
         {
             foreach (Drawing.SLPicture Picture in slws.Pictures)
             {
-                imgp = dp.AddImagePart(Picture.PictureImagePartType);
+                imgp = dp.AddImagePart(Picture.PictureImageContentType);
 
                 if (Picture.DataIsInFile)
                 {

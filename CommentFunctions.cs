@@ -546,7 +546,7 @@ public partial class SLDocument
                                 // drawings to choke a modestly sized art museum.
                                 if (!dictImageData.ContainsValue(sRelId)) break;
                             }
-                            imgp = vdp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(comm.Fill.BlipFileName), sRelId);
+                            imgp = vdp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(comm.Fill.BlipFileName), sRelId);
                             fs.Position = 0;
                             imgp.FeedData(fs);
                             comm.Fill.BlipRelationshipID = vdp.GetIdOfPart(imgp);

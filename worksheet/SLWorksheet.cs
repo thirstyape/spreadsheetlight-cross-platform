@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Packaging;
-
-namespace SpreadsheetLight;
+﻿namespace SpreadsheetLight;
 
 internal class SLWorksheet
 {
@@ -75,7 +73,7 @@ internal class SLWorksheet
     internal bool? BackgroundPictureDataIsInFile { get; set; }
     internal string BackgroundPictureFileName { get; set; }
     internal byte[] BackgroundPictureByteData { get; set; }
-    internal ImagePartType BackgroundPictureImagePartType { get; set; }
+    internal string BackgroundPictureImageContentType { get; set; }
 
     // for cell comments
     internal string LegacyDrawingId { get; set; }
@@ -150,7 +148,7 @@ internal class SLWorksheet
         this.BackgroundPictureDataIsInFile = null;
         this.BackgroundPictureFileName = string.Empty;
         this.BackgroundPictureByteData = new byte[1];
-        this.BackgroundPictureImagePartType = ImagePartType.Bmp;
+        this.BackgroundPictureImageContentType = "image/bmp";
     }
 
     internal void ToggleCustomRowColumnDimension(bool IsCustom)

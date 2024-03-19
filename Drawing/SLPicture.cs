@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Packaging;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using A = DocumentFormat.OpenXml.Drawing;
 
 namespace SpreadsheetLight.Drawing;
@@ -13,7 +12,7 @@ public class SLPicture
     internal bool DataIsInFile;
     internal string PictureFileName;
     internal byte[] PictureByteData;
-    internal ImagePartType PictureImagePartType = ImagePartType.Bmp;
+    internal string PictureImageContentType = "image/bmp";
 
     internal double TopPosition;
     internal double LeftPosition;
@@ -275,14 +274,14 @@ public class SLPicture
     /// Initializes an instance of SLPicture given a picture's data in a byte array.
     /// </summary>
     /// <param name="PictureByteData">The picture's data in a byte array.</param>
-    /// <param name="PictureType">The image type of the picture.</param>
-    public SLPicture(byte[] PictureByteData, ImagePartType PictureType)
+    /// <param name="ContentType">The image type of the picture.</param>
+    public SLPicture(byte[] PictureByteData, string ContentType)
     {
         InitialisePicture(false);
 
         DataIsInFile = false;
         this.PictureByteData = PictureByteData;
-        this.PictureImagePartType = PictureType;
+        this.PictureImageContentType = ContentType;
 
         SetResolution(false, 96, 96);
     }
@@ -291,15 +290,15 @@ public class SLPicture
     /// Initializes an instance of SLPicture given a picture's data in a byte array.
     /// </summary>
     /// <param name="PictureByteData">The picture's data in a byte array.</param>
-    /// <param name="PictureType">The image type of the picture.</param>
+    /// <param name="ContentType">The image type of the picture.</param>
     /// <param name="ThrowExceptionsIfAny">Set to true to bubble exceptions up if there are any occurring within SpreadsheetLight. Set to false otherwise. The default is false.</param>
-    public SLPicture(byte[] PictureByteData, ImagePartType PictureType, bool ThrowExceptionsIfAny)
+    public SLPicture(byte[] PictureByteData, string ContentType, bool ThrowExceptionsIfAny)
     {
         InitialisePicture(ThrowExceptionsIfAny);
 
         DataIsInFile = false;
         this.PictureByteData = PictureByteData;
-        this.PictureImagePartType = PictureType;
+        this.PictureImageContentType = ContentType;
 
         SetResolution(false, 96, 96);
     }
@@ -308,10 +307,10 @@ public class SLPicture
     /// Initializes an instance of SLPicture given a picture's data in a byte array, and the targeted computer's horizontal and vertical resolution. This scales the picture according to how it will be displayed on the targeted computer screen.
     /// </summary>
     /// <param name="PictureByteData">The picture's data in a byte array.</param>
-    /// <param name="PictureType">The image type of the picture.</param>
+    /// <param name="ContentType">The image type of the picture.</param>
     /// <param name="TargetHorizontalResolution">The targeted computer's horizontal resolution (DPI).</param>
     /// <param name="TargetVerticalResolution">The targeted computer's vertical resolution (DPI).</param>
-    public SLPicture(byte[] PictureByteData, ImagePartType PictureType, float TargetHorizontalResolution, float TargetVerticalResolution)
+    public SLPicture(byte[] PictureByteData, string ContentType, float TargetHorizontalResolution, float TargetVerticalResolution)
     {
         InitialisePicture(false);
 
@@ -321,7 +320,7 @@ public class SLPicture
         {
             this.PictureByteData[i] = PictureByteData[i];
         }
-        this.PictureImagePartType = PictureType;
+        this.PictureImageContentType = ContentType;
 
         SetResolution(true, TargetHorizontalResolution, TargetVerticalResolution);
     }
@@ -330,11 +329,11 @@ public class SLPicture
     /// Initializes an instance of SLPicture given a picture's data in a byte array, and the targeted computer's horizontal and vertical resolution. This scales the picture according to how it will be displayed on the targeted computer screen.
     /// </summary>
     /// <param name="PictureByteData">The picture's data in a byte array.</param>
-    /// <param name="PictureType">The image type of the picture.</param>
+    /// <param name="ContentType">The image type of the picture.</param>
     /// <param name="TargetHorizontalResolution">The targeted computer's horizontal resolution (DPI).</param>
     /// <param name="TargetVerticalResolution">The targeted computer's vertical resolution (DPI).</param>
     /// <param name="ThrowExceptionsIfAny">Set to true to bubble exceptions up if there are any occurring within SpreadsheetLight. Set to false otherwise. The default is false.</param>
-    public SLPicture(byte[] PictureByteData, ImagePartType PictureType, float TargetHorizontalResolution, float TargetVerticalResolution, bool ThrowExceptionsIfAny)
+    public SLPicture(byte[] PictureByteData, string ContentType, float TargetHorizontalResolution, float TargetVerticalResolution, bool ThrowExceptionsIfAny)
     {
         InitialisePicture(ThrowExceptionsIfAny);
 
@@ -344,7 +343,7 @@ public class SLPicture
         {
             this.PictureByteData[i] = PictureByteData[i];
         }
-        this.PictureImagePartType = PictureType;
+        this.PictureImageContentType = ContentType;
 
         SetResolution(true, TargetHorizontalResolution, TargetVerticalResolution);
     }
@@ -386,14 +385,14 @@ public class SLPicture
         this.DataIsInFile = true;
         this.PictureFileName = string.Empty;
         this.PictureByteData = new byte[1];
-        this.PictureImagePartType = ImagePartType.Bmp;
+        this.PictureImageContentType = "image/bmp";
     }
 
     private void InitialisePictureFile(string FileName)
     {
         this.PictureFileName = FileName.Trim();
 
-        this.PictureImagePartType = SLDrawingTool.GetImagePartType(this.PictureFileName);
+        this.PictureImageContentType = SLDrawingTool.GetImageContentType(this.PictureFileName);
 
         string sImageFileName = this.PictureFileName.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
         sImageFileName = sImageFileName.Substring(sImageFileName.LastIndexOf(Path.DirectorySeparatorChar) + 1);
@@ -1283,7 +1282,7 @@ public class SLPicture
         {
             pic.PictureByteData[i] = this.PictureByteData[i];
         }
-        pic.PictureImagePartType = this.PictureImagePartType;
+        pic.PictureImageContentType = this.PictureImageContentType;
 
         pic.TopPosition = this.TopPosition;
         pic.LeftPosition = this.LeftPosition;

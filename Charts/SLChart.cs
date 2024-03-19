@@ -4227,7 +4227,7 @@ public class SLChart
         {
             if (this.Title.Fill.Type == SLA.SLFillType.BlipFill)
             {
-                imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(this.Title.Fill.BlipFileName));
+                imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(this.Title.Fill.BlipFileName));
                 using (FileStream fs = new FileStream(this.Title.Fill.BlipFileName, FileMode.Open))
                 {
                     imgp.FeedData(fs);
@@ -4249,7 +4249,7 @@ public class SLChart
             {
                 if (this.Floor.Fill.Type == SLA.SLFillType.BlipFill)
                 {
-                    imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(this.Floor.Fill.BlipFileName));
+                    imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(this.Floor.Fill.BlipFileName));
                     using (FileStream fs = new FileStream(this.Floor.Fill.BlipFileName, FileMode.Open))
                     {
                         imgp.FeedData(fs);
@@ -4265,7 +4265,7 @@ public class SLChart
             {
                 if (this.SideWall.Fill.Type == SLA.SLFillType.BlipFill)
                 {
-                    imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(this.SideWall.Fill.BlipFileName));
+                    imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(this.SideWall.Fill.BlipFileName));
                     using (FileStream fs = new FileStream(this.SideWall.Fill.BlipFileName, FileMode.Open))
                     {
                         imgp.FeedData(fs);
@@ -4281,7 +4281,7 @@ public class SLChart
             {
                 if (this.BackWall.Fill.Type == SLA.SLFillType.BlipFill)
                 {
-                    imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(this.BackWall.Fill.BlipFileName));
+                    imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(this.BackWall.Fill.BlipFileName));
                     using (FileStream fs = new FileStream(this.BackWall.Fill.BlipFileName, FileMode.Open))
                     {
                         imgp.FeedData(fs);
@@ -4294,7 +4294,7 @@ public class SLChart
 
         if (this.PlotArea.Fill.Type == SLA.SLFillType.BlipFill)
         {
-            imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(this.PlotArea.Fill.BlipFileName));
+            imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(this.PlotArea.Fill.BlipFileName));
             using (FileStream fs = new FileStream(this.PlotArea.Fill.BlipFileName, FileMode.Open))
             {
                 imgp.FeedData(fs);
@@ -4307,7 +4307,7 @@ public class SLChart
         {
             if (this.Legend.Fill.Type == SLA.SLFillType.BlipFill)
             {
-                imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImagePartType(this.Legend.Fill.BlipFileName));
+                imgp = chartp.AddImagePart(SLA.SLDrawingTool.GetImageContentType(this.Legend.Fill.BlipFileName));
                 using (FileStream fs = new FileStream(this.Legend.Fill.BlipFileName, FileMode.Open))
                 {
                     imgp.FeedData(fs);

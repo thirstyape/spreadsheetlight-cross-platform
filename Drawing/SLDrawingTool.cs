@@ -1,46 +1,51 @@
-﻿using DocumentFormat.OpenXml.Packaging;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Runtime.InteropServices;
 using A = DocumentFormat.OpenXml.Drawing;
 
 namespace SpreadsheetLight.Drawing;
 
-internal class SLDrawingTool
+public class SLDrawingTool
 {
-    internal static ImagePartType GetImagePartType(string ImageFileName)
+    /// <summary>
+    /// Returns the content type for the provided image filename (or image/png if there is not a match).
+    /// </summary>
+    /// <param name="ImageFileName">The file name of the image to get the content type of.</param>
+    public static string GetImageContentType(string ImageFileName)
     {
-        ImagePartType ipt = ImagePartType.Png;
+        string ipt = "image/png";
 
         switch (ImageFileName.Substring(ImageFileName.LastIndexOf(".") + 1).ToLowerInvariant())
         {
             case "bmp":
-                ipt = ImagePartType.Bmp;
+                ipt = "image/bmp";
                 break;
             case "emf":
-                ipt = ImagePartType.Emf;
+                ipt = "image/x-emf";
                 break;
             case "gif":
-                ipt = ImagePartType.Gif;
+                ipt = "image/gif";
                 break;
             case "ico":
-                ipt = ImagePartType.Icon;
+                ipt = "image/x-icon";
                 break;
             case "jpg":
             case "jpeg":
-                ipt = ImagePartType.Jpeg;
+                ipt = "image/jpeg";
                 break;
             case "pcx":
-                ipt = ImagePartType.Pcx;
+                ipt = "image/x-pcx";
                 break;
             case "png":
-                ipt = ImagePartType.Png;
+                ipt = "image/png";
                 break;
             case "tif":
+                ipt = "image/tif";
+                break;
             case "tiff":
-                ipt = ImagePartType.Tiff;
+                ipt = "image/tiff";
                 break;
             case "wmf":
-                ipt = ImagePartType.Wmf;
+                ipt = "image/x-wmf";
                 break;
         }
 
