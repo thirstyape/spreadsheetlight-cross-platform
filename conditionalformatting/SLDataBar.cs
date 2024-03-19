@@ -94,27 +94,19 @@ internal class SLDataBar
     internal SLConditionalFormatAutoMinMaxValues TranslateToAutoMinMaxValues(ConditionalFormatValueObjectValues Type)
     {
         SLConditionalFormatAutoMinMaxValues result = SLConditionalFormatAutoMinMaxValues.Percentile;
-        switch (Type)
-        {
-            case ConditionalFormatValueObjectValues.Formula:
-                result = SLConditionalFormatAutoMinMaxValues.Formula;
-                break;
-            case ConditionalFormatValueObjectValues.Max:
-                result = SLConditionalFormatAutoMinMaxValues.Value;
-                break;
-            case ConditionalFormatValueObjectValues.Min:
-                result = SLConditionalFormatAutoMinMaxValues.Value;
-                break;
-            case ConditionalFormatValueObjectValues.Number:
-                result = SLConditionalFormatAutoMinMaxValues.Number;
-                break;
-            case ConditionalFormatValueObjectValues.Percent:
-                result = SLConditionalFormatAutoMinMaxValues.Percent;
-                break;
-            case ConditionalFormatValueObjectValues.Percentile:
-                result = SLConditionalFormatAutoMinMaxValues.Percentile;
-                break;
-        }
+
+        if (Type == ConditionalFormatValueObjectValues.Formula)
+            result = SLConditionalFormatAutoMinMaxValues.Formula;
+        else if (Type == ConditionalFormatValueObjectValues.Max)
+            result = SLConditionalFormatAutoMinMaxValues.Value;
+        else if (Type == ConditionalFormatValueObjectValues.Min)
+            result = SLConditionalFormatAutoMinMaxValues.Value;
+        else if (Type == ConditionalFormatValueObjectValues.Number)
+            result = SLConditionalFormatAutoMinMaxValues.Number;
+        else if (Type == ConditionalFormatValueObjectValues.Percent)
+            result = SLConditionalFormatAutoMinMaxValues.Percent;
+        else if (Type == ConditionalFormatValueObjectValues.Percentile)
+            result = SLConditionalFormatAutoMinMaxValues.Percentile;
 
         return result;
     }

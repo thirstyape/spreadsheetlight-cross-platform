@@ -486,38 +486,36 @@ public partial class SLDocument
                     }
                     else
                     {
-                        switch (comm.Fill.GradientColor.PathType)
+                        if (comm.Fill.GradientColor.PathType == A.PathShadeValues.Shape)
                         {
-                            case A.PathShadeValues.Shape:
-                                sbVml.Append(" focusposition=\"50%,50%\" focus=\"100%\" type=\"gradientradial\"");
-                                break;
-                            case A.PathShadeValues.Rectangle:
-                            case A.PathShadeValues.Circle:
-                                // because there's no way to do a circular gradient with VML...
-                                switch (comm.Fill.GradientColor.Direction)
-                                {
-                                    case SLA.SLGradientDirectionValues.Center:
-                                        sbVml.Append(" focusposition=\"50%,50%\"");
-                                        break;
-                                    case SLA.SLGradientDirectionValues.CenterToBottomLeftCorner:
-                                        // so the "centre" is at the top-right
-                                        sbVml.Append(" focusposition=\"100%,0%\"");
-                                        break;
-                                    case SLA.SLGradientDirectionValues.CenterToBottomRightCorner:
-                                        // so the "centre" is at the top-left
-                                        sbVml.Append(" focusposition=\"0%,0%\"");
-                                        break;
-                                    case SLA.SLGradientDirectionValues.CenterToTopLeftCorner:
-                                        // so the "centre" is at the bottom-right
-                                        sbVml.Append(" focusposition=\"100%,100%\"");
-                                        break;
-                                    case SLA.SLGradientDirectionValues.CenterToTopRightCorner:
-                                        // so the "centre" is at the bottom-left
-                                        sbVml.Append(" focusposition=\"0%,100%\"");
-                                        break;
-                                }
-                                sbVml.Append(" focus=\"100%\" type=\"gradientradial\"");
-                                break;
+                            sbVml.Append(" focusposition=\"50%,50%\" focus=\"100%\" type=\"gradientradial\"");
+                        }
+                        else if (comm.Fill.GradientColor.PathType == A.PathShadeValues.Rectangle || comm.Fill.GradientColor.PathType == A.PathShadeValues.Circle)
+                        {
+                            switch (comm.Fill.GradientColor.Direction)
+                            {
+                                case SLA.SLGradientDirectionValues.Center:
+                                    sbVml.Append(" focusposition=\"50%,50%\"");
+                                    break;
+                                case SLA.SLGradientDirectionValues.CenterToBottomLeftCorner:
+                                    // so the "centre" is at the top-right
+                                    sbVml.Append(" focusposition=\"100%,0%\"");
+                                    break;
+                                case SLA.SLGradientDirectionValues.CenterToBottomRightCorner:
+                                    // so the "centre" is at the top-left
+                                    sbVml.Append(" focusposition=\"0%,0%\"");
+                                    break;
+                                case SLA.SLGradientDirectionValues.CenterToTopLeftCorner:
+                                    // so the "centre" is at the bottom-right
+                                    sbVml.Append(" focusposition=\"100%,100%\"");
+                                    break;
+                                case SLA.SLGradientDirectionValues.CenterToTopRightCorner:
+                                    // so the "centre" is at the bottom-left
+                                    sbVml.Append(" focusposition=\"0%,100%\"");
+                                    break;
+                            }
+
+                            sbVml.Append(" focus=\"100%\" type=\"gradientradial\"");
                         }
                     }
                 }
@@ -665,24 +663,14 @@ public partial class SLDocument
                 {
                     sbVml.Append("<v:stroke");
 
-                    switch (comm.LineStyle)
-                    {
-                        case StrokeLineStyleValues.Single:
-                            // don't have to do anything
-                            break;
-                        case StrokeLineStyleValues.ThickBetweenThin:
-                            sbVml.Append(" linestyle=\"thickBetweenThin\"/>");
-                            break;
-                        case StrokeLineStyleValues.ThickThin:
-                            sbVml.Append(" linestyle=\"thickThin\"/>");
-                            break;
-                        case StrokeLineStyleValues.ThinThick:
-                            sbVml.Append(" linestyle=\"thinThick\"/>");
-                            break;
-                        case StrokeLineStyleValues.ThinThin:
-                            sbVml.Append(" linestyle=\"thinThin\"/>");
-                            break;
-                    }
+                    if (comm.LineStyle == StrokeLineStyleValues.ThickBetweenThin)
+                        sbVml.Append(" linestyle=\"thickBetweenThin\"/>");
+                    else if (comm.LineStyle == StrokeLineStyleValues.ThickThin)
+                        sbVml.Append(" linestyle=\"thickThin\"/>");
+                    else if (comm.LineStyle == StrokeLineStyleValues.ThinThick)
+                        sbVml.Append(" linestyle=\"thinThick\"/>");
+                    else if (comm.LineStyle == StrokeLineStyleValues.ThinThin)
+                        sbVml.Append(" linestyle=\"thinThin\"/>");
 
                     if (comm.vLineDashStyle != null)
                     {
@@ -726,18 +714,12 @@ public partial class SLDocument
 
                     if (comm.vEndCap != null)
                     {
-                        switch (comm.vEndCap.Value)
-                        {
-                            case StrokeEndCapValues.Flat:
-                                sbVml.Append(" endcap=\"flat\"/>");
-                                break;
-                            case StrokeEndCapValues.Round:
-                                sbVml.Append(" endcap=\"round\"/>");
-                                break;
-                            case StrokeEndCapValues.Square:
-                                sbVml.Append(" endcap=\"square\"/>");
-                                break;
-                        }
+                        if (comm.vEndCap.Value == StrokeEndCapValues.Flat)
+                            sbVml.Append(" endcap=\"flat\"/>");
+                        else if (comm.vEndCap.Value == StrokeEndCapValues.Round)
+                            sbVml.Append(" endcap=\"round\"/>");
+                        else if (comm.vEndCap.Value == StrokeEndCapValues.Square)
+                            sbVml.Append(" endcap=\"square\"/>");
                     }
 
                     sbVml.Append("/>");

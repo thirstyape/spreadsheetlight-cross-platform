@@ -79,33 +79,23 @@ public partial class SLDocument
         }
 
         SLDataFieldFunctionValues func = SLDataFieldFunctionValues.Sum;
-        switch (Function)
-        {
-            case TotalsRowFunctionValues.Average:
-                func = SLDataFieldFunctionValues.Average;
-                break;
-            case TotalsRowFunctionValues.Count:
-                func = SLDataFieldFunctionValues.Count;
-                break;
-            case TotalsRowFunctionValues.CountNumbers:
-                func = SLDataFieldFunctionValues.CountNumbers;
-                break;
-            case TotalsRowFunctionValues.Maximum:
-                func = SLDataFieldFunctionValues.Maximum;
-                break;
-            case TotalsRowFunctionValues.Minimum:
-                func = SLDataFieldFunctionValues.Minimum;
-                break;
-            case TotalsRowFunctionValues.StandardDeviation:
-                func = SLDataFieldFunctionValues.StandardDeviation;
-                break;
-            case TotalsRowFunctionValues.Sum:
-                func = SLDataFieldFunctionValues.Sum;
-                break;
-            case TotalsRowFunctionValues.Variance:
-                func = SLDataFieldFunctionValues.Variance;
-                break;
-        }
+
+        if (Function == TotalsRowFunctionValues.Average)
+            func = SLDataFieldFunctionValues.Average;
+        else if (Function == TotalsRowFunctionValues.Count)
+            func = SLDataFieldFunctionValues.Count;
+        else if (Function == TotalsRowFunctionValues.CountNumbers)
+            func = SLDataFieldFunctionValues.CountNumbers;
+        else if (Function == TotalsRowFunctionValues.Maximum)
+            func = SLDataFieldFunctionValues.Maximum;
+        else if (Function == TotalsRowFunctionValues.Minimum)
+            func = SLDataFieldFunctionValues.Minimum;
+        else if (Function == TotalsRowFunctionValues.StandardDeviation)
+            func = SLDataFieldFunctionValues.StandardDeviation;
+        else if (Function == TotalsRowFunctionValues.Sum)
+            func = SLDataFieldFunctionValues.Sum;
+        else if (Function == TotalsRowFunctionValues.Variance)
+            func = SLDataFieldFunctionValues.Variance;
 
         return Calculate(func, Cells, out ResultText);
     }
@@ -383,33 +373,23 @@ public partial class SLDocument
     internal int GetFunctionNumber(TotalsRowFunctionValues Function)
     {
         int result = 0;
-        switch (Function)
-        {
-            case TotalsRowFunctionValues.Average:
-                result = 101;
-                break;
-            case TotalsRowFunctionValues.Count:
-                result = 103;
-                break;
-            case TotalsRowFunctionValues.CountNumbers:
-                result = 102;
-                break;
-            case TotalsRowFunctionValues.Maximum:
-                result = 104;
-                break;
-            case TotalsRowFunctionValues.Minimum:
-                result = 105;
-                break;
-            case TotalsRowFunctionValues.StandardDeviation:
-                result = 107;
-                break;
-            case TotalsRowFunctionValues.Sum:
-                result = 109;
-                break;
-            case TotalsRowFunctionValues.Variance:
-                result = 110;
-                break;
-        }
+
+        if (Function == TotalsRowFunctionValues.Average)
+            result = 101;
+        else if (Function == TotalsRowFunctionValues.Count)
+            result = 103;
+        else if (Function == TotalsRowFunctionValues.CountNumbers)
+            result = 102;
+        else if (Function == TotalsRowFunctionValues.Maximum)
+            result = 104;
+        else if (Function == TotalsRowFunctionValues.Minimum)
+            result = 105;
+        else if (Function == TotalsRowFunctionValues.StandardDeviation)
+            result = 107;
+        else if (Function == TotalsRowFunctionValues.Sum)
+            result = 109;
+        else if (Function == TotalsRowFunctionValues.Variance)
+            result = 110;
 
         return result;
     }

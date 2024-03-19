@@ -2663,27 +2663,19 @@ public partial class SLDocument : IDisposable
                         }
 
                         // number type is default
-                        switch (c.DataType)
-                        {
-                            case CellValues.Boolean:
-                                oxa.Add(new OpenXmlAttribute("t", null, "b"));
-                                break;
-                            case CellValues.Date:
-                                oxa.Add(new OpenXmlAttribute("t", null, "d"));
-                                break;
-                            case CellValues.Error:
-                                oxa.Add(new OpenXmlAttribute("t", null, "e"));
-                                break;
-                            case CellValues.InlineString:
-                                oxa.Add(new OpenXmlAttribute("t", null, "inlineStr"));
-                                break;
-                            case CellValues.SharedString:
-                                oxa.Add(new OpenXmlAttribute("t", null, "s"));
-                                break;
-                            case CellValues.String:
-                                oxa.Add(new OpenXmlAttribute("t", null, "str"));
-                                break;
-                        }
+
+                        if (c.DataType == CellValues.Boolean)
+                            oxa.Add(new OpenXmlAttribute("t", null, "b"));
+                        else if (c.DataType == CellValues.Date)
+                            oxa.Add(new OpenXmlAttribute("t", null, "d"));
+                        else if (c.DataType == CellValues.Error)
+                            oxa.Add(new OpenXmlAttribute("t", null, "e"));
+                        else if (c.DataType == CellValues.InlineString)
+                            oxa.Add(new OpenXmlAttribute("t", null, "inlineStr"));
+                        else if (c.DataType == CellValues.SharedString)
+                            oxa.Add(new OpenXmlAttribute("t", null, "s"));
+                        else if (c.DataType == CellValues.String)
+                            oxa.Add(new OpenXmlAttribute("t", null, "str"));
 
                         if (c.CellMetaIndex > 0)
                         {
@@ -3521,8 +3513,9 @@ public partial class SLDocument : IDisposable
 
         WriteWorkbook();
         WriteDocumentProperties();
-        
-        xl.Close();
+
+        xl.Dispose();
+
         this.NullifyInternalDataStores();
     }
 

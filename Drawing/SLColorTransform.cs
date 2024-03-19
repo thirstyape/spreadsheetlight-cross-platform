@@ -149,54 +149,34 @@ internal class SLColorTransform
         this.SchemeColor = Color;
 
         int iThemeColor = (int)SLThemeColorIndexValues.Dark1Color;
-        switch (Color)
-        {
-            // I don't really know what to assign for Text1, Text2, Background1, Background2
-            // PhClr (placeholder colour)
-            case A.SchemeColorValues.Dark1:
-            case A.SchemeColorValues.Text1:
-                iThemeColor = (int)SLThemeColorIndexValues.Dark1Color;
-                break;
-            case A.SchemeColorValues.Light1:
-            case A.SchemeColorValues.Background1:
-                iThemeColor = (int)SLThemeColorIndexValues.Light1Color;
-                break;
-            case A.SchemeColorValues.Dark2:
-            case A.SchemeColorValues.Text2:
-                iThemeColor = (int)SLThemeColorIndexValues.Dark2Color;
-                break;
-            case A.SchemeColorValues.Light2:
-            case A.SchemeColorValues.Background2:
-                iThemeColor = (int)SLThemeColorIndexValues.Light2Color;
-                break;
-            case A.SchemeColorValues.PhColor:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent1Color;
-                break;
-            case A.SchemeColorValues.Accent1:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent1Color;
-                break;
-            case A.SchemeColorValues.Accent2:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent2Color;
-                break;
-            case A.SchemeColorValues.Accent3:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent3Color;
-                break;
-            case A.SchemeColorValues.Accent4:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent4Color;
-                break;
-            case A.SchemeColorValues.Accent5:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent5Color;
-                break;
-            case A.SchemeColorValues.Accent6:
-                iThemeColor = (int)SLThemeColorIndexValues.Accent6Color;
-                break;
-            case A.SchemeColorValues.Hyperlink:
-                iThemeColor = (int)SLThemeColorIndexValues.Hyperlink;
-                break;
-            case A.SchemeColorValues.FollowedHyperlink:
-                iThemeColor = (int)SLThemeColorIndexValues.FollowedHyperlinkColor;
-                break;
-        }
+
+        if (Color == A.SchemeColorValues.Dark1 || Color == A.SchemeColorValues.Text1)
+            iThemeColor = (int)SLThemeColorIndexValues.Dark1Color;
+        else if (Color == A.SchemeColorValues.Light1 || Color == A.SchemeColorValues.Background1)
+            iThemeColor = (int)SLThemeColorIndexValues.Light1Color;
+        else if (Color == A.SchemeColorValues.Dark2 || Color == A.SchemeColorValues.Text2)
+            iThemeColor = (int)SLThemeColorIndexValues.Dark2Color;
+        else if (Color == A.SchemeColorValues.Light2 || Color == A.SchemeColorValues.Background2)
+            iThemeColor = (int)SLThemeColorIndexValues.Light2Color;
+        else if (Color == A.SchemeColorValues.PhColor)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent1Color;
+        else if (Color == A.SchemeColorValues.Accent1)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent1Color;
+        else if (Color == A.SchemeColorValues.Accent2)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent2Color;
+        else if (Color == A.SchemeColorValues.Accent3)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent3Color;
+        else if (Color == A.SchemeColorValues.Accent4)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent4Color;
+        else if (Color == A.SchemeColorValues.Accent5)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent5Color;
+        else if (Color == A.SchemeColorValues.Accent6)
+            iThemeColor = (int)SLThemeColorIndexValues.Accent6Color;
+        else if (Color == A.SchemeColorValues.Hyperlink)
+            iThemeColor = (int)SLThemeColorIndexValues.Hyperlink;
+        else if (Color == A.SchemeColorValues.FollowedHyperlink)
+            iThemeColor = (int)SLThemeColorIndexValues.FollowedHyperlinkColor;
+
         this.Tint = Tint;
         this.Transparency = Transparency;
 

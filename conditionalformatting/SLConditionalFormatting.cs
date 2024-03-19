@@ -1472,60 +1472,40 @@ public class SLConditionalFormatting
     /// <param name="IconSetType">A built-in icon set type.</param>
     public void SetIconSet(IconSetValues IconSetType)
     {
-        switch (IconSetType)
-        {
-            case IconSetValues.FiveArrows:
-                this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveArrows));
-                break;
-            case IconSetValues.FiveArrowsGray:
-                this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveArrowsGray));
-                break;
-            case IconSetValues.FiveQuarters:
-                this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveQuarters));
-                break;
-            case IconSetValues.FiveRating:
-                this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveRating));
-                break;
-            case IconSetValues.FourArrows:
-                this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourArrows));
-                break;
-            case IconSetValues.FourArrowsGray:
-                this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourArrowsGray));
-                break;
-            case IconSetValues.FourRating:
-                this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourRating));
-                break;
-            case IconSetValues.FourRedToBlack:
-                this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourRedToBlack));
-                break;
-            case IconSetValues.FourTrafficLights:
-                this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourTrafficLights));
-                break;
-            case IconSetValues.ThreeArrows:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeArrows));
-                break;
-            case IconSetValues.ThreeArrowsGray:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeArrowsGray));
-                break;
-            case IconSetValues.ThreeFlags:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeFlags));
-                break;
-            case IconSetValues.ThreeSigns:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeSigns));
-                break;
-            case IconSetValues.ThreeSymbols:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeSymbols));
-                break;
-            case IconSetValues.ThreeSymbols2:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeSymbols2));
-                break;
-            case IconSetValues.ThreeTrafficLights1:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeTrafficLights1));
-                break;
-            case IconSetValues.ThreeTrafficLights2:
-                this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeTrafficLights2));
-                break;
-        }
+        if (IconSetType == IconSetValues.FiveArrows)
+            this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveArrows));
+        else if (IconSetType == IconSetValues.FiveArrowsGray)
+            this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveArrowsGray));
+        else if (IconSetType == IconSetValues.FiveQuarters)
+            this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveQuarters));
+        else if (IconSetType == IconSetValues.FiveRating)
+            this.SetCustomIconSet(new SLFiveIconSetOptions(SLFiveIconSetValues.FiveRating));
+        else if (IconSetType == IconSetValues.FourArrows)
+            this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourArrows));
+        else if (IconSetType == IconSetValues.FourArrowsGray)
+            this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourArrowsGray));
+        else if (IconSetType == IconSetValues.FourRating)
+            this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourRating));
+        else if (IconSetType == IconSetValues.FourRedToBlack)
+            this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourRedToBlack));
+        else if (IconSetType == IconSetValues.FourTrafficLights)
+            this.SetCustomIconSet(new SLFourIconSetOptions(SLFourIconSetValues.FourTrafficLights));
+        else if (IconSetType == IconSetValues.ThreeArrows)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeArrows));
+        else if (IconSetType == IconSetValues.ThreeArrowsGray)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeArrowsGray));
+        else if (IconSetType == IconSetValues.ThreeFlags)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeFlags));
+        else if (IconSetType == IconSetValues.ThreeSigns)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeSigns));
+        else if (IconSetType == IconSetValues.ThreeSymbols)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeSymbols));
+        else if (IconSetType == IconSetValues.ThreeSymbols2)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeSymbols2));
+        else if (IconSetType == IconSetValues.ThreeTrafficLights1)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeTrafficLights1));
+        else if (IconSetType == IconSetValues.ThreeTrafficLights2)
+            this.SetCustomIconSet(new SLThreeIconSetOptions(SLThreeIconSetValues.ThreeTrafficLights2));
     }
 
     /// <summary>
@@ -2440,39 +2420,28 @@ public class SLConditionalFormatting
         {
             sRef = SLTool.ToCellReference(this.SequenceOfReferences[0].StartRowIndex, this.SequenceOfReferences[0].StartColumnIndex);
         }
-        switch (DatePeriod)
-        {
-            case TimePeriodValues.Yesterday:
-                f.Text = string.Format("FLOOR({0},1)=TODAY()-1", sRef);
-                break;
-            case TimePeriodValues.Today:
-                f.Text = string.Format("FLOOR({0},1)=TODAY()", sRef);
-                break;
-            case TimePeriodValues.Tomorrow:
-                f.Text = string.Format("FLOOR({0},1)=TODAY()+1", sRef);
-                break;
-            case TimePeriodValues.Last7Days:
-                f.Text = string.Format("AND(TODAY()-FLOOR({0},1)<=6,FLOOR({0},1)<=TODAY())", sRef);
-                break;
-            case TimePeriodValues.LastWeek:
-                f.Text = string.Format("AND(TODAY()-ROUNDDOWN({0},0)>=(WEEKDAY(TODAY())),TODAY()-ROUNDDOWN({0},0)<(WEEKDAY(TODAY())+7))", sRef);
-                break;
-            case TimePeriodValues.ThisWeek:
-                f.Text = string.Format("AND(TODAY()-ROUNDDOWN({0},0)<=WEEKDAY(TODAY())-1,ROUNDDOWN({0},0)-TODAY()<=7-WEEKDAY(TODAY()))", sRef);
-                break;
-            case TimePeriodValues.NextWeek:
-                f.Text = string.Format("AND(ROUNDDOWN({0},0)-TODAY()>(7-WEEKDAY(TODAY())),ROUNDDOWN({0},0)-TODAY()<(15-WEEKDAY(TODAY())))", sRef);
-                break;
-            case TimePeriodValues.LastMonth:
-                f.Text = string.Format("AND(MONTH({0})=MONTH(EDATE(TODAY(),0-1)),YEAR({0})=YEAR(EDATE(TODAY(),0-1)))", sRef);
-                break;
-            case TimePeriodValues.ThisMonth:
-                f.Text = string.Format("AND(MONTH({0})=MONTH(TODAY()),YEAR({0})=YEAR(TODAY()))", sRef);
-                break;
-            case TimePeriodValues.NextMonth:
-                f.Text = string.Format("AND(MONTH({0})=MONTH(TODAY())+1,OR(YEAR({0})=YEAR(TODAY()),AND(MONTH({0})=12,YEAR({0})=YEAR(TODAY())+1)))", sRef);
-                break;
-        }
+
+        if (DatePeriod == TimePeriodValues.Yesterday)
+            f.Text = string.Format("FLOOR({0},1)=TODAY()-1", sRef);
+        else if (DatePeriod == TimePeriodValues.Today)
+            f.Text = string.Format("FLOOR({0},1)=TODAY()", sRef);
+        else if (DatePeriod == TimePeriodValues.Tomorrow)
+            f.Text = string.Format("FLOOR({0},1)=TODAY()+1", sRef);
+        else if (DatePeriod == TimePeriodValues.Last7Days)
+            f.Text = string.Format("AND(TODAY()-FLOOR({0},1)<=6,FLOOR({0},1)<=TODAY())", sRef);
+        else if (DatePeriod == TimePeriodValues.LastWeek)
+            f.Text = string.Format("AND(TODAY()-ROUNDDOWN({0},0)>=(WEEKDAY(TODAY())),TODAY()-ROUNDDOWN({0},0)<(WEEKDAY(TODAY())+7))", sRef);
+        else if (DatePeriod == TimePeriodValues.ThisWeek)
+            f.Text = string.Format("AND(TODAY()-ROUNDDOWN({0},0)<=WEEKDAY(TODAY())-1,ROUNDDOWN({0},0)-TODAY()<=7-WEEKDAY(TODAY()))", sRef);
+        else if (DatePeriod == TimePeriodValues.NextWeek)
+            f.Text = string.Format("AND(ROUNDDOWN({0},0)-TODAY()>(7-WEEKDAY(TODAY())),ROUNDDOWN({0},0)-TODAY()<(15-WEEKDAY(TODAY())))", sRef);
+        else if (DatePeriod == TimePeriodValues.LastMonth)
+            f.Text = string.Format("AND(MONTH({0})=MONTH(EDATE(TODAY(),0-1)),YEAR({0})=YEAR(EDATE(TODAY(),0-1)))", sRef);
+        else if (DatePeriod == TimePeriodValues.ThisMonth)
+            f.Text = string.Format("AND(MONTH({0})=MONTH(TODAY()),YEAR({0})=YEAR(TODAY()))", sRef);
+        else if (DatePeriod == TimePeriodValues.NextMonth)
+            f.Text = string.Format("AND(MONTH({0})=MONTH(TODAY())+1,OR(YEAR({0})=YEAR(TODAY()),AND(MONTH({0})=12,YEAR({0})=YEAR(TODAY())+1)))", sRef);
+
         cfr.Formulas.Add(f);
 
         cfr.DifferentialFormat = HighlightStyle.Clone();

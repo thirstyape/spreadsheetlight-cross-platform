@@ -268,18 +268,13 @@ internal class SLSheetView
     internal static string GetSheetViewValuesAttribute(SheetViewValues svv)
     {
         string result = "normal";
-        switch (svv)
-        {
-            case SheetViewValues.Normal:
-                result = "normal";
-                break;
-            case SheetViewValues.PageBreakPreview:
-                result = "pageBreakPreview";
-                break;
-            case SheetViewValues.PageLayout:
-                result = "pageLayout";
-                break;
-        }
+
+        if (svv == SheetViewValues.Normal)
+            result = "normal";
+        else if (svv == SheetViewValues.PageBreakPreview)
+            result = "pageBreakPreview";
+        else if (svv == SheetViewValues.PageLayout)
+            result = "pageLayout";
 
         return result;
     }

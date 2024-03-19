@@ -142,21 +142,15 @@ public class SLCellFormula
     internal static string GetFormulaTypeAttribute(CellFormulaValues cfv)
     {
         string result = "normal";
-        switch (cfv)
-        {
-            case CellFormulaValues.Normal:
-                result = "normal";
-                break;
-            case CellFormulaValues.Array:
-                result = "array";
-                break;
-            case CellFormulaValues.DataTable:
-                result = "dataTable";
-                break;
-            case CellFormulaValues.Shared:
-                result = "shared";
-                break;
-        }
+
+        if (cfv == CellFormulaValues.Normal)
+            result = "normal";
+        else if (cfv == CellFormulaValues.Array)
+            result = "array";
+        else if (cfv == CellFormulaValues.DataTable)
+            result = "dataTable";
+        else if (cfv == CellFormulaValues.Shared)
+            result = "shared";
 
         return result;
     }

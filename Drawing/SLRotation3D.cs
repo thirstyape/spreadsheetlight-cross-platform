@@ -512,35 +512,54 @@ public class SLRotation3D
     {
         bool result = false;
 
-        switch (Preset)
-        {
-            case A.PresetCameraValues.LegacyPerspectiveBottom:
-            case A.PresetCameraValues.LegacyPerspectiveBottomLeft:
-            case A.PresetCameraValues.LegacyPerspectiveBottomRight:
-            case A.PresetCameraValues.LegacyPerspectiveFront:
-            case A.PresetCameraValues.LegacyPerspectiveLeft:
-            case A.PresetCameraValues.LegacyPerspectiveRight:
-            case A.PresetCameraValues.LegacyPerspectiveTop:
-            case A.PresetCameraValues.LegacyPerspectiveTopLeft:
-            case A.PresetCameraValues.LegacyPerspectiveTopRight:
-            case A.PresetCameraValues.PerspectiveAbove:
-            case A.PresetCameraValues.PerspectiveAboveLeftFacing:
-            case A.PresetCameraValues.PerspectiveAboveRightFacing:
-            case A.PresetCameraValues.PerspectiveBelow:
-            case A.PresetCameraValues.PerspectiveContrastingLeftFacing:
-            case A.PresetCameraValues.PerspectiveContrastingRightFacing:
-            case A.PresetCameraValues.PerspectiveFront:
-            case A.PresetCameraValues.PerspectiveHeroicExtremeLeftFacing:
-            case A.PresetCameraValues.PerspectiveHeroicExtremeRightFacing:
-            case A.PresetCameraValues.PerspectiveHeroicLeftFacing:
-            case A.PresetCameraValues.PerspectiveHeroicRightFacing:
-            case A.PresetCameraValues.PerspectiveLeft:
-            case A.PresetCameraValues.PerspectiveRelaxed:
-            case A.PresetCameraValues.PerspectiveRelaxedModerately:
-            case A.PresetCameraValues.PerspectiveRight:
-                result = true;
-                break;
-        }
+        if (Preset == A.PresetCameraValues.LegacyPerspectiveBottom)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveBottomLeft)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveBottomRight)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveFront)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveLeft)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveRight)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveTop)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveTopLeft)
+            result = true;
+        else if (Preset == A.PresetCameraValues.LegacyPerspectiveTopRight)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveAbove)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveAboveLeftFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveAboveRightFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveBelow)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveContrastingLeftFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveContrastingRightFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveFront)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveHeroicExtremeLeftFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveHeroicExtremeRightFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveHeroicLeftFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveHeroicRightFacing)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveLeft)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveRelaxed)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveRelaxedModerately)
+            result = true;
+        else if (Preset == A.PresetCameraValues.PerspectiveRight)
+            result = true;
 
         return result;
     }

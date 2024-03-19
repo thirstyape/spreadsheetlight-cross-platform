@@ -95,60 +95,41 @@ internal class SLIconSet
     internal static SLIconSetValues TranslateIconSetToInternalSet(IconSetValues isv)
     {
         SLIconSetValues result = SLIconSetValues.ThreeTrafficLights1;
-        switch (isv)
-        {
-            case IconSetValues.FiveArrows:
-                result = SLIconSetValues.FiveArrows;
-                break;
-            case IconSetValues.FiveArrowsGray:
-                result = SLIconSetValues.FiveArrowsGray;
-                break;
-            case IconSetValues.FiveQuarters:
-                result = SLIconSetValues.FiveQuarters;
-                break;
-            case IconSetValues.FiveRating:
-                result = SLIconSetValues.FiveRating;
-                break;
-            case IconSetValues.FourArrows:
-                result = SLIconSetValues.FourArrows;
-                break;
-            case IconSetValues.FourArrowsGray:
-                result = SLIconSetValues.FourArrowsGray;
-                break;
-            case IconSetValues.FourRating:
-                result = SLIconSetValues.FourRating;
-                break;
-            case IconSetValues.FourRedToBlack:
-                result = SLIconSetValues.FourRedToBlack;
-                break;
-            case IconSetValues.FourTrafficLights:
-                result = SLIconSetValues.FourTrafficLights;
-                break;
-            case IconSetValues.ThreeArrows:
-                result = SLIconSetValues.ThreeArrows;
-                break;
-            case IconSetValues.ThreeArrowsGray:
-                result = SLIconSetValues.ThreeArrowsGray;
-                break;
-            case IconSetValues.ThreeFlags:
-                result = SLIconSetValues.ThreeFlags;
-                break;
-            case IconSetValues.ThreeSigns:
-                result = SLIconSetValues.ThreeSigns;
-                break;
-            case IconSetValues.ThreeSymbols:
-                result = SLIconSetValues.ThreeSymbols;
-                break;
-            case IconSetValues.ThreeSymbols2:
-                result = SLIconSetValues.ThreeSymbols2;
-                break;
-            case IconSetValues.ThreeTrafficLights1:
-                result = SLIconSetValues.ThreeTrafficLights1;
-                break;
-            case IconSetValues.ThreeTrafficLights2:
-                result = SLIconSetValues.ThreeTrafficLights2;
-                break;
-        }
+
+        if (isv == IconSetValues.FiveArrows)
+            result = SLIconSetValues.FiveArrows;
+        else if (isv == IconSetValues.FiveArrowsGray)
+            result = SLIconSetValues.FiveArrowsGray;
+        else if (isv == IconSetValues.FiveQuarters)
+            result = SLIconSetValues.FiveQuarters;
+        else if (isv == IconSetValues.FiveRating)
+            result = SLIconSetValues.FiveRating;
+        else if (isv == IconSetValues.FourArrows)
+            result = SLIconSetValues.FourArrows;
+        else if (isv == IconSetValues.FourArrowsGray)
+            result = SLIconSetValues.FourArrowsGray;
+        else if (isv == IconSetValues.FourRating)
+            result = SLIconSetValues.FourRating;
+        else if (isv == IconSetValues.FourRedToBlack)
+            result = SLIconSetValues.FourRedToBlack;
+        else if (isv == IconSetValues.FourTrafficLights)
+            result = SLIconSetValues.FourTrafficLights;
+        else if (isv == IconSetValues.ThreeArrows)
+            result = SLIconSetValues.ThreeArrows;
+        else if (isv == IconSetValues.ThreeArrowsGray)
+            result = SLIconSetValues.ThreeArrowsGray;
+        else if (isv == IconSetValues.ThreeFlags)
+            result = SLIconSetValues.ThreeFlags;
+        else if (isv == IconSetValues.ThreeSigns)
+            result = SLIconSetValues.ThreeSigns;
+        else if (isv == IconSetValues.ThreeSymbols)
+            result = SLIconSetValues.ThreeSymbols;
+        else if (isv == IconSetValues.ThreeSymbols2)
+            result = SLIconSetValues.ThreeSymbols2;
+        else if (isv == IconSetValues.ThreeTrafficLights1)
+            result = SLIconSetValues.ThreeTrafficLights1;
+        else if (isv == IconSetValues.ThreeTrafficLights2)
+            result = SLIconSetValues.ThreeTrafficLights2;
 
         return result;
     }
@@ -523,126 +504,145 @@ internal class SLIconSet
     internal static SLIconValues TranslateIconSetType(X14.IconSetTypeValues IconSetType, uint IconId)
     {
         SLIconValues result = SLIconValues.NoIcon;
-        switch (IconSetType)
+
+        if (IconSetType == X14.IconSetTypeValues.FiveArrows)
         {
-            case X14.IconSetTypeValues.FiveArrows:
-                if (IconId == 0) result = SLIconValues.RedDownArrow;
-                else if (IconId == 1) result = SLIconValues.YellowDownInclineArrow;
-                else if (IconId == 2) result = SLIconValues.YellowSideArrow;
-                else if (IconId == 3) result = SLIconValues.YellowUpInclineArrow;
-                else if (IconId == 4) result = SLIconValues.GreenUpArrow;
-                break;
-            case X14.IconSetTypeValues.FiveArrowsGray:
-                if (IconId == 0) result = SLIconValues.GrayDownArrow;
-                else if (IconId == 1) result = SLIconValues.GrayDownInclineArrow;
-                else if (IconId == 2) result = SLIconValues.GraySideArrow;
-                else if (IconId == 3) result = SLIconValues.GrayUpInclineArrow;
-                else if (IconId == 4) result = SLIconValues.GrayUpArrow;
-                break;
-            case X14.IconSetTypeValues.FiveBoxes:
-                if (IconId == 0) result = SLIconValues.ZeroFilledBoxes;
-                else if (IconId == 1) result = SLIconValues.OneFilledBox;
-                else if (IconId == 2) result = SLIconValues.TwoFilledBoxes;
-                else if (IconId == 3) result = SLIconValues.ThreeFilledBoxes;
-                else if (IconId == 4) result = SLIconValues.FourFilledBoxes;
-                break;
-            case X14.IconSetTypeValues.FiveQuarters:
-                if (IconId == 0) result = SLIconValues.WhiteCircleAllWhiteQuarters;
-                else if (IconId == 1) result = SLIconValues.CircleWithThreeWhiteQuarters;
-                else if (IconId == 2) result = SLIconValues.CircleWithTwoWhiteQuarters;
-                else if (IconId == 3) result = SLIconValues.CircleWithOneWhiteQuarter;
-                else if (IconId == 4) result = SLIconValues.BlackCircle;
-                break;
-            case X14.IconSetTypeValues.FiveRating:
-                if (IconId == 0) result = SLIconValues.SignalMeterWithNoFilledBars;
-                else if (IconId == 1) result = SLIconValues.SignalMeterWithOneFilledBar;
-                else if (IconId == 2) result = SLIconValues.SignalMeterWithTwoFilledBars;
-                else if (IconId == 3) result = SLIconValues.SignalMeterWithThreeFilledBars;
-                else if (IconId == 4) result = SLIconValues.SignalMeterWithFourFilledBars;
-                break;
-            case X14.IconSetTypeValues.FourArrows:
-                if (IconId == 0) result = SLIconValues.RedDownArrow;
-                else if (IconId == 1) result = SLIconValues.YellowDownInclineArrow;
-                else if (IconId == 2) result = SLIconValues.YellowUpInclineArrow;
-                else if (IconId == 3) result = SLIconValues.GreenUpArrow;
-                break;
-            case X14.IconSetTypeValues.FourArrowsGray:
-                if (IconId == 0) result = SLIconValues.GrayDownArrow;
-                else if (IconId == 1) result = SLIconValues.GrayDownInclineArrow;
-                else if (IconId == 2) result = SLIconValues.GrayUpInclineArrow;
-                else if (IconId == 3) result = SLIconValues.GrayUpArrow;
-                break;
-            case X14.IconSetTypeValues.FourRating:
-                if (IconId == 0) result = SLIconValues.SignalMeterWithOneFilledBar;
-                else if (IconId == 1) result = SLIconValues.SignalMeterWithTwoFilledBars;
-                else if (IconId == 2) result = SLIconValues.SignalMeterWithThreeFilledBars;
-                else if (IconId == 3) result = SLIconValues.SignalMeterWithFourFilledBars;
-                break;
-            case X14.IconSetTypeValues.FourRedToBlack:
-                if (IconId == 0) result = SLIconValues.BlackCircle;
-                else if (IconId == 1) result = SLIconValues.GrayCircle;
-                else if (IconId == 2) result = SLIconValues.PinkCircle;
-                else if (IconId == 3) result = SLIconValues.RedCircle;
-                break;
-            case X14.IconSetTypeValues.FourTrafficLights:
-                if (IconId == 0) result = SLIconValues.BlackCircleWithBorder;
-                else if (IconId == 1) result = SLIconValues.RedCircleWithBorder;
-                else if (IconId == 2) result = SLIconValues.YellowCircle;
-                else if (IconId == 3) result = SLIconValues.GreenCircle;
-                break;
-            case X14.IconSetTypeValues.NoIcons:
-                result = SLIconValues.NoIcon;
-                break;
-            case X14.IconSetTypeValues.ThreeArrows:
-                if (IconId == 0) result = SLIconValues.RedDownArrow;
-                else if (IconId == 1) result = SLIconValues.YellowSideArrow;
-                else if (IconId == 2) result = SLIconValues.GreenUpArrow;
-                break;
-            case X14.IconSetTypeValues.ThreeArrowsGray:
-                if (IconId == 0) result = SLIconValues.GrayDownArrow;
-                else if (IconId == 1) result = SLIconValues.GraySideArrow;
-                else if (IconId == 2) result = SLIconValues.GrayUpArrow;
-                break;
-            case X14.IconSetTypeValues.ThreeFlags:
-                if (IconId == 0) result = SLIconValues.RedFlag;
-                else if (IconId == 1) result = SLIconValues.YellowFlag;
-                else if (IconId == 2) result = SLIconValues.GreenFlag;
-                break;
-            case X14.IconSetTypeValues.ThreeSigns:
-                if (IconId == 0) result = SLIconValues.RedDiamond;
-                else if (IconId == 1) result = SLIconValues.YellowTriangle;
-                else if (IconId == 2) result = SLIconValues.GreenCircle;
-                break;
-            case X14.IconSetTypeValues.ThreeStars:
-                if (IconId == 0) result = SLIconValues.SilverStar;
-                else if (IconId == 1) result = SLIconValues.HalfGoldStar;
-                else if (IconId == 2) result = SLIconValues.GoldStar;
-                break;
-            case X14.IconSetTypeValues.ThreeSymbols:
-                if (IconId == 0) result = SLIconValues.RedCrossSymbol;
-                else if (IconId == 1) result = SLIconValues.YellowExclamationSymbol;
-                else if (IconId == 2) result = SLIconValues.GreenCheckSymbol;
-                break;
-            case X14.IconSetTypeValues.ThreeSymbols2:
-                if (IconId == 0) result = SLIconValues.RedCross;
-                else if (IconId == 1) result = SLIconValues.YellowExclamation;
-                else if (IconId == 2) result = SLIconValues.GreenCheck;
-                break;
-            case X14.IconSetTypeValues.ThreeTrafficLights1:
-                if (IconId == 0) result = SLIconValues.RedCircleWithBorder;
-                else if (IconId == 1) result = SLIconValues.YellowCircle;
-                else if (IconId == 2) result = SLIconValues.GreenCircle;
-                break;
-            case X14.IconSetTypeValues.ThreeTrafficLights2:
-                if (IconId == 0) result = SLIconValues.RedTrafficLight;
-                else if (IconId == 1) result = SLIconValues.YellowTrafficLight;
-                else if (IconId == 2) result = SLIconValues.GreenTrafficLight;
-                break;
-            case X14.IconSetTypeValues.ThreeTriangles:
-                if (IconId == 0) result = SLIconValues.RedDownArrow;
-                else if (IconId == 1) result = SLIconValues.YellowDash;
-                else if (IconId == 2) result = SLIconValues.GreenUpArrow;
-                break;
+            if (IconId == 0) result = SLIconValues.RedDownArrow;
+            else if (IconId == 1) result = SLIconValues.YellowDownInclineArrow;
+            else if (IconId == 2) result = SLIconValues.YellowSideArrow;
+            else if (IconId == 3) result = SLIconValues.YellowUpInclineArrow;
+            else if (IconId == 4) result = SLIconValues.GreenUpArrow;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FiveArrowsGray)
+        {
+            if (IconId == 0) result = SLIconValues.GrayDownArrow;
+            else if (IconId == 1) result = SLIconValues.GrayDownInclineArrow;
+            else if (IconId == 2) result = SLIconValues.GraySideArrow;
+            else if (IconId == 3) result = SLIconValues.GrayUpInclineArrow;
+            else if (IconId == 4) result = SLIconValues.GrayUpArrow;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FiveBoxes)
+        {
+            if (IconId == 0) result = SLIconValues.ZeroFilledBoxes;
+            else if (IconId == 1) result = SLIconValues.OneFilledBox;
+            else if (IconId == 2) result = SLIconValues.TwoFilledBoxes;
+            else if (IconId == 3) result = SLIconValues.ThreeFilledBoxes;
+            else if (IconId == 4) result = SLIconValues.FourFilledBoxes;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FiveQuarters)
+        {
+            if (IconId == 0) result = SLIconValues.WhiteCircleAllWhiteQuarters;
+            else if (IconId == 1) result = SLIconValues.CircleWithThreeWhiteQuarters;
+            else if (IconId == 2) result = SLIconValues.CircleWithTwoWhiteQuarters;
+            else if (IconId == 3) result = SLIconValues.CircleWithOneWhiteQuarter;
+            else if (IconId == 4) result = SLIconValues.BlackCircle;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FiveRating)
+        {
+            if (IconId == 0) result = SLIconValues.SignalMeterWithNoFilledBars;
+            else if (IconId == 1) result = SLIconValues.SignalMeterWithOneFilledBar;
+            else if (IconId == 2) result = SLIconValues.SignalMeterWithTwoFilledBars;
+            else if (IconId == 3) result = SLIconValues.SignalMeterWithThreeFilledBars;
+            else if (IconId == 4) result = SLIconValues.SignalMeterWithFourFilledBars;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FourArrows)
+        {
+            if (IconId == 0) result = SLIconValues.RedDownArrow;
+            else if (IconId == 1) result = SLIconValues.YellowDownInclineArrow;
+            else if (IconId == 2) result = SLIconValues.YellowUpInclineArrow;
+            else if (IconId == 3) result = SLIconValues.GreenUpArrow;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FourArrowsGray)
+        {
+            if (IconId == 0) result = SLIconValues.GrayDownArrow;
+            else if (IconId == 1) result = SLIconValues.GrayDownInclineArrow;
+            else if (IconId == 2) result = SLIconValues.GrayUpInclineArrow;
+            else if (IconId == 3) result = SLIconValues.GrayUpArrow;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FourRating)
+        {
+            if (IconId == 0) result = SLIconValues.SignalMeterWithOneFilledBar;
+            else if (IconId == 1) result = SLIconValues.SignalMeterWithTwoFilledBars;
+            else if (IconId == 2) result = SLIconValues.SignalMeterWithThreeFilledBars;
+            else if (IconId == 3) result = SLIconValues.SignalMeterWithFourFilledBars;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FourRedToBlack)
+        {
+            if (IconId == 0) result = SLIconValues.BlackCircle;
+            else if (IconId == 1) result = SLIconValues.GrayCircle;
+            else if (IconId == 2) result = SLIconValues.PinkCircle;
+            else if (IconId == 3) result = SLIconValues.RedCircle;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.FourTrafficLights)
+        {
+            if (IconId == 0) result = SLIconValues.BlackCircleWithBorder;
+            else if (IconId == 1) result = SLIconValues.RedCircleWithBorder;
+            else if (IconId == 2) result = SLIconValues.YellowCircle;
+            else if (IconId == 3) result = SLIconValues.GreenCircle;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.NoIcons)
+        {
+            result = SLIconValues.NoIcon;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeArrows)
+        {
+            if (IconId == 0) result = SLIconValues.RedDownArrow;
+            else if (IconId == 1) result = SLIconValues.YellowSideArrow;
+            else if (IconId == 2) result = SLIconValues.GreenUpArrow;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeArrowsGray)
+        {
+            if (IconId == 0) result = SLIconValues.GrayDownArrow;
+            else if (IconId == 1) result = SLIconValues.GraySideArrow;
+            else if (IconId == 2) result = SLIconValues.GrayUpArrow;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeFlags)
+        {
+            if (IconId == 0) result = SLIconValues.RedFlag;
+            else if (IconId == 1) result = SLIconValues.YellowFlag;
+            else if (IconId == 2) result = SLIconValues.GreenFlag;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeSigns)
+        {
+            if (IconId == 0) result = SLIconValues.RedDiamond;
+            else if (IconId == 1) result = SLIconValues.YellowTriangle;
+            else if (IconId == 2) result = SLIconValues.GreenCircle;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeStars)
+        {
+            if (IconId == 0) result = SLIconValues.SilverStar;
+            else if (IconId == 1) result = SLIconValues.HalfGoldStar;
+            else if (IconId == 2) result = SLIconValues.GoldStar;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeSymbols)
+        {
+            if (IconId == 0) result = SLIconValues.RedCrossSymbol;
+            else if (IconId == 1) result = SLIconValues.YellowExclamationSymbol;
+            else if (IconId == 2) result = SLIconValues.GreenCheckSymbol;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeSymbols2)
+        {
+            if (IconId == 0) result = SLIconValues.RedCross;
+            else if (IconId == 1) result = SLIconValues.YellowExclamation;
+            else if (IconId == 2) result = SLIconValues.GreenCheck;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeTrafficLights1)
+        {
+            if (IconId == 0) result = SLIconValues.RedCircleWithBorder;
+            else if (IconId == 1) result = SLIconValues.YellowCircle;
+            else if (IconId == 2) result = SLIconValues.GreenCircle;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeTrafficLights2)
+        {
+            if (IconId == 0) result = SLIconValues.RedTrafficLight;
+            else if (IconId == 1) result = SLIconValues.YellowTrafficLight;
+            else if (IconId == 2) result = SLIconValues.GreenTrafficLight;
+        }
+        else if (IconSetType == X14.IconSetTypeValues.ThreeTriangles)
+        {
+            if (IconId == 0) result = SLIconValues.RedDownArrow;
+            else if (IconId == 1) result = SLIconValues.YellowDash;
+            else if (IconId == 2) result = SLIconValues.GreenUpArrow;
         }
 
         return result;

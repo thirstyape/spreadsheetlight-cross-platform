@@ -62,21 +62,15 @@ internal class SLPane
     internal static string GetPaneValuesAttribute(PaneValues pv)
     {
         string result = "topLeft";
-        switch (pv)
-        {
-            case PaneValues.BottomLeft:
-                result = "bottomLeft";
-                break;
-            case PaneValues.BottomRight:
-                result = "bottomRight";
-                break;
-            case PaneValues.TopLeft:
-                result = "topLeft";
-                break;
-            case PaneValues.TopRight:
-                result = "topRight";
-                break;
-        }
+
+        if (pv == PaneValues.BottomLeft)
+            result = "bottomLeft";
+        else if (pv == PaneValues.BottomRight)
+            result = "bottomRight";
+        else if (pv == PaneValues.TopLeft)
+            result = "topLeft";
+        else if (pv == PaneValues.TopRight)
+            result = "topRight";
 
         return result;
     }
@@ -84,18 +78,13 @@ internal class SLPane
     internal static string GetPaneStateValuesAttribute(PaneStateValues psv)
     {
         string result = "split";
-        switch (psv)
-        {
-            case PaneStateValues.Frozen:
-                result = "frozen";
-                break;
-            case PaneStateValues.FrozenSplit:
-                result = "frozenSplit";
-                break;
-            case PaneStateValues.Split:
-                result = "split";
-                break;
-        }
+
+        if (psv == PaneStateValues.Frozen)
+            result = "frozen";
+        else if (psv == PaneStateValues.FrozenSplit)
+            result = "frozenSplit";
+        else if (psv == PaneStateValues.Split)
+            result = "split";
 
         return result;
     }

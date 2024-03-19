@@ -179,21 +179,15 @@ internal class SLChartTool
     internal static C.AxisPositionValues GetOppositePosition(C.AxisPositionValues Position)
     {
         C.AxisPositionValues result = Position;
-        switch (Position)
-        {
-            case C.AxisPositionValues.Bottom:
-                result = C.AxisPositionValues.Top;
-                break;
-            case C.AxisPositionValues.Left:
-                result = C.AxisPositionValues.Right;
-                break;
-            case C.AxisPositionValues.Right:
-                result = C.AxisPositionValues.Left;
-                break;
-            case C.AxisPositionValues.Top:
-                result = C.AxisPositionValues.Bottom;
-                break;
-        }
+
+        if (Position == C.AxisPositionValues.Bottom)
+            result = C.AxisPositionValues.Top;
+        else if (Position == C.AxisPositionValues.Left)
+            result = C.AxisPositionValues.Right;
+        else if (Position == C.AxisPositionValues.Right)
+            result = C.AxisPositionValues.Left;
+        else if (Position == C.AxisPositionValues.Top)
+            result = C.AxisPositionValues.Bottom;
 
         return result;
     }

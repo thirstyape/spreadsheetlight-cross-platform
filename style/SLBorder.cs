@@ -1016,51 +1016,35 @@ public class SLBorderProperties
     internal string GetBorderStyleAttribute(BorderStyleValues bsv)
     {
         string result = "none";
-        switch (bsv)
-        {
-            case BorderStyleValues.DashDot:
-                result = "dashDot";
-                break;
-            case BorderStyleValues.DashDotDot:
-                result = "dashDotDot";
-                break;
-            case BorderStyleValues.Dashed:
-                result = "dashed";
-                break;
-            case BorderStyleValues.Dotted:
-                result = "dotted";
-                break;
-            case BorderStyleValues.Double:
-                result = "double";
-                break;
-            case BorderStyleValues.Hair:
-                result = "hair";
-                break;
-            case BorderStyleValues.Medium:
-                result = "medium";
-                break;
-            case BorderStyleValues.MediumDashDot:
-                result = "mediumDashDot";
-                break;
-            case BorderStyleValues.MediumDashDotDot:
-                result = "mediumDashDotDot";
-                break;
-            case BorderStyleValues.MediumDashed:
-                result = "mediumDashed";
-                break;
-            case BorderStyleValues.None:
-                result = "none";
-                break;
-            case BorderStyleValues.SlantDashDot:
-                result = "slantDashDot";
-                break;
-            case BorderStyleValues.Thick:
-                result = "thick";
-                break;
-            case BorderStyleValues.Thin:
-                result = "thin";
-                break;
-        }
+
+        if (bsv == BorderStyleValues.DashDot)
+            result = "dashDot";
+        else if (bsv == BorderStyleValues.DashDotDot)
+            result = "dashDotDot";
+        else if (bsv == BorderStyleValues.Dashed)
+            result = "dashed";
+        else if (bsv == BorderStyleValues.Dotted)
+            result = "dotted";
+        else if (bsv == BorderStyleValues.Double)
+            result = "double";
+        else if (bsv == BorderStyleValues.Hair)
+            result = "hair";
+        else if (bsv == BorderStyleValues.Medium)
+            result = "medium";
+        else if (bsv == BorderStyleValues.MediumDashDot)
+            result = "mediumDashDot";
+        else if (bsv == BorderStyleValues.MediumDashDotDot)
+            result = "mediumDashDotDot";
+        else if (bsv == BorderStyleValues.MediumDashed)
+            result = "mediumDashed";
+        else if (bsv == BorderStyleValues.None)
+            result = "none";
+        else if (bsv == BorderStyleValues.SlantDashDot)
+            result = "slantDashDot";
+        else if (bsv == BorderStyleValues.Thick)
+            result = "thick";
+        else if (bsv == BorderStyleValues.Thin)
+            result = "thin";
 
         return result;
     }

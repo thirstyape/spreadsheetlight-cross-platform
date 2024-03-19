@@ -212,22 +212,23 @@ public class SLFont
     /// <param name="FontSize">The size of the font in points.</param>
     public void SetFont(FontSchemeValues FontScheme, double FontSize)
     {
-        switch (FontScheme)
+        if (FontScheme == FontSchemeValues.Major)
         {
-            case FontSchemeValues.Major:
-                this.FontName = this.MajorFont;
-                this.FontScheme = FontSchemeValues.Major;
-                break;
-            case FontSchemeValues.Minor:
-                this.FontName = this.MinorFont;
-                this.FontScheme = FontSchemeValues.Minor;
-                break;
-            case FontSchemeValues.None:
-                this.FontName = this.MinorFont;
-                this.vFontScheme = FontSchemeValues.None;
-                HasFontScheme = false;
-                break;
+            this.FontName = this.MajorFont;
+            this.FontScheme = FontSchemeValues.Major;
         }
+        else if (FontScheme == FontSchemeValues.Minor)
+        {
+            this.FontName = this.MinorFont;
+            this.FontScheme = FontSchemeValues.Minor;
+        }
+        else if (FontScheme == FontSchemeValues.None)
+        {
+            this.FontName = this.MinorFont;
+            this.vFontScheme = FontSchemeValues.None;
+            HasFontScheme = false;
+        }
+
         this.FontSize = FontSize;
         this.CharacterSet = null;
         this.FontFamily = null;

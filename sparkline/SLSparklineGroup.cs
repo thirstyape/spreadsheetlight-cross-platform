@@ -1359,7 +1359,7 @@ public class SLSparklineGroup
         if (spkgrp.ManualMin != null) this.ManualMin = spkgrp.ManualMin.Value;
         if (spkgrp.LineWeight != null) this.LineWeight = (decimal)spkgrp.LineWeight.Value;
         if (spkgrp.Type != null) this.Type = spkgrp.Type.Value;
-        
+
         // we're gonna ignore dateAxis because if there's no formula, having it true is useless
 
         if (spkgrp.DisplayEmptyCellsAs != null) this.ShowEmptyCellsAs = spkgrp.DisplayEmptyCellsAs.Value;
@@ -1411,32 +1411,24 @@ public class SLSparklineGroup
             spkgrp.Sparklines.Append(spk.ToSparkline());
         }
 
-        switch (this.MinAxisType)
+        if (MinAxisType == X14.SparklineAxisMinMaxValues.Group)
         {
-            case X14.SparklineAxisMinMaxValues.Individual:
-                // default, so don't have to do anything
-                break;
-            case X14.SparklineAxisMinMaxValues.Group:
-                spkgrp.MinAxisType = X14.SparklineAxisMinMaxValues.Group;
-                break;
-            case X14.SparklineAxisMinMaxValues.Custom:
-                spkgrp.MinAxisType = X14.SparklineAxisMinMaxValues.Custom;
-                spkgrp.ManualMin = this.ManualMin;
-                break;
+            spkgrp.MinAxisType = X14.SparklineAxisMinMaxValues.Group;
+        }
+        else if (MinAxisType == X14.SparklineAxisMinMaxValues.Custom)
+        {
+            spkgrp.MinAxisType = X14.SparklineAxisMinMaxValues.Custom;
+            spkgrp.ManualMin = this.ManualMin;
         }
 
-        switch (this.MaxAxisType)
+        if (MaxAxisType == X14.SparklineAxisMinMaxValues.Group)
         {
-            case X14.SparklineAxisMinMaxValues.Individual:
-                // default, so don't have to do anything
-                break;
-            case X14.SparklineAxisMinMaxValues.Group:
-                spkgrp.MaxAxisType = X14.SparklineAxisMinMaxValues.Group;
-                break;
-            case X14.SparklineAxisMinMaxValues.Custom:
-                spkgrp.MaxAxisType = X14.SparklineAxisMinMaxValues.Custom;
-                spkgrp.ManualMax = this.ManualMax;
-                break;
+            spkgrp.MaxAxisType = X14.SparklineAxisMinMaxValues.Group;
+        }
+        else if (MaxAxisType == X14.SparklineAxisMinMaxValues.Custom)
+        {
+            spkgrp.MaxAxisType = X14.SparklineAxisMinMaxValues.Custom;
+            spkgrp.ManualMax = this.ManualMax;
         }
 
         if (this.decLineWeight != 0.75m) spkgrp.LineWeight = (double)this.decLineWeight;
@@ -1507,7 +1499,7 @@ public class SLSparklineGroup
         spkgrp.ShowNegativePoints = this.ShowNegativePoints;
         spkgrp.ShowAxis = this.ShowAxis;
         spkgrp.ShowHiddenData = this.ShowHiddenData;
-        spkgrp.RightToLeft = this.RightToLeft;            
+        spkgrp.RightToLeft = this.RightToLeft;
 
         return spkgrp;
     }

@@ -149,38 +149,20 @@ public class SLCell
         else this.DataType = CellValues.Number;
 
         if (c.CellValue != null) this.CellText = c.CellValue.Text ?? string.Empty;
-        
+
         double fValue = 0;
         int iValue = 0;
         bool bValue = false;
-        switch (this.DataType)
-        {
-            case CellValues.Number:
-                if (double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
-                {
-                    this.NumericValue = fValue;
-                }
-                break;
-            case CellValues.SharedString:
-                if (int.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out iValue))
-                {
-                    this.NumericValue = iValue;
-                }
-                break;
-            case CellValues.Boolean:
-                if (double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
-                {
-                    if (fValue > 0.5) this.NumericValue = 1;
-                    else this.NumericValue = 0;
-                }
-                else if (bool.TryParse(this.CellText, out bValue))
-                {
-                    if (bValue) this.NumericValue = 1;
-                    else this.NumericValue = 0;
-                }
-                break;
-        }
-        
+
+        if (c.DataType == CellValues.Number && double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
+            this.NumericValue = fValue;
+        else if (c.DataType == CellValues.SharedString && int.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out iValue))
+            this.NumericValue = iValue;
+        else if (c.DataType == CellValues.Boolean && double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
+            this.NumericValue = fValue > 0.5 ? 1 : 0;
+        else if (c.DataType == CellValues.Boolean && bool.TryParse(this.CellText, out bValue))
+            this.NumericValue = bValue ? 1 : 0;
+
         if (c.CellMetaIndex != null) this.CellMetaIndex = c.CellMetaIndex.Value;
         if (c.ValueMetaIndex != null) this.ValueMetaIndex = c.ValueMetaIndex.Value;
         if (c.ShowPhonetic != null) this.ShowPhonetic = c.ShowPhonetic.Value;

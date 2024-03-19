@@ -294,55 +294,36 @@ public class SLAlignment
 
         if (this.HasHorizontal)
         {
-            switch (this.Horizontal)
-            {
-                case HorizontalAlignmentValues.Center:
-                    sb.Append(" horizontal=\"center\"");
-                    break;
-                case HorizontalAlignmentValues.CenterContinuous:
-                    sb.Append(" horizontal=\"centerContinuous\"");
-                    break;
-                case HorizontalAlignmentValues.Distributed:
-                    sb.Append(" horizontal=\"distributed\"");
-                    break;
-                case HorizontalAlignmentValues.Fill:
-                    sb.Append(" horizontal=\"fill\"");
-                    break;
-                case HorizontalAlignmentValues.General:
-                    sb.Append(" horizontal=\"general\"");
-                    break;
-                case HorizontalAlignmentValues.Justify:
-                    sb.Append(" horizontal=\"justify\"");
-                    break;
-                case HorizontalAlignmentValues.Left:
-                    sb.Append(" horizontal=\"left\"");
-                    break;
-                case HorizontalAlignmentValues.Right:
-                    sb.Append(" horizontal=\"right\"");
-                    break;
-            }
+            if (Horizontal == HorizontalAlignmentValues.Center)
+                sb.Append(" horizontal=\"center\"");
+            else if (Horizontal == HorizontalAlignmentValues.CenterContinuous)
+                sb.Append(" horizontal=\"centerContinuous\"");
+            else if (Horizontal == HorizontalAlignmentValues.Distributed)
+                sb.Append(" horizontal=\"distributed\"");
+            else if (Horizontal == HorizontalAlignmentValues.Fill)
+                sb.Append(" horizontal=\"fill\"");
+            else if (Horizontal == HorizontalAlignmentValues.General)
+                sb.Append(" horizontal=\"general\"");
+            else if (Horizontal == HorizontalAlignmentValues.Justify)
+                sb.Append(" horizontal=\"justify\"");
+            else if (Horizontal == HorizontalAlignmentValues.Left)
+                sb.Append(" horizontal=\"left\"");
+            else if (Horizontal == HorizontalAlignmentValues.Right)
+                sb.Append(" horizontal=\"right\"");
         }
 
         if (this.HasVertical)
         {
-            switch (this.Vertical)
-            {
-                case VerticalAlignmentValues.Bottom:
-                    sb.Append(" vertical=\"bottom\"");
-                    break;
-                case VerticalAlignmentValues.Center:
-                    sb.Append(" vertical=\"center\"");
-                    break;
-                case VerticalAlignmentValues.Distributed:
-                    sb.Append(" vertical=\"distributed\"");
-                    break;
-                case VerticalAlignmentValues.Justify:
-                    sb.Append(" vertical=\"justify\"");
-                    break;
-                case VerticalAlignmentValues.Top:
-                    sb.Append(" vertical=\"top\"");
-                    break;
-            }
+            if (Vertical == VerticalAlignmentValues.Bottom)
+                sb.Append(" vertical=\"bottom\"");
+            else if (Vertical == VerticalAlignmentValues.Center)
+                sb.Append(" vertical=\"center\"");
+            else if (Vertical == VerticalAlignmentValues.Distributed)
+                sb.Append(" vertical=\"distributed\"");
+            else if (Vertical == VerticalAlignmentValues.Justify)
+                sb.Append(" vertical=\"justify\"");
+            else if (Vertical == VerticalAlignmentValues.Top)
+                sb.Append(" vertical=\"top\"");
         }
 
         if (this.TextRotation != null) sb.AppendFormat(" textRotation=\"{0}\"", this.TextRotationToOpenXmlValue(this.TextRotation.Value).ToString(CultureInfo.InvariantCulture));
