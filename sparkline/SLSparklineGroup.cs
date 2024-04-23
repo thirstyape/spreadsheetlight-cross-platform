@@ -613,11 +613,6 @@ public class SLSparklineGroup
                 this.Sparklines.Add(spk);
             }
         }
-        else
-        {
-            // don't do anything? The location range is invalid to the point
-            // where I don't know what to do. So just don't do anything...
-        }
     }
 
     /// <summary>

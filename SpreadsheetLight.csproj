@@ -1,48 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <OutputType>Library</OutputType>
-	  <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
-	  <RootNamespace>$(MSBuildProjectName.Replace("-", "_"))</RootNamespace>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <Copyright>Copyright 2011 Vincent Tan Wai Lip</Copyright>
-	  <Company>NF Software Inc.</Company>
-	  <Authors>Vincent Tan, NF Software Inc.</Authors>
-	  <Version>3.5.5</Version>
-	  <AssemblyVersion>3.5.5.0</AssemblyVersion>
-	  <FileVersion>3.5.5.0</FileVersion>
-	  <PackageId>SpreadsheetLight.Cross.Platform</PackageId>
-	  <PackageTags>spreadsheetlight openxml excel export template xlsx</PackageTags>
-	  <RepositoryUrl>https://github.com/thirstyape/spreadsheetlight-cross-platform</RepositoryUrl>
-	  <PackageProjectUrl>https://github.com/thirstyape/spreadsheetlight-cross-platform</PackageProjectUrl>
-	  <Description>
-		  SpreadsheetLight is an open source Open XML spreadsheet .NET library written in C#, and is released under the MIT License. You can create new Open XML spreadsheets, or work with existing Open XML spreadsheets that are compatible with Microsoft Excel 2007/2010/2013 and LibreOffice Calc.
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<RootNamespace>$(MSBuildProjectName.Replace("-", "_"))</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Copyright>Copyright 2011 Vincent Tan Wai Lip</Copyright>
+		<Company>NF Software Inc.</Company>
+		<Authors>Vincent Tan, NF Software Inc.</Authors>
+		<Version>3.5.6</Version>
+		<AssemblyVersion>3.5.6.0</AssemblyVersion>
+		<FileVersion>3.5.6.0</FileVersion>
+		<PackageId>SpreadsheetLight.Cross.Platform</PackageId>
+		<PackageTags>spreadsheetlight openxml excel export template xlsx</PackageTags>
+		<RepositoryUrl>https://github.com/thirstyape/spreadsheetlight-cross-platform</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/thirstyape/spreadsheetlight-cross-platform</PackageProjectUrl>
+		<Description>
+			SpreadsheetLight is an open source Open XML spreadsheet .NET library written in C#, and is released under the MIT License. You can create new Open XML spreadsheets, or work with existing Open XML spreadsheets that are compatible with Microsoft Excel 2007/2010/2013 and LibreOffice Calc.
 
-		  No Office/Excel Interop needed. You do not need Microsoft Office/Excel to be installed.
+			No Office/Excel Interop needed. You do not need Microsoft Office/Excel to be installed.
 
-		  This is a fork of the original code designed to run on .NET 6.0+. It also includes OS platform checks so that code requiring Windows will not execute on other platforms. Some features may not work on non-Windows platforms.
-	  </Description>
-	  <PackageReleaseNotes>
-		  3.5.5
-		  Update publishing to include source link, deterministic, and compiler flags
+			This is a fork of the original code designed to run on .NET 6.0+. It also includes OS platform checks so that code requiring Windows will not execute on other platforms. Some features may not work on non-Windows platforms.
+		</Description>
+		<PackageReleaseNotes>
+			3.5.6
+			Fix issue causing InvalidOperationException
 
-		  3.5.4
-		  Prevent using with DocumentFormat.OpenXml >= 3.0.0 due to breaking changes
+			3.5.5
+			Update publishing to include source link, deterministic, and compiler flags
 
-		  3.5.3
-		  Update to enable multi-targeting for .NET 6.0, .NET 7.0, and .NET 8.0
+			3.5.4
+			Prevent using with DocumentFormat.OpenXml &gt;= 3.0.0 due to breaking changes
 
-		  3.5.2
-		  Add project icon, include XML documentation
+			3.5.3
+			Update to enable multi-targeting for .NET 6.0, .NET 7.0, and .NET 8.0
 
-		  3.5.1
-		  Update to move to .NET 6.0 and improve cross platform compatibility
+			3.5.2
+			Add project icon, include XML documentation
 
-		  3.5.0
-		  Original release from https://spreadsheetlight.com/
-	  </PackageReleaseNotes>
+			3.5.1
+			Update to move to .NET 6.0 and improve cross platform compatibility
 
-  </PropertyGroup>
+			3.5.0
+			Original release from https://spreadsheetlight.com/
+		</PackageReleaseNotes>
+	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
 		<DebugType>portable</DebugType>
@@ -63,32 +65,32 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.*" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.*" PrivateAssets="All" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="[2.18.0,3)" />
-    <PackageReference Include="System.Drawing.Common" Version="[6.0.0,9)" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DocumentFormat.OpenXml" Version="[2.18.0,3)" />
+		<PackageReference Include="System.Drawing.Common" Version="[6.0.0,9)" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove=".gitignore" />
 		<None Remove=".gitattributes" />
 	</ItemGroup>
 
-  <ItemGroup>
-	  <None Include="icon.png">
-		  <Pack>True</Pack>
-		  <PackagePath></PackagePath>
-	  </None>
-    <None Include="license.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-	  <None Include="README.md">
-		  <Pack>True</Pack>
-		  <PackagePath></PackagePath>
-	  </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="license.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>

@@ -24,8 +24,6 @@ public class SLCell
         }
     }
 
-    //internal CellFormula Formula { get; set; }
-
     /// <summary>
     /// Cell formula.
     /// </summary>
@@ -38,6 +36,7 @@ public class SLCell
     }
 
     private string sCellText;
+
     /// <summary>
     /// If this is null, the actual value is stored in NumericValue.
     /// </summary>
@@ -136,42 +135,47 @@ public class SLCell
     {
         this.SetAllNull();
 
-        //if (c.CellFormula != null) this.Formula = (CellFormula)c.CellFormula.CloneNode(true);
         if (c.CellFormula != null)
         {
             this.CellFormula = new SLCellFormula();
             this.CellFormula.FromCellFormula(c.CellFormula);
         }
 
-        if (c.StyleIndex != null) this.StyleIndex = c.StyleIndex.Value;
+        if (c.StyleIndex != null)
+            this.StyleIndex = c.StyleIndex.Value;
 
-        if (c.DataType != null) this.DataType = c.DataType.Value;
-        else this.DataType = CellValues.Number;
+        if (c.DataType != null)
+            this.DataType = c.DataType.Value;
+        else
+            this.DataType = CellValues.Number;
 
-        if (c.CellValue != null) this.CellText = c.CellValue.Text ?? string.Empty;
+        if (c.CellValue != null)
+            this.CellText = c.CellValue.Text ?? string.Empty;
 
-        double fValue = 0;
-        int iValue = 0;
-        bool bValue = false;
+        if (c.DataType != null)
+        {
+			if (c.DataType == CellValues.Number && double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out double fValue))
+				this.NumericValue = fValue;
+			else if (c.DataType == CellValues.SharedString && int.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out int iValue))
+				this.NumericValue = iValue;
+			else if (c.DataType == CellValues.Boolean && double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
+				this.NumericValue = fValue > 0.5 ? 1 : 0;
+			else if (c.DataType == CellValues.Boolean && bool.TryParse(this.CellText, out bool bValue))
+				this.NumericValue = bValue ? 1 : 0;
+		}
 
-        if (c.DataType == CellValues.Number && double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
-            this.NumericValue = fValue;
-        else if (c.DataType == CellValues.SharedString && int.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out iValue))
-            this.NumericValue = iValue;
-        else if (c.DataType == CellValues.Boolean && double.TryParse(this.CellText, NumberStyles.Any, CultureInfo.InvariantCulture, out fValue))
-            this.NumericValue = fValue > 0.5 ? 1 : 0;
-        else if (c.DataType == CellValues.Boolean && bool.TryParse(this.CellText, out bValue))
-            this.NumericValue = bValue ? 1 : 0;
-
-        if (c.CellMetaIndex != null) this.CellMetaIndex = c.CellMetaIndex.Value;
-        if (c.ValueMetaIndex != null) this.ValueMetaIndex = c.ValueMetaIndex.Value;
-        if (c.ShowPhonetic != null) this.ShowPhonetic = c.ShowPhonetic.Value;
+        if (c.CellMetaIndex != null)
+            this.CellMetaIndex = c.CellMetaIndex.Value;
+        if (c.ValueMetaIndex != null)
+            this.ValueMetaIndex = c.ValueMetaIndex.Value;
+        if (c.ShowPhonetic != null)
+            this.ShowPhonetic = c.ShowPhonetic.Value;
     }
 
     internal Cell ToCell(string CellReference)
     {
         Cell c = new Cell();
-        //if (this.Formula != null) c.CellFormula = this.Formula;
+
         if (this.CellFormula != null) c.CellFormula = this.CellFormula.ToCellFormula();
 
         if (this.CellText != null)
@@ -222,7 +226,7 @@ public class SLCell
     internal SLCell Clone()
     {
         SLCell cell = new SLCell();
-        //if (this.Formula != null) cell.Formula = (CellFormula)this.Formula.CloneNode(true);
+
         if (this.CellFormula != null) cell.CellFormula = this.CellFormula.Clone();
         cell.bToPreserveSpace = this.bToPreserveSpace;
         cell.sCellText = this.sCellText;

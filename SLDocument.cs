@@ -769,13 +769,10 @@ public partial class SLDocument : IDisposable
 
     private void LoadSelectedWorksheet()
     {
-        // Need to check?
-        //if (string.IsNullOrEmpty(gsSelectedWorksheetRelationshipID)) return;
-
         WorksheetPart wsp = (WorksheetPart)wbp.GetPartById(gsSelectedWorksheetRelationshipID);
 
         slws = new SLWorksheet(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors, SimpleTheme.ThemeColumnWidth, SimpleTheme.ThemeColumnWidthInEMU, SimpleTheme.ThemeMaxDigitWidth, SimpleTheme.listColumnStepSize, SimpleTheme.ThemeRowHeight);
-        
+
         int index = 0;
         SLColumnProperties cp;
         Column col;
@@ -820,7 +817,6 @@ public partial class SLDocument : IDisposable
             }
             else if (oxr.ElementType == typeof(Column))
             {
-                #region Column
                 int i = 0;
                 col = (Column)oxr.LoadCurrentElement();
                 int min = (int)col.Min.Value;
@@ -849,11 +845,9 @@ public partial class SLDocument : IDisposable
                     if (col.Collapsed != null && col.Collapsed.Value) cp.Collapsed = col.Collapsed.Value;
                     slws.ColumnProperties[i] = cp;
                 }
-                #endregion
             }
             else if (oxr.ElementType == typeof(Row))
             {
-                #region Row
                 ++iGuessRowIndex;
                 iGuessColumnIndex = 0;
                 r = (Row)oxr.LoadCurrentElement();
@@ -967,7 +961,6 @@ public partial class SLDocument : IDisposable
                     }
                 }
                 oxrRow.Close();
-                #endregion
             }
             else if (oxr.ElementType == typeof(SheetProtection))
             {
@@ -1209,7 +1202,7 @@ public partial class SLDocument : IDisposable
         //    }
         //}
         //else if (slws.ConditionalFormattings.Count == 0 && slws.ConditionalFormattings2010.Count > 0)
-        //{   
+        //{
         //}
         //else if (slws.ConditionalFormattings.Count > 0 && slws.ConditionalFormattings2010.Count > 0)
         //{
@@ -1456,7 +1449,6 @@ public partial class SLDocument : IDisposable
 
             wsp.Worksheet.SheetFormatProperties = slws.SheetFormatProperties.ToSheetFormatProperties();
 
-            #region Filling Columns
             if (wsp.Worksheet.Elements<Columns>().Count() > 0)
             {
                 wsp.Worksheet.RemoveAllChildren<Columns>();
@@ -1560,7 +1552,6 @@ public partial class SLDocument : IDisposable
                     wsp.Worksheet.PrependChild(cols);
                 }
             }
-            #endregion
 
             SheetData sd = new SheetData();
 
@@ -2514,7 +2505,6 @@ public partial class SLDocument : IDisposable
             oxw.WriteStartElement(new SheetFormatProperties(), oxa);
             oxw.WriteEndElement();
 
-            #region Filling Columns
             if (slws.ColumnProperties.Count > 0)
             {
                 oxw.WriteStartElement(new Columns());
@@ -2596,7 +2586,6 @@ public partial class SLDocument : IDisposable
 
                 oxw.WriteEndElement();
             }
-            #endregion
 
             oxw.WriteStartElement(new SheetData());
 
@@ -2663,7 +2652,6 @@ public partial class SLDocument : IDisposable
                         }
 
                         // number type is default
-
                         if (c.DataType == CellValues.Boolean)
                             oxa.Add(new OpenXmlAttribute("t", null, "b"));
                         else if (c.DataType == CellValues.Date)
@@ -3346,7 +3334,6 @@ public partial class SLDocument : IDisposable
         string sRelID = string.Empty;
         foreach (WorksheetPart wsp in wbp.WorksheetParts)
         {
-            #region Worksheets
             sRelID = wbp.GetIdOfPart(wsp);
             if (sRelID.Equals(gsSelectedWorksheetRelationshipID, StringComparison.OrdinalIgnoreCase))
             {
@@ -3387,11 +3374,7 @@ public partial class SLDocument : IDisposable
                 // no else because we'll just ignore
             }
 
-            // TODO: Custom sheet views?
-
             wsp.Worksheet.Save();
-
-            #endregion
         }
 
         #region Chartsheets
@@ -3468,7 +3451,7 @@ public partial class SLDocument : IDisposable
                 if (slwb.Sheets[i].State == SheetStateValues.Visible) iFirstSheet = (uint)i;
             }
 
-            // there's guaranteed to be one worksheet with the same name as the 
+            // there's guaranteed to be one worksheet with the same name as the
             // currently selected worksheet.
             if (iActiveTab == null)
             {
@@ -3539,39 +3522,30 @@ public partial class SLDocument : IDisposable
         dictStyleNumberingFormat = null;
         dictStyleNumberingFormatHash = null;
 
-        //countStyle = 0;
         listStyle = null;
         dictStyleHash = null;
 
-        //countStyleFont = 0;
         listStyleFont = null;
         dictStyleFontHash = null;
 
-        //countStyleFill = 0;
         listStyleFill = null;
         dictStyleFillHash = null;
 
-        //countStyleBorder = 0;
         listStyleBorder = null;
         dictStyleBorderHash = null;
 
-        //countStyleCellStyle = 0;
         listStyleCellStyle = null;
         dictStyleCellStyleHash = null;
 
-        //countStyleCellStyleFormat = 0;
         listStyleCellStyleFormat = null;
         dictStyleCellStyleFormatHash = null;
 
-        //countStyleDifferentialFormat = 0;
         listStyleDifferentialFormat = null;
         dictStyleDifferentialFormatHash = null;
 
-        //countStyleTableStyle = 0;
         listStyleTableStyle = null;
         dictStyleTableStyleHash = null;
 
-        //countSharedString = 0;
         listSharedString = null;
         dictSharedStringHash = null;
         hsUniqueSharedString = null;
@@ -3601,13 +3575,10 @@ public partial class SLDocument : IDisposable
     /// <param name="FileName">The file name of the spreadsheet to be saved to.</param>
     public void SaveAs(string FileName)
     {
-        //gsSpreadsheetFileName = FileName;
-
         CloseAndCleanUp();
 
         byte[] data = memstream.ToArray();
         memstream.Close();
-        //File.WriteAllBytes(gsSpreadsheetFileName, data);
         File.WriteAllBytes(FileName, data);
     }
 
