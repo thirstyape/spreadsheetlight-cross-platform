@@ -542,11 +542,34 @@ public partial class SLDocument
     /// </summary>
     /// <param name="CellReference">The cell reference, such as "A1".</param>
     /// <param name="Data">The cell value data.</param>
+    /// <returns>False if the cell reference is invalid. True otherwise.</returns>
+    public bool SetCellValue(string CellReference, DateOnly Data)
+    {
+        return SetCellValue(CellReference, Data.ToDateTime(TimeOnly.MinValue), string.Empty, false);
+    }
+
+    /// <summary>
+    /// Set the cell value given a cell reference. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="CellReference">The cell reference, such as "A1".</param>
+    /// <param name="Data">The cell value data.</param>
     /// <param name="For1904Epoch">True if using 1 Jan 1904 as the date epoch. False if using 1 Jan 1900 as the date epoch. This is independent of the workbook's Date1904 property.</param>
     /// <returns>False if the cell reference is invalid. True otherwise.</returns>
     public bool SetCellValue(string CellReference, DateTime Data, bool For1904Epoch)
     {
         return SetCellValue(CellReference, Data, string.Empty, For1904Epoch);
+    }
+
+    /// <summary>
+    /// Set the cell value given a cell reference. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="CellReference">The cell reference, such as "A1".</param>
+    /// <param name="Data">The cell value data.</param>
+    /// <param name="For1904Epoch">True if using 1 Jan 1904 as the date epoch. False if using 1 Jan 1900 as the date epoch. This is independent of the workbook's Date1904 property.</param>
+    /// <returns>False if the cell reference is invalid. True otherwise.</returns>
+    public bool SetCellValue(string CellReference, DateOnly Data, bool For1904Epoch)
+    {
+        return SetCellValue(CellReference, Data.ToDateTime(TimeOnly.MinValue), string.Empty, For1904Epoch);
     }
 
     /// <summary>
@@ -567,18 +590,46 @@ public partial class SLDocument
     /// <param name="CellReference">The cell reference, such as "A1".</param>
     /// <param name="Data">The cell value data.</param>
     /// <param name="Format">The format string used if the given date is before the date epoch. A date before the date epoch is stored as a string, so the date precision is only as good as the format string. For example, "dd/MM/yyyy HH:mm:ss" is more precise than "dd/MM/yyyy" because the latter loses information about the hours, minutes and seconds.</param>
+    /// <returns>False if the cell reference is invalid. True otherwise.</returns>
+    public bool SetCellValue(string CellReference, DateOnly Data, string Format)
+    {
+        return SetCellValue(CellReference, Data.ToDateTime(TimeOnly.MinValue), Format, false);
+    }
+
+    /// <summary>
+    /// Set the cell value given a cell reference. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="CellReference">The cell reference, such as "A1".</param>
+    /// <param name="Data">The cell value data.</param>
+    /// <param name="Format">The format string used if the given date is before the date epoch. A date before the date epoch is stored as a string, so the date precision is only as good as the format string. For example, "dd/MM/yyyy HH:mm:ss" is more precise than "dd/MM/yyyy" because the latter loses information about the hours, minutes and seconds.</param>
     /// <param name="For1904Epoch">True if using 1 Jan 1904 as the date epoch. False if using 1 Jan 1900 as the date epoch. This is independent of the workbook's Date1904 property.</param>
     /// <returns>False if the cell reference is invalid. True otherwise.</returns>
     public bool SetCellValue(string CellReference, DateTime Data, string Format, bool For1904Epoch)
     {
-        int iRowIndex = -1;
-        int iColumnIndex = -1;
-        if (!SLTool.FormatCellReferenceToRowColumnIndex(CellReference, out iRowIndex, out iColumnIndex))
+        if (!SLTool.FormatCellReferenceToRowColumnIndex(CellReference, out int iRowIndex, out int iColumnIndex))
         {
             return false;
         }
 
         return SetCellValue(iRowIndex, iColumnIndex, Data, Format, For1904Epoch);
+    }
+
+    /// <summary>
+    /// Set the cell value given a cell reference. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="CellReference">The cell reference, such as "A1".</param>
+    /// <param name="Data">The cell value data.</param>
+    /// <param name="Format">The format string used if the given date is before the date epoch. A date before the date epoch is stored as a string, so the date precision is only as good as the format string. For example, "dd/MM/yyyy HH:mm:ss" is more precise than "dd/MM/yyyy" because the latter loses information about the hours, minutes and seconds.</param>
+    /// <param name="For1904Epoch">True if using 1 Jan 1904 as the date epoch. False if using 1 Jan 1900 as the date epoch. This is independent of the workbook's Date1904 property.</param>
+    /// <returns>False if the cell reference is invalid. True otherwise.</returns>
+    public bool SetCellValue(string CellReference, DateOnly Data, string Format, bool For1904Epoch)
+    {
+        if (!SLTool.FormatCellReferenceToRowColumnIndex(CellReference, out int iRowIndex, out int iColumnIndex))
+        {
+            return false;
+        }
+
+        return SetCellValue(iRowIndex, iColumnIndex, Data.ToDateTime(TimeOnly.MinValue), Format, For1904Epoch);
     }
 
     /// <summary>
@@ -591,6 +642,18 @@ public partial class SLDocument
     public bool SetCellValue(int RowIndex, int ColumnIndex, DateTime Data)
     {
         return SetCellValue(RowIndex, ColumnIndex, Data, string.Empty, false);
+    }
+
+    /// <summary>
+    /// Set the cell value given the row index and column index. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="RowIndex">The row index.</param>
+    /// <param name="ColumnIndex">The column index.</param>
+    /// <param name="Data">The cell value data.</param>
+    /// <returns>False if either the row index or column index (or both) are invalid. True otherwise.</returns>
+    public bool SetCellValue(int RowIndex, int ColumnIndex, DateOnly Data)
+    {
+        return SetCellValue(RowIndex, ColumnIndex, Data.ToDateTime(TimeOnly.MinValue), string.Empty, false);
     }
 
     /// <summary>
@@ -612,11 +675,37 @@ public partial class SLDocument
     /// <param name="RowIndex">The row index.</param>
     /// <param name="ColumnIndex">The column index.</param>
     /// <param name="Data">The cell value data.</param>
+    /// <param name="For1904Epoch">True if using 1 Jan 1904 as the date epoch. False if using 1 Jan 1900 as the date epoch. This is independent of the workbook's Date1904 property.</param>
+    /// <returns>False if either the row index or column index (or both) are invalid. True otherwise.</returns>
+    public bool SetCellValue(int RowIndex, int ColumnIndex, DateOnly Data, bool For1904Epoch)
+    {
+        return SetCellValue(RowIndex, ColumnIndex, Data.ToDateTime(TimeOnly.MinValue), string.Empty, For1904Epoch);
+    }
+
+    /// <summary>
+    /// Set the cell value given the row index and column index. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="RowIndex">The row index.</param>
+    /// <param name="ColumnIndex">The column index.</param>
+    /// <param name="Data">The cell value data.</param>
     /// <param name="Format">The format string used if the given date is before the date epoch. A date before the date epoch is stored as a string, so the date precision is only as good as the format string. For example, "dd/MM/yyyy HH:mm:ss" is more precise than "dd/MM/yyyy" because the latter loses information about the hours, minutes and seconds.</param>
     /// <returns>False if either the row index or column index (or both) are invalid. True otherwise.</returns>
     public bool SetCellValue(int RowIndex, int ColumnIndex, DateTime Data, string Format)
     {
         return SetCellValue(RowIndex, ColumnIndex, Data, Format, false);
+    }
+
+    /// <summary>
+    /// Set the cell value given the row index and column index. Be sure to follow up with a date format style.
+    /// </summary>
+    /// <param name="RowIndex">The row index.</param>
+    /// <param name="ColumnIndex">The column index.</param>
+    /// <param name="Data">The cell value data.</param>
+    /// <param name="Format">The format string used if the given date is before the date epoch. A date before the date epoch is stored as a string, so the date precision is only as good as the format string. For example, "dd/MM/yyyy HH:mm:ss" is more precise than "dd/MM/yyyy" because the latter loses information about the hours, minutes and seconds.</param>
+    /// <returns>False if either the row index or column index (or both) are invalid. True otherwise.</returns>
+    public bool SetCellValue(int RowIndex, int ColumnIndex, DateOnly Data, string Format)
+    {
+        return SetCellValue(RowIndex, ColumnIndex, Data.ToDateTime(TimeOnly.MinValue), Format, false);
     }
 
     /// <summary>
@@ -681,9 +770,7 @@ public partial class SLDocument
 
     private bool SetCellValueNumberFinal(string CellReference, bool IsNumeric, double NumericValue, string NumberData)
     {
-        int iRowIndex = -1;
-        int iColumnIndex = -1;
-        if (!SLTool.FormatCellReferenceToRowColumnIndex(CellReference, out iRowIndex, out iColumnIndex))
+        if (!SLTool.FormatCellReferenceToRowColumnIndex(CellReference, out int iRowIndex, out int iColumnIndex))
         {
             return false;
         }
@@ -1510,7 +1597,7 @@ public partial class SLDocument
                         {
                             index = Convert.ToInt32(c.NumericValue);
                         }
-                        
+
                         if (index >= 0 && index < listSharedString.Count)
                         {
                             rst.FromHash(listSharedString[index]);
@@ -1530,7 +1617,7 @@ public partial class SLDocument
                     }
                     catch
                     {
-                        if (gbThrowExceptionsIfAny) 
+                        if (gbThrowExceptionsIfAny)
                             throw;
                         // else something terrible just happened. (the shared string index probably
                         // isn't even correct!) Don't do anything...
@@ -1552,7 +1639,7 @@ public partial class SLDocument
                     }
                     catch
                     {
-                        if (gbThrowExceptionsIfAny) 
+                        if (gbThrowExceptionsIfAny)
                             throw;
                         // else don't need to do anything. Just return the default date value.
                     }
@@ -2963,7 +3050,7 @@ public partial class SLDocument
                                         {
                                             // else source cell has default style.
                                             // Now check if destination cell lies on a row/column
-                                            // that has non-default style. Remember, we don't have 
+                                            // that has non-default style. Remember, we don't have
                                             // a destination cell here.
                                             iStyleIndexNew = 0;
                                             if (rowstyleindex.ContainsKey(iNewRowIndex)) iStyleIndexNew = (int)rowstyleindex[iNewRowIndex];
@@ -3203,7 +3290,7 @@ public partial class SLDocument
                                         newcell.CellText = origcell.CellText;
                                         newcell.fNumericValue = origcell.fNumericValue;
                                         newcell.DataType = origcell.DataType;
-                                        
+
                                         iStyleIndexNew = 0;
                                         if (rowstyleindex.ContainsKey(iNewRowIndex)) iStyleIndexNew = (int)rowstyleindex[iNewRowIndex];
                                         if (iStyleIndexNew == 0 && colstyleindex.ContainsKey(iNewColumnIndex)) iStyleIndexNew = (int)colstyleindex[iNewColumnIndex];
@@ -3870,7 +3957,7 @@ public partial class SLDocument
                                     {
                                         // else source cell has default style.
                                         // Now check if destination cell lies on a row/column
-                                        // that has non-default style. Remember, we don't have 
+                                        // that has non-default style. Remember, we don't have
                                         // a destination cell here.
                                         iStyleIndexNew = 0;
                                         if (rowstyleindex.ContainsKey(iNewRowIndex)) iStyleIndexNew = (int)rowstyleindex[iNewRowIndex];
@@ -3944,7 +4031,7 @@ public partial class SLDocument
                                     newcell.CellText = origcell.CellText;
                                     newcell.fNumericValue = origcell.fNumericValue;
                                     newcell.DataType = origcell.DataType;
-                                    
+
                                     iStyleIndexNew = 0;
                                     if (rowstyleindex.ContainsKey(iNewRowIndex)) iStyleIndexNew = (int)rowstyleindex[iNewRowIndex];
                                     if (iStyleIndexNew == 0 && colstyleindex.ContainsKey(iNewColumnIndex)) iStyleIndexNew = (int)colstyleindex[iNewColumnIndex];
@@ -4571,7 +4658,7 @@ public partial class SLDocument
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="cell"></param>
     /// <param name="ToSwapRowColumn">this is for copying on transpose</param>
@@ -4624,7 +4711,7 @@ public partial class SLDocument
     //CellFormula.SharedIndex see for details about shared formula and si
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="CellFormula"></param>
     /// <param name="ToSwapRowColumn">this is for copying on transpose</param>

@@ -391,9 +391,9 @@ public partial class SLDocument
         }
 
         // "Optimisation" order:
-        // double, float, decimal, int, long, string, DateTime,
+        // double, float, decimal, int, long, string, DateTime, DateOnly,
         // short, ushort, uint, ulong, char, byte, sbyte, bool,
-        // TimeSpan, byte[]
+        // TimeSpan, TimeOnly, byte[]
 
         if (IncludeHeader)
         {
@@ -456,6 +456,10 @@ public partial class SLDocument
                     {
                         this.SetCellValue(iRowIndex, iColumnIndex, (DateTime)dr.ItemArray[j]);
                     }
+                    else if (taColumns[j] == typeof(DateOnly))
+                    {
+                        this.SetCellValue(iRowIndex, iColumnIndex, ((DateOnly)dr.ItemArray[j]));
+                    }
                     else if (taColumns[j] == typeof(short))
                     {
                         this.SetCellValue(iRowIndex, iColumnIndex, (short)dr.ItemArray[j]);
@@ -490,8 +494,11 @@ public partial class SLDocument
                     }
                     else if (taColumns[j] == typeof(TimeSpan))
                     {
-                        // what do you do with TimeSpans?
                         this.SetCellValue(iRowIndex, iColumnIndex, ((TimeSpan)dr.ItemArray[j]).ToString());
+                    }
+                    else if (taColumns[j] == typeof(TimeOnly))
+                    {
+                        this.SetCellValue(iRowIndex, iColumnIndex, ((TimeOnly)dr.ItemArray[j]).ToString());
                     }
                     else
                     {

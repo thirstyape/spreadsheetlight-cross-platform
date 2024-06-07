@@ -102,7 +102,7 @@ internal partial class SLTool
         // anywhere between 10 to 20 iterations. Every single time.
         // That's a waste of CPU cycles. The worst case scenario is if you set cell values only
         // on column XFD and 1 million+ rows. You're accruing 16384 million iterations.
-        
+
         // As a historical note, SpreadsheetLight originally used a static List<string> and Dictionary
         // to hold the column names and the reverse column name index. This is precalculated
         // at initialisation. This follows a game development tip: Precalculate everything when
@@ -374,10 +374,10 @@ internal partial class SLTool
         bool result = true;
         RowIndex = -1;
         ColumnIndex = -1;
-        int index = -1;
+
         if (Regex.IsMatch(CellReference, @"^[a-zA-Z]{1,3}\d{1,7}$"))
         {
-            index = CellReference.IndexOfAny("0123456789".ToCharArray());
+            var index = CellReference.IndexOfAny("0123456789".ToCharArray());
             if (!int.TryParse(CellReference.Substring(index), out RowIndex))
             {
                 result = false;
@@ -385,7 +385,7 @@ internal partial class SLTool
             else
             {
                 string sPrefix = CellReference.Substring(0, index);
-                ColumnIndex = SLTool.ToColumnIndex(sPrefix);
+                ColumnIndex = ToColumnIndex(sPrefix);
             }
         }
         else
@@ -393,7 +393,7 @@ internal partial class SLTool
             result = false;
         }
 
-        if (!SLTool.CheckRowColumnIndexLimit(RowIndex, ColumnIndex))
+        if (!CheckRowColumnIndexLimit(RowIndex, ColumnIndex))
         {
             result = false;
         }
@@ -401,7 +401,7 @@ internal partial class SLTool
         return result;
     }
 
-    internal static System.Drawing.Color ToColor(string HexValue)
+    internal static Color ToColor(string HexValue)
     {
         NumberStyles ns = NumberStyles.HexNumber;
         CultureInfo ci = CultureInfo.InvariantCulture;
@@ -428,10 +428,10 @@ internal partial class SLTool
             iBlue = 0;
         }
 
-        return System.Drawing.Color.FromArgb(iAlpha, iRed, iGreen, iBlue);
+        return Color.FromArgb(iAlpha, iRed, iGreen, iBlue);
     }
 
-    internal static System.Drawing.Color ToColor(double Hue, double Saturation, double Luminance)
+    internal static Color ToColor(double Hue, double Saturation, double Luminance)
     {
         double fChroma = (1.0 - Math.Abs(2.0 * Luminance - 1.0)) * Saturation;
         double fHue = Hue / 60.0;
@@ -673,7 +673,7 @@ internal partial class SLTool
             xtw.WriteString(XmlToBeEscaped);
             result = sw.ToString();
             // apparently the escaped double quote escapes (haha) the XML escaping...
-            result = result.Replace("\"", "&quot;"); 
+            result = result.Replace("\"", "&quot;");
 
             xtw.Close();
             sw.Close();
@@ -703,7 +703,7 @@ internal partial class SLTool
             // doesn't matter what the tag is. We just need a root XML tag.
             StringReader sr = new StringReader(string.Format("<sl>{0}</sl>", XmlThatsEscaped));
             XmlTextReader xtr = new XmlTextReader(sr);
-            
+
             xtr.Read();
             result = xtr.ReadString();
 
@@ -1040,7 +1040,7 @@ internal partial class SLTool
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="Width"></param>
     /// <param name="Height"></param>
@@ -1090,7 +1090,7 @@ internal partial class SLTool
         {
             szfa[i] = g.MeasureString(string.Format("_{0}_", saText[i]), UsableFont);
             szfa[i].Width = szfa[i].Width - fDoubleUnderscoreWidth;
-            
+
             // Targetting .NET Standard means TextRenderer is no longer available
             // We will just have to make do with Graphics only for width and height.
 
