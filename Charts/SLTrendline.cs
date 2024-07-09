@@ -110,6 +110,9 @@ public class SLTrendline
     /// </summary>
     public SLA.SLFormat3D Format3D { get { return this.TrendlineLabel.Format3D; } }
 
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
     public SLTrendline()
     {
     }

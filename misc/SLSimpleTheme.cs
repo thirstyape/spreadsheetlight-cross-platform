@@ -4,11 +4,6 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using System.Runtime.InteropServices;
 using A = DocumentFormat.OpenXml.Drawing;
 
-// Targetting .NET Standard means Forms is no longer useful
-// Keeping this as a comment as a reminder of pre-Standard days
-// (or until this comment is no longer usefulr :)
-//using System.Windows.Forms;
-
 namespace SpreadsheetLight;
 
 /// <summary>
