@@ -461,7 +461,7 @@ internal class SLSimpleTheme
         get { return lThemeRowHeightInEMU; }
     }
 
-    internal List<double> listColumnStepSize;
+    internal List<double> listColumnStepSize = new();
 
     internal SLSimpleTheme(WorkbookPart wbp, SLThemeTypeValues themetype, bool ThrowExceptionsIfAny)
     {
