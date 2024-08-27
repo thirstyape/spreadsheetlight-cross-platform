@@ -56,7 +56,7 @@ public partial class SLDocument
 
             if (bFound)
             {
-                this.FlattenAllSharedCellFormula();
+				CalculationFunctions.FlattenAllSharedCellFormula(this);
             }
         }
     }
@@ -755,7 +755,7 @@ public partial class SLDocument
             // given datetime is earlier than epoch
             // So we set date to string format
             c.DataType = CellValues.SharedString;
-            c.NumericValue = this.DirectSaveToSharedStringTable(Data.ToString(Format));
+            c.NumericValue = InternalDataStoreFunctions.DirectSaveToSharedStringTable(Data.ToString(Format), this);
             slws.CellWarehouse.SetValue(RowIndex, ColumnIndex, c);
         }
         else
@@ -894,7 +894,7 @@ public partial class SLDocument
             }
         }
         c.DataType = CellValues.SharedString;
-        c.NumericValue = this.DirectSaveToSharedStringTable(Data);
+        c.NumericValue = InternalDataStoreFunctions.DirectSaveToSharedStringTable(Data, this);
         slws.CellWarehouse.SetValue(RowIndex, ColumnIndex, c);
 
         return true;
@@ -968,7 +968,7 @@ public partial class SLDocument
             if (Data.Equals("=", StringComparison.OrdinalIgnoreCase))
             {
                 c.DataType = CellValues.SharedString;
-                c.NumericValue = this.DirectSaveToSharedStringTable("=");
+                c.NumericValue = InternalDataStoreFunctions.DirectSaveToSharedStringTable("=", this);
                 slws.CellWarehouse.SetValue(RowIndex, ColumnIndex, c);
             }
             else
@@ -989,13 +989,13 @@ public partial class SLDocument
         else if (Data.StartsWith("'"))
         {
             c.DataType = CellValues.SharedString;
-            c.NumericValue = this.DirectSaveToSharedStringTable(SLTool.XmlWrite(Data.Substring(1), gbThrowExceptionsIfAny));
+            c.NumericValue = InternalDataStoreFunctions.DirectSaveToSharedStringTable(SLTool.XmlWrite(Data.Substring(1), ThrowExceptionsIfAny), this);
             slws.CellWarehouse.SetValue(RowIndex, ColumnIndex, c);
         }
         else
         {
             c.DataType = CellValues.SharedString;
-            c.NumericValue = this.DirectSaveToSharedStringTable(SLTool.XmlWrite(Data, gbThrowExceptionsIfAny));
+            c.NumericValue = InternalDataStoreFunctions.DirectSaveToSharedStringTable(SLTool.XmlWrite(Data, ThrowExceptionsIfAny), this);
             slws.CellWarehouse.SetValue(RowIndex, ColumnIndex, c);
         }
 
@@ -1090,7 +1090,7 @@ public partial class SLDocument
                     string sText = string.Empty;
                     if (c.DataType == CellValues.String)
                     {
-                        sText = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                        sText = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                     }
                     else if (c.DataType == CellValues.SharedString)
                     {
@@ -1106,19 +1106,18 @@ public partial class SLDocument
                             }
                             else
                             {
-                                sText = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                                sText = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                             }
                         }
                         catch
                         {
-                            if (gbThrowExceptionsIfAny)
+                            if (ThrowExceptionsIfAny)
                             {
                                 throw;
                             }
                             else
                             {
-                                // something terrible just happened. We'll just use whatever's in the cell...
-                                sText = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                                sText = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                             }
                         }
                     }
@@ -1617,7 +1616,7 @@ public partial class SLDocument
                     }
                     catch
                     {
-                        if (gbThrowExceptionsIfAny)
+                        if (ThrowExceptionsIfAny)
                             throw;
                         // else something terrible just happened. (the shared string index probably
                         // isn't even correct!) Don't do anything...
@@ -1639,7 +1638,7 @@ public partial class SLDocument
                     }
                     catch
                     {
-                        if (gbThrowExceptionsIfAny)
+                        if (ThrowExceptionsIfAny)
                             throw;
                         // else don't need to do anything. Just return the default date value.
                     }
@@ -1688,7 +1687,7 @@ public partial class SLDocument
                 {
                     if (c.DataType == CellValues.String)
                     {
-                        result = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                        result = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                     }
                     else if (c.DataType == CellValues.SharedString)
                     {
@@ -1702,19 +1701,18 @@ public partial class SLDocument
                             }
                             else
                             {
-                                result = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                                result = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                             }
                         }
                         catch
                         {
-                            if (gbThrowExceptionsIfAny)
+                            if (ThrowExceptionsIfAny)
                             {
                                 throw;
                             }
                             else
                             {
-                                // something terrible just happened. We'll just use whatever's in the cell...
-                                result = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                                result = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                             }
                         }
                     }
@@ -1726,7 +1724,7 @@ public partial class SLDocument
                     }
                     else
                     {
-                        result = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                        result = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                     }
                 }
                 else
@@ -1745,7 +1743,7 @@ public partial class SLDocument
                         }
                         else
                         {
-                            result = SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny);
+                            result = SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny);
                         }
                     }
                     else if (c.DataType == CellValues.Boolean)
@@ -1797,7 +1795,7 @@ public partial class SLDocument
                 {
                     if (c.DataType == CellValues.String)
                     {
-                        rst.SetText(SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny));
+                        rst.SetText(SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny));
                     }
                     else if (c.DataType == CellValues.SharedString)
                     {
@@ -1810,19 +1808,18 @@ public partial class SLDocument
                             }
                             else
                             {
-                                rst.SetText(SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny));
+                                rst.SetText(SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny));
                             }
                         }
                         catch
                         {
-                            if (gbThrowExceptionsIfAny)
+                            if (ThrowExceptionsIfAny)
                             {
                                 throw;
                             }
                             else
                             {
-                                // something terrible just happened. We'll just use whatever's in the cell...
-                                rst.SetText(SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny));
+                                rst.SetText(SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny));
                             }
                         }
                     }
@@ -1833,7 +1830,7 @@ public partial class SLDocument
                     //}
                     else
                     {
-                        rst.SetText(SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny));
+                        rst.SetText(SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny));
                     }
                 }
                 else
@@ -1851,7 +1848,7 @@ public partial class SLDocument
                         }
                         else
                         {
-                            rst.SetText(SLTool.XmlRead(c.CellText, gbThrowExceptionsIfAny));
+                            rst.SetText(SLTool.XmlRead(c.CellText, ThrowExceptionsIfAny));
                         }
                     }
                     else if (c.DataType == CellValues.Boolean)
@@ -2974,7 +2971,7 @@ public partial class SLDocument
             && AnchorColumnIndex >= 1 && AnchorColumnIndex <= SLConstants.ColumnLimit
             && (iStartRowIndex != AnchorRowIndex || iStartColumnIndex != AnchorColumnIndex))
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
 
@@ -3797,7 +3794,7 @@ public partial class SLDocument
             && AnchorRowIndex >= 1 && AnchorRowIndex <= SLConstants.RowLimit
             && AnchorColumnIndex >= 1 && AnchorColumnIndex <= SLConstants.ColumnLimit)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
 

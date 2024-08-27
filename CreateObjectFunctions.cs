@@ -480,38 +480,6 @@ public partial class SLDocument
     }
 
     /// <summary>
-    /// <strong>Obsolete. </strong>Creates an instance of SLChart, given cell references of opposite cells in a cell range and whether rows or columns contain the data series and if hidden data is used.
-    /// </summary>
-    /// <param name="StartCellReference">The cell reference of the start cell of the cell range to be in the chart, such as "A1". This is typically the top-left cell.</param>
-    /// <param name="EndCellReference">The cell reference of the end cell of the cell range to be in the chart, such as "A1". This is typically the bottom-right cell.</param>
-    /// <param name="RowsAsDataSeries">True if rows contain the data series. False if columns contain the data series.</param>
-    /// <param name="ShowHiddenData">True if hidden data is used in the chart. False otherwise.</param>
-    /// <returns>An SLChart with the required information.</returns>
-    [Obsolete("Use an overload with the SLCreateChartOptions parameter instead.")]
-    public SLC.SLChart CreateChart(string StartCellReference, string EndCellReference, bool RowsAsDataSeries, bool ShowHiddenData)
-    {
-        int iStartRowIndex = -1;
-        int iStartColumnIndex = -1;
-        int iEndRowIndex = -1;
-        int iEndColumnIndex = -1;
-        if (!SLTool.FormatCellReferenceToRowColumnIndex(StartCellReference, out iStartRowIndex, out iStartColumnIndex))
-        {
-            iStartRowIndex = -1;
-            iStartColumnIndex = -1;
-        }
-        if (!SLTool.FormatCellReferenceToRowColumnIndex(EndCellReference, out iEndRowIndex, out iEndColumnIndex))
-        {
-            iEndRowIndex = -1;
-            iEndColumnIndex = -1;
-        }
-
-        SLC.SLCreateChartOptions Options = new SLC.SLCreateChartOptions();
-        Options.RowsAsDataSeries = RowsAsDataSeries;
-        Options.ShowHiddenData = ShowHiddenData;
-        return this.CreateChartInternal(gsSelectedWorksheetName, iStartRowIndex, iStartColumnIndex, iEndRowIndex, iEndColumnIndex, Options);
-    }
-
-    /// <summary>
     /// Creates an instance of SLChart, given cell references of opposite cells in a cell range.
     /// </summary>
     /// <param name="StartCellReference">The cell reference of the start cell of the cell range to be in the chart, such as "A1". This is typically the top-left cell.</param>
@@ -566,39 +534,6 @@ public partial class SLDocument
     }
 
     /// <summary>
-    /// <strong>Obsolete. </strong>Creates an instance of SLChart, given cell references of opposite cells in a cell range and whether rows or columns contain the data series.
-    /// </summary>
-    /// <param name="WorksheetName">The name of the source worksheet.</param>
-    /// <param name="StartCellReference">The cell reference of the start cell of the cell range to be in the chart, such as "A1". This is typically the top-left cell.</param>
-    /// <param name="EndCellReference">The cell reference of the end cell of the cell range to be in the chart, such as "A1". This is typically the bottom-right cell.</param>
-    /// <param name="RowsAsDataSeries">True if rows contain the data series. False if columns contain the data series.</param>
-    /// <param name="ShowHiddenData">True if hidden data is used in the chart. False otherwise.</param>
-    /// <returns>An SLChart with the required information.</returns>
-    [Obsolete("Use an overload with the SLCreateChartOptions parameter instead.")]
-    public SLC.SLChart CreateChart(string WorksheetName, string StartCellReference, string EndCellReference, bool RowsAsDataSeries, bool ShowHiddenData)
-    {
-        int iStartRowIndex = -1;
-        int iStartColumnIndex = -1;
-        int iEndRowIndex = -1;
-        int iEndColumnIndex = -1;
-        if (!SLTool.FormatCellReferenceToRowColumnIndex(StartCellReference, out iStartRowIndex, out iStartColumnIndex))
-        {
-            iStartRowIndex = -1;
-            iStartColumnIndex = -1;
-        }
-        if (!SLTool.FormatCellReferenceToRowColumnIndex(EndCellReference, out iEndRowIndex, out iEndColumnIndex))
-        {
-            iEndRowIndex = -1;
-            iEndColumnIndex = -1;
-        }
-
-        SLC.SLCreateChartOptions Options = new SLC.SLCreateChartOptions();
-        Options.RowsAsDataSeries = RowsAsDataSeries;
-        Options.ShowHiddenData = ShowHiddenData;
-        return this.CreateChartInternal(WorksheetName, iStartRowIndex, iStartColumnIndex, iEndRowIndex, iEndColumnIndex, Options);
-    }
-
-    /// <summary>
     /// Creates an instance of SLChart, given cell references of opposite cells in a cell range.
     /// </summary>
     /// <param name="WorksheetName">The name of the source worksheet.</param>
@@ -640,25 +575,6 @@ public partial class SLDocument
     }
 
     /// <summary>
-    /// <strong>Obsolete. </strong>Creates an instance of SLChart, given row and column indices of opposite cells in a cell range and whether rows or columns contain the data series and if hidden data is used.
-    /// </summary>
-    /// <param name="StartRowIndex">The row index of the start row. This is typically the top row.</param>
-    /// <param name="StartColumnIndex">The column index of the start column. This is typically the left-most column.</param>
-    /// <param name="EndRowIndex">The row index of the end row. This is typically the bottom row.</param>
-    /// <param name="EndColumnIndex">The column index of the end column. This is typically the right-most column.</param>
-    /// <param name="RowsAsDataSeries">True if rows contain the data series. False if columns contain the data series.</param>
-    /// <param name="ShowHiddenData">True if hidden data is used in the chart. False otherwise.</param>
-    /// <returns>An SLChart with the required information.</returns>
-    [Obsolete("Use an overload with the SLCreateChartOptions parameter instead.")]
-    public SLC.SLChart CreateChart(int StartRowIndex, int StartColumnIndex, int EndRowIndex, int EndColumnIndex, bool RowsAsDataSeries, bool ShowHiddenData)
-    {
-        SLC.SLCreateChartOptions Options = new SLC.SLCreateChartOptions();
-        Options.RowsAsDataSeries = RowsAsDataSeries;
-        Options.ShowHiddenData = ShowHiddenData;
-        return this.CreateChartInternal(gsSelectedWorksheetName, StartRowIndex, StartColumnIndex, EndRowIndex, EndColumnIndex, Options);
-    }
-
-    /// <summary>
     /// Creates an instance of SLChart, given row and column indices of opposite cells in a cell range.
     /// </summary>
     /// <param name="StartRowIndex">The row index of the start row. This is typically the top row.</param>
@@ -684,26 +600,6 @@ public partial class SLDocument
     public SLC.SLChart CreateChart(string WorksheetName, int StartRowIndex, int StartColumnIndex, int EndRowIndex, int EndColumnIndex)
     {
         return this.CreateChartInternal(WorksheetName, StartRowIndex, StartColumnIndex, EndRowIndex, EndColumnIndex, new SLC.SLCreateChartOptions());
-    }
-
-    /// <summary>
-    /// <strong>Obsolete. </strong>Creates an instance of SLChart, given row and column indices of opposite cells in a cell range and whether rows or columns contain the data series and if hidden data is used.
-    /// </summary>
-    /// <param name="WorksheetName">The name of the source worksheet.</param>
-    /// <param name="StartRowIndex">The row index of the start row. This is typically the top row.</param>
-    /// <param name="StartColumnIndex">The column index of the start column. This is typically the left-most column.</param>
-    /// <param name="EndRowIndex">The row index of the end row. This is typically the bottom row.</param>
-    /// <param name="EndColumnIndex">The column index of the end column. This is typically the right-most column.</param>
-    /// <param name="RowsAsDataSeries">True if rows contain the data series. False if columns contain the data series.</param>
-    /// <param name="ShowHiddenData">True if hidden data is used in the chart. False otherwise.</param>
-    /// <returns>An SLChart with the required information.</returns>
-    [Obsolete("Use an overload with the SLCreateChartOptions parameter instead.")]
-    public SLC.SLChart CreateChart(string WorksheetName, int StartRowIndex, int StartColumnIndex, int EndRowIndex, int EndColumnIndex, bool RowsAsDataSeries, bool ShowHiddenData)
-    {
-        SLC.SLCreateChartOptions Options = new SLC.SLCreateChartOptions();
-        Options.RowsAsDataSeries = RowsAsDataSeries;
-        Options.ShowHiddenData = ShowHiddenData;
-        return this.CreateChartInternal(WorksheetName, StartRowIndex, StartColumnIndex, EndRowIndex, EndColumnIndex, Options);
     }
 
     /// <summary>
@@ -862,7 +758,7 @@ public partial class SLDocument
                 // albeit a large number. This is a limitation on the double variable type.
                 // Excel can print more decimal places. You go Excel...
                 // Go Google IEEE and the floating point standard for more details.
-                
+
                 // We could store using a decimal type in SLCell, but I don't think
                 // it's worth it given speed vs accuracy vs number range issues.
                 // If you need larger number of decimal places of accuracy in a chart,
@@ -1066,7 +962,7 @@ public partial class SLDocument
         bool bIsStringReference = true;
         // we're going to assume that the format code applies to all in the "category" cells.
         string sAxisFormatCode = string.Empty;
-        
+
         SLC.SLAxisDataSourceType cat = new SLC.SLAxisDataSourceType();
         if (RowsAsDataSeries)
         {
@@ -1280,7 +1176,7 @@ public partial class SLDocument
                 nr.Formula = SLC.SLChartTool.GetChartReferenceFormula(WorksheetName, StartRowIndex + 1, StartColumnIndex, EndRowIndex, StartColumnIndex);
                 nr.NumberingCache.FormatCode = sAxisFormatCode;
             }
-            
+
             index2 = 0;
             // if the header column is hidden, I don't know what to do...
             for (i = StartRowIndex + 1; i <= EndRowIndex; ++i)

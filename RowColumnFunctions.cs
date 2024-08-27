@@ -177,7 +177,7 @@ public partial class SLDocument
         bool bItalic;
         bool bStrike;
         bool bUnderline;
-        
+
         System.Drawing.Font ftUsableFont;
         System.Drawing.SizeF szf;
 
@@ -247,7 +247,7 @@ public partial class SLDocument
                                 if (bStrike) drawstyle |= System.Drawing.FontStyle.Strikeout;
                                 if (bUnderline) drawstyle |= System.Drawing.FontStyle.Underline;
 
-                                ftUsableFont = SLTool.GetUsableNormalFont(sFontName, fFontSize, drawstyle, gbThrowExceptionsIfAny);
+                                ftUsableFont = SLTool.GetUsableNormalFont(sFontName, fFontSize, drawstyle, ThrowExceptionsIfAny);
 
                                 dictAutoFitFontCache[iStyleIndex] = (System.Drawing.Font)ftUsableFont.Clone();
                             }
@@ -921,7 +921,7 @@ public partial class SLDocument
             && AnchorRowIndex >= 1 && AnchorRowIndex <= SLConstants.RowLimit
             && iStartRowIndex != AnchorRowIndex)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
 
@@ -1078,7 +1078,7 @@ public partial class SLDocument
         bool result = false;
         if (StartRowIndex >= 1 && StartRowIndex <= SLConstants.RowLimit)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
             int i = 0, iNewIndex = 0;
@@ -1475,7 +1475,7 @@ public partial class SLDocument
         bool result = false;
         if (StartRowIndex >= 1 && StartRowIndex <= SLConstants.RowLimit)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
             int i = 0, iNewIndex = 0;
@@ -2985,7 +2985,7 @@ public partial class SLDocument
             && AnchorColumnIndex >= 1 && AnchorColumnIndex <= SLConstants.ColumnLimit
             && iStartColumnIndex != AnchorColumnIndex)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
 
@@ -3461,7 +3461,7 @@ public partial class SLDocument
         bool result = false;
         if (StartColumnIndex >= 1 && StartColumnIndex <= SLConstants.ColumnLimit)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
             int i = 0, iNewIndex = 0;
@@ -3969,7 +3969,7 @@ public partial class SLDocument
         bool result = false;
         if (StartColumnIndex >= 1 && StartColumnIndex <= SLConstants.ColumnLimit)
         {
-            this.FlattenAllSharedCellFormula();
+			CalculationFunctions.FlattenAllSharedCellFormula(this);
 
             result = true;
             int i = 0, iNewIndex = 0;
@@ -5054,7 +5054,7 @@ public partial class SLDocument
                                 if (bStrike) drawstyle |= System.Drawing.FontStyle.Strikeout;
                                 if (bUnderline) drawstyle |= System.Drawing.FontStyle.Underline;
 
-                                ftUsable = SLTool.GetUsableNormalFont(sFontName, fFontSize, drawstyle, gbThrowExceptionsIfAny);
+                                ftUsable = SLTool.GetUsableNormalFont(sFontName, fFontSize, drawstyle, ThrowExceptionsIfAny);
                                 sFormatCode = style.FormatCode;
                                 sDotNetFormatCode = SLTool.ToDotNetFormatCode(sFormatCode);
                                 if (style.HasAlignment && style.alignReal.TextRotation != null)
@@ -5215,7 +5215,7 @@ public partial class SLDocument
                                                     // the last element has the trailing spaces ignored. Hence the Reverse() above.
                                                     if (i == 0) sText = sText.TrimEnd();
 
-                                                    szf = SLTool.MeasureText(bm, g, sText, SLTool.GetUsableNormalFont(sFontName, fFontSize, drawstyle, gbThrowExceptionsIfAny));
+                                                    szf = SLTool.MeasureText(bm, g, sText, SLTool.GetUsableNormalFont(sFontName, fFontSize, drawstyle, ThrowExceptionsIfAny));
                                                     if (szf.Height > fHeight) fHeight = szf.Height;
                                                     fWidth += szf.Width;
                                                 }
@@ -5246,7 +5246,7 @@ public partial class SLDocument
                                             }
                                             else
                                             {
-                                                sText = SLTool.ToSampleDisplayFormat(fCellValue, sDotNetFormatCode, gbThrowExceptionsIfAny);
+                                                sText = SLTool.ToSampleDisplayFormat(fCellValue, sDotNetFormatCode, ThrowExceptionsIfAny);
                                             }
                                         }
                                         else
@@ -5257,7 +5257,7 @@ public partial class SLDocument
                                             }
                                             else
                                             {
-                                                sText = SLTool.ToSampleDisplayFormat(c.NumericValue, sDotNetFormatCode, gbThrowExceptionsIfAny);
+                                                sText = SLTool.ToSampleDisplayFormat(c.NumericValue, sDotNetFormatCode, ThrowExceptionsIfAny);
                                             }
                                         }
                                     }
@@ -5270,11 +5270,11 @@ public partial class SLDocument
                                                 fCellValue = 0;
                                             }
 
-                                            sText = SLTool.ToSampleDisplayFormat(fCellValue, "G10", gbThrowExceptionsIfAny);
+                                            sText = SLTool.ToSampleDisplayFormat(fCellValue, "G10", ThrowExceptionsIfAny);
                                         }
                                         else
                                         {
-                                            sText = SLTool.ToSampleDisplayFormat(c.NumericValue, "G10", gbThrowExceptionsIfAny);
+                                            sText = SLTool.ToSampleDisplayFormat(c.NumericValue, "G10", ThrowExceptionsIfAny);
                                         }
                                     }
                                     #endregion
@@ -5317,7 +5317,7 @@ public partial class SLDocument
                                 // Column.Width, which says there's an extra 5 pixels, 2 pixels on the left/right
                                 // and a pixel for the gridlines.
 
-                                // Note that this padding appears to change depending on the font/typeface and 
+                                // Note that this padding appears to change depending on the font/typeface and
                                 // font size used. (Haha... where have I seen this before...) So 5 pixels doesn't
                                 // seem to work exactly. Or maybe it's wrong because the method of measuring isn't
                                 // what Excel actually uses to measure the text.

@@ -2,15 +2,15 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 		<RootNamespace>$(MSBuildProjectName.Replace("-", "_"))</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Copyright>Copyright 2011 Vincent Tan Wai Lip</Copyright>
 		<Company>NF Software Inc.</Company>
 		<Authors>Vincent Tan, NF Software Inc.</Authors>
-		<Version>3.5.8</Version>
-		<AssemblyVersion>3.5.8.0</AssemblyVersion>
-		<FileVersion>3.5.8.0</FileVersion>
+		<Version>3.6.0</Version>
+		<AssemblyVersion>3.6.0.0</AssemblyVersion>
+		<FileVersion>3.6.0.0</FileVersion>
 		<PackageId>SpreadsheetLight.Cross.Platform</PackageId>
 		<PackageTags>spreadsheetlight openxml excel export template xlsx</PackageTags>
 		<RepositoryUrl>https://github.com/thirstyape/spreadsheetlight-cross-platform</RepositoryUrl>
@@ -23,32 +23,18 @@
 			This is a fork of the original code designed to run on .NET 6.0+. It also includes OS platform checks so that code requiring Windows will not execute on other platforms. Some features may not work on non-Windows platforms.
 		</Description>
 		<PackageReleaseNotes>
-			3.5.8
-			Bugfix for NullReferenceException on SLDocument creation on Linux (PR #4)
+			3.6.0
+			Remove support for .NET 7.0, remove obsolete methods,
 
-			3.5.7
-			Add DateOnly and TimeOnly support to SetCellValue and ImportDataTable
-
-			3.5.6
-			Fix issue causing InvalidOperationException
-
-			3.5.5
-			Update publishing to include source link, deterministic, and compiler flags
-
-			3.5.4
-			Prevent using with DocumentFormat.OpenXml &gt;= 3.0.0 due to breaking changes
-
-			3.5.3
-			Update to enable multi-targeting for .NET 6.0, .NET 7.0, and .NET 8.0
-
-			3.5.2
-			Add project icon, include XML documentation
-
-			3.5.1
-			Update to move to .NET 6.0 and improve cross platform compatibility
-
-			3.5.0
-			Original release from https://spreadsheetlight.com/
+			3.5.8 Bugfix for NullReferenceException on SLDocument creation on Linux (PR #4)
+			3.5.7 Add DateOnly and TimeOnly support to SetCellValue and ImportDataTable
+			3.5.6 Fix issue causing InvalidOperationException
+			3.5.5 Update publishing to include source link, deterministic, and compiler flags
+			3.5.4 Prevent using with DocumentFormat.OpenXml &gt;= 3.0.0 due to breaking changes
+			3.5.3 Update to enable multi-targeting for .NET 6.0, .NET 7.0, and .NET 8.0
+			3.5.2 Add project icon, include XML documentation
+			3.5.1 Update to move to .NET 6.0 and improve cross platform compatibility
+			3.5.0 Original release from https://spreadsheetlight.com/
 		</PackageReleaseNotes>
 	</PropertyGroup>
 

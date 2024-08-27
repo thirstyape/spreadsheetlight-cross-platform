@@ -7,40 +7,6 @@ namespace SpreadsheetLight;
 public partial class SLDocument
 {
     /// <summary>
-    /// <strong>Obsolete. </strong>Get the column name given the column index.
-    /// </summary>
-    /// <param name="ColumnIndex">The column index.</param>
-    /// <returns>The column name.</returns>
-    [Obsolete("Use SLConvert.ToColumnName() instead.")]
-    public static string WhatIsColumnName(int ColumnIndex)
-    {
-        return SLTool.ToColumnName(ColumnIndex);
-    }
-
-    /// <summary>
-    /// <strong>Obsolete. </strong>Get the column index given a cell reference or column name.
-    /// </summary>
-    /// <param name="Input">A cell reference such as "A1" or column name such as "A". If the input is invalid, then -1 is returned.</param>
-    /// <returns>The column index.</returns>
-    [Obsolete("Use SLConvert.ToColumnIndex() instead.")]
-    public static int WhatIsColumnIndex(string Input)
-    {
-        return SLTool.ToColumnIndex(Input);
-    }
-
-    /// <summary>
-    /// <strong>Obsolete. </strong>Get the cell reference given the row index and column index.
-    /// </summary>
-    /// <param name="RowIndex">The row index.</param>
-    /// <param name="ColumnIndex">The column index.</param>
-    /// <returns>The cell reference.</returns>
-    [Obsolete("Use SLConvert.ToCellReference() instead.")]
-    public static string WhatIsCellReference(int RowIndex, int ColumnIndex)
-    {
-        return SLTool.ToCellReference(RowIndex, ColumnIndex);
-    }
-
-    /// <summary>
     /// Get the row and column indices given a cell reference such as "C5". A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="CellReference">The cell reference in A1 format, such as "C5".</param>
@@ -405,7 +371,7 @@ public partial class SLDocument
                 if (!dn.Name.StartsWith("_xlnm")) result.Add(dn.Clone());
             }
         }
-        
+
         return result;
     }
 
@@ -757,14 +723,14 @@ public partial class SLDocument
             else style.FromHash(listStyle[0]);
             style.SetFontUnderline(UnderlineValues.Single);
             style.SetFontColor(SLThemeColorIndexValues.Hyperlink);
-            c.StyleIndex = (uint)this.SaveToStylesheet(style.ToHash());
+            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(style.ToHash(), this);
 
             if (OverwriteExistingCell)
             {
                 // in case there's a formula
                 c.CellFormula = null;
                 c.DataType = CellValues.SharedString;
-                c.CellText = this.DirectSaveToSharedStringTable(hl.Display).ToString(CultureInfo.InvariantCulture);
+                c.CellText = InternalDataStoreFunctions.DirectSaveToSharedStringTable(hl.Display, this).ToString(CultureInfo.InvariantCulture);
             }
             // else don't have to do anything
 
@@ -778,10 +744,10 @@ public partial class SLDocument
             style.FromHash(listStyle[0]);
             style.SetFontUnderline(UnderlineValues.Single);
             style.SetFontColor(SLThemeColorIndexValues.Hyperlink);
-            c.StyleIndex = (uint)this.SaveToStylesheet(style.ToHash());
+            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(style.ToHash(), this);
 
             c.DataType = CellValues.SharedString;
-            c.CellText = this.DirectSaveToSharedStringTable(hl.Display).ToString(CultureInfo.InvariantCulture);
+            c.CellText = InternalDataStoreFunctions.DirectSaveToSharedStringTable(hl.Display, this).ToString(CultureInfo.InvariantCulture);
             slws.CellWarehouse.SetValue(RowIndex, ColumnIndex, c);
         }
 

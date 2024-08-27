@@ -1228,7 +1228,7 @@ public partial class SLDocument
             }
         }
     }
-    
+
     internal void FeedDataDiagramDataPart(DiagramDataPart NewPart, DiagramDataPart ExistingPart)
     {
         using (StreamReader sr = new StreamReader(ExistingPart.GetStream()))
@@ -1639,7 +1639,7 @@ public partial class SLDocument
         }
         else
         {
-            this.SplitPanes(NumberOfRows, NumberOfColumns, true, slws.SheetFormatProperties.DefaultRowHeight, SLTool.GetDefaultRowHeadingWidth(SimpleTheme.MinorLatinFont, gbThrowExceptionsIfAny), false);
+            this.SplitPanes(NumberOfRows, NumberOfColumns, true, slws.SheetFormatProperties.DefaultRowHeight, SLTool.GetDefaultRowHeadingWidth(SimpleTheme.MinorLatinFont, ThrowExceptionsIfAny), false);
         }
     }
 
@@ -2573,7 +2573,7 @@ public partial class SLDocument
                 ++index;
                 if (ConditionalFormatting.Rules[i].HasDifferentialFormat)
                 {
-                    ConditionalFormatting.Rules[i].FormatId = (uint)this.SaveToStylesheetDifferentialFormat(ConditionalFormatting.Rules[i].DifferentialFormat.ToHash());
+                    ConditionalFormatting.Rules[i].FormatId = (uint)InternalDataStoreFunctions.SaveToStylesheetDifferentialFormat(ConditionalFormatting.Rules[i].DifferentialFormat.ToHash(), this);
                 }
 
                 bIsDataBar2010 = ConditionalFormatting.Rules[i].HasDataBar && ConditionalFormatting.Rules[i].DataBar.Is2010;
@@ -2793,7 +2793,7 @@ public partial class SLDocument
                 {
                     c = new SLCell();
                     c.DataType = CellValues.SharedString;
-                    c.NumericValue = this.DirectSaveToSharedStringTable(SLTool.XmlWrite(tc.TotalsRowLabel, gbThrowExceptionsIfAny));
+                    c.NumericValue = InternalDataStoreFunctions.DirectSaveToSharedStringTable(SLTool.XmlWrite(tc.TotalsRowLabel, ThrowExceptionsIfAny), this);
                     slws.CellWarehouse.SetValue(Table.EndRowIndex, Table.StartColumnIndex + j, c);
                 }
                 if (tc.HasTotalsRowFunction)
@@ -2809,8 +2809,8 @@ public partial class SLDocument
 
                     c = new SLCell();
                     c.CellFormula = new SLCellFormula();
-                    c.CellFormula.FormulaText = string.Format("SUBTOTAL({0},[{1}])", this.GetFunctionNumber(tc.TotalsRowFunction), tc.Name);
-                    if (!this.Calculate(tc.TotalsRowFunction, cells, out sResultText))
+                    c.CellFormula.FormulaText = string.Format("SUBTOTAL({0},[{1}])", CalculationFunctions.GetFunctionNumber(tc.TotalsRowFunction), tc.Name);
+                    if (!CalculationFunctions.Calculate(tc.TotalsRowFunction, cells, out sResultText))
                     {
                         c.DataType = CellValues.Error;
                     }

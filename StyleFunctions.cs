@@ -163,7 +163,7 @@ public partial class SLDocument
             && iEndColumnIndex >= 1 && iEndColumnIndex <= SLConstants.ColumnLimit)
         {
             result = true;
-            int iStyleIndex = this.SaveToStylesheet(Style.ToHash());
+            int iStyleIndex = InternalDataStoreFunctions.SaveToStylesheet(Style.ToHash(), this);
 
             // original style index, new style index
             Dictionary<uint, uint> stylecache = new Dictionary<uint, uint>();
@@ -191,7 +191,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(Style);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(i, j, c);
@@ -213,7 +213,7 @@ public partial class SLDocument
                             {
                                 cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                                 cellstyle.MergeStyle(Style);
-                                c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                                c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                                 stylecache[iCacheStyleIndex] = c.StyleIndex;
                             }
                             slws.CellWarehouse.SetValue(i, j, c);
@@ -233,7 +233,7 @@ public partial class SLDocument
                             {
                                 cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                                 cellstyle.MergeStyle(Style);
-                                c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                                c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                                 stylecache[iCacheStyleIndex] = c.StyleIndex;
                             }
                             slws.CellWarehouse.SetValue(i, j, c);
@@ -615,7 +615,7 @@ public partial class SLDocument
         {
             result = true;
             int i = 0;
-            int iStyleIndex = this.SaveToStylesheet(RowStyle.ToHash());
+            int iStyleIndex = InternalDataStoreFunctions.SaveToStylesheet(RowStyle.ToHash(), this);
             SLRowProperties rp;
             for (i = iStartRowIndex; i <= iEndRowIndex; ++i)
             {
@@ -658,7 +658,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(RowStyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(rowkey, colkey, c);
@@ -686,7 +686,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(RowStyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(i, colindex, c);
@@ -1437,7 +1437,7 @@ public partial class SLDocument
         {
             result = true;
             int i = 0;
-            int iStyleIndex = this.SaveToStylesheet(ColumnStyle.ToHash());
+            int iStyleIndex = InternalDataStoreFunctions.SaveToStylesheet(ColumnStyle.ToHash(), this);
             SLColumnProperties cp;
             for (i = iStartColumnIndex; i <= iEndColumnIndex; ++i)
             {
@@ -1480,7 +1480,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(ColumnStyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(rowkey, colkey, c);
@@ -1510,7 +1510,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(ColumnStyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(rowindex, i, c);
@@ -1821,7 +1821,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)c.StyleIndex]);
                             cellstyle.MergeStyle(rowstyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(rowkey, colkey, c);
@@ -1853,7 +1853,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(rowstyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(i, colindex, c);
@@ -1964,7 +1964,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)c.StyleIndex]);
                             cellstyle.MergeStyle(colstyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(rowkey, colkey, c);
@@ -1994,7 +1994,7 @@ public partial class SLDocument
                         {
                             cellstyle.FromHash(listStyle[(int)iCacheStyleIndex]);
                             cellstyle.MergeStyle(colstyle);
-                            c.StyleIndex = (uint)this.SaveToStylesheet(cellstyle.ToHash());
+                            c.StyleIndex = (uint)InternalDataStoreFunctions.SaveToStylesheet(cellstyle.ToHash(), this);
                             stylecache[iCacheStyleIndex] = c.StyleIndex;
                         }
                         slws.CellWarehouse.SetValue(rowindex, i, c);
@@ -2104,7 +2104,7 @@ public partial class SLDocument
 
         if (style.nfFormatCode.FormatCode.Length > 0)
         {
-            style.NumberFormatId = (uint)this.SaveToStylesheetNumberingFormat(style.nfFormatCode.ToHash());
+            style.NumberFormatId = (uint)InternalDataStoreFunctions.SaveToStylesheetNumberingFormat(style.nfFormatCode.ToHash(),this);
         }
         else
         {
@@ -2113,32 +2113,32 @@ public partial class SLDocument
 
         if (style.HasFont)
         {
-            style.FontId = (uint)this.SaveToStylesheetFont(style.fontReal.ToHash());
+            style.FontId = (uint)InternalDataStoreFunctions.SaveToStylesheetFont(style.fontReal.ToHash(), this);
         }
         else
         {
-            style.FontId = (uint)this.SaveToStylesheetFont(listStyleFont[0]);
+            style.FontId = (uint)InternalDataStoreFunctions.SaveToStylesheetFont(listStyleFont[0], this);
         }
 
         if (style.HasFill)
         {
-            style.FillId = (uint)this.SaveToStylesheetFill(style.fillReal.ToHash());
+            style.FillId = (uint)InternalDataStoreFunctions.SaveToStylesheetFill(style.fillReal.ToHash(), this);
         }
         else
         {
             SLFill fill = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
             fill.SetPatternType(PatternValues.None);
-            style.FillId = (uint)this.SaveToStylesheetFill(fill.ToHash());
+            style.FillId = (uint)InternalDataStoreFunctions.SaveToStylesheetFill(fill.ToHash(), this);
         }
 
         if (style.HasBorder)
         {
-            style.BorderId = (uint)this.SaveToStylesheetBorder(style.borderReal.ToHash());
+            style.BorderId = (uint)InternalDataStoreFunctions.SaveToStylesheetBorder(style.borderReal.ToHash(), this);
         }
         else
         {
             SLBorder border = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
-            style.BorderId = (uint)this.SaveToStylesheetBorder(border.ToHash());
+            style.BorderId = (uint)InternalDataStoreFunctions.SaveToStylesheetBorder(border.ToHash(), this);
         }
     }
 
@@ -2244,7 +2244,7 @@ public partial class SLDocument
                                 {
                                     fontSL = new SLFont(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                                     fontSL.FromFont((Font)oxrFont.LoadCurrentElement());
-                                    this.ForceSaveToStylesheetFont(fontSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheetFont(fontSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2261,7 +2261,7 @@ public partial class SLDocument
                                 {
                                     fillSL = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                                     fillSL.FromFill((Fill)oxrFill.LoadCurrentElement());
-                                    this.ForceSaveToStylesheetFill(fillSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheetFill(fillSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2278,7 +2278,7 @@ public partial class SLDocument
                                 {
                                     borderSL = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                                     borderSL.FromBorder((Border)oxrBorder.LoadCurrentElement());
-                                    this.ForceSaveToStylesheetBorder(borderSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheetBorder(borderSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2296,7 +2296,7 @@ public partial class SLDocument
                                     styleSL = new SLStyle(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                                     styleSL.FromCellFormat((CellFormat)oxrCellStyleFormats.LoadCurrentElement());
                                     this.TranslateStyleIdsToStyles(ref styleSL);
-                                    this.ForceSaveToStylesheetCellStylesFormat(styleSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheetCellStylesFormat(styleSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2314,7 +2314,7 @@ public partial class SLDocument
                                     styleSL = new SLStyle(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                                     styleSL.FromCellFormat((CellFormat)oxrCellFormats.LoadCurrentElement());
                                     this.TranslateStyleIdsToStyles(ref styleSL);
-                                    this.ForceSaveToStylesheet(styleSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheet(styleSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2331,7 +2331,7 @@ public partial class SLDocument
                                 {
                                     csSL = new SLCellStyle();
                                     csSL.FromCellStyle((CellStyle)oxrCellStyles.LoadCurrentElement());
-                                    this.ForceSaveToStylesheetCellStyle(csSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheetCellStyle(csSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2348,7 +2348,7 @@ public partial class SLDocument
                                 {
                                     dfSL = new SLDifferentialFormat();
                                     dfSL.FromDifferentialFormat((DifferentialFormat)oxrDiff.LoadCurrentElement());
-                                    this.ForceSaveToStylesheetDifferentialFormat(dfSL.ToHash());
+									InternalDataStoreFunctions.ForceSaveToStylesheetDifferentialFormat(dfSL.ToHash(), this);
                                 }
                             }
                         }
@@ -2428,30 +2428,30 @@ public partial class SLDocument
                 SLFont fontSL = new SLFont(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                 fontSL.SetFont(FontSchemeValues.Minor, SLConstants.DefaultFontSize);
                 fontSL.SetFontThemeColor(SLThemeColorIndexValues.Dark1Color);
-                this.SaveToStylesheetFont(fontSL.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetFont(fontSL.ToHash(), this);
             }
 
             if (listStyleFill.Count == 0)
             {
                 SLFill fillNone = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                 fillNone.SetPatternType(PatternValues.None);
-                this.SaveToStylesheetFill(fillNone.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetFill(fillNone.ToHash(), this);
 
                 SLFill fillGray125 = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                 fillGray125.SetPatternType(PatternValues.Gray125);
-                this.SaveToStylesheetFill(fillGray125.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetFill(fillGray125.ToHash(), this);
             }
             else
             {
                 // make sure there's at least a "none" pattern
                 SLFill fillNone = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
                 fillNone.SetPatternType(PatternValues.None);
-                this.SaveToStylesheetFill(fillNone.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetFill(fillNone.ToHash(), this);
             }
 
             // make sure there's at least an empty border
             SLBorder borderEmpty = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
-            this.SaveToStylesheetBorder(borderEmpty.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheetBorder(borderEmpty.ToHash(), this);
 
             int iCanonicalCellStyleFormatId = 0;
             SLStyle style = new SLStyle(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
@@ -2461,11 +2461,11 @@ public partial class SLDocument
             style.Border = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
 
             // there's at least one cell style format
-            iCanonicalCellStyleFormatId = this.SaveToStylesheetCellStylesFormat(style.ToHash());
+            iCanonicalCellStyleFormatId = InternalDataStoreFunctions.SaveToStylesheetCellStylesFormat(style.ToHash(), this);
 
             // there's at least one style
             style.CellStyleFormatId = (uint)iCanonicalCellStyleFormatId;
-            this.SaveToStylesheet(style.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheet(style.ToHash(), this);
 
             if (listStyleCellStyle.Count == 0)
             {
@@ -2474,7 +2474,7 @@ public partial class SLDocument
                 //csNormal.FormatId = 0;
                 csNormal.FormatId = (uint)iCanonicalCellStyleFormatId;
                 csNormal.BuiltinId = 0;
-                this.SaveToStylesheetCellStyle(csNormal.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetCellStyle(csNormal.ToHash(), this);
             }
         }
         else
@@ -2490,18 +2490,18 @@ public partial class SLDocument
             SLFont fontDefault = new SLFont(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
             fontDefault.SetFont(FontSchemeValues.Minor, SLConstants.DefaultFontSize);
             fontDefault.SetFontThemeColor(SLThemeColorIndexValues.Dark1Color);
-            this.SaveToStylesheetFont(fontDefault.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheetFont(fontDefault.ToHash(), this);
 
             SLFill fillNone = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
             fillNone.SetPatternType(PatternValues.None);
-            this.SaveToStylesheetFill(fillNone.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheetFill(fillNone.ToHash(), this);
 
             SLFill fillGray125 = new SLFill(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
             fillGray125.SetPatternType(PatternValues.Gray125);
-            this.SaveToStylesheetFill(fillGray125.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheetFill(fillGray125.ToHash(), this);
 
             SLBorder borderEmpty = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
-            this.SaveToStylesheetBorder(borderEmpty.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheetBorder(borderEmpty.ToHash(), this);
 
             int iCanonicalCellStyleFormatId = 0;
             SLStyle style = new SLStyle(SimpleTheme.MajorLatinFont, SimpleTheme.MinorLatinFont, SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
@@ -2509,17 +2509,17 @@ public partial class SLDocument
             style.Font = fontDefault;
             style.Fill = fillNone;
             style.Border = borderEmpty;
-            iCanonicalCellStyleFormatId = this.SaveToStylesheetCellStylesFormat(style.ToHash());
+            iCanonicalCellStyleFormatId = InternalDataStoreFunctions.SaveToStylesheetCellStylesFormat(style.ToHash(), this);
 
             style.CellStyleFormatId = (uint)iCanonicalCellStyleFormatId;
-            this.SaveToStylesheet(style.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheet(style.ToHash(), this);
 
             SLCellStyle csNormal = new SLCellStyle();
             csNormal.Name = "Normal";
             //csNormal.FormatId = 0;
             csNormal.FormatId = (uint)iCanonicalCellStyleFormatId;
             csNormal.BuiltinId = 0;
-            this.SaveToStylesheetCellStyle(csNormal.ToHash());
+			InternalDataStoreFunctions.SaveToStylesheetCellStyle(csNormal.ToHash(), this);
 
             this.TableStylesDefaultTableStyle = SLConstants.DefaultTableStyle;
             this.TableStylesDefaultPivotStyle = SLConstants.DefaultPivotStyle;
@@ -2536,22 +2536,22 @@ public partial class SLDocument
             styleSL.FromHash(listStyle[i]);
             if (styleSL.nfFormatCode.FormatCode.Length > 0)
             {
-                this.SaveToStylesheetNumberingFormat(styleSL.nfFormatCode.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetNumberingFormat(styleSL.nfFormatCode.ToHash(), this);
             }
 
             if (styleSL.HasFont)
             {
-                this.SaveToStylesheetFont(styleSL.fontReal.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetFont(styleSL.fontReal.ToHash(), this);
             }
 
             if (styleSL.HasFill)
             {
-                this.SaveToStylesheetFill(styleSL.fillReal.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetFill(styleSL.fillReal.ToHash(), this);
             }
 
             if (styleSL.HasBorder)
             {
-                this.SaveToStylesheetBorder(styleSL.borderReal.ToHash());
+				InternalDataStoreFunctions.SaveToStylesheetBorder(styleSL.borderReal.ToHash(), this);
             }
         }
 
@@ -2646,7 +2646,7 @@ public partial class SLDocument
             styleCanonical.fontReal.FromHash(listStyleFont[0]);
             styleCanonical.Fill.SetPatternType(PatternValues.None);
             styleCanonical.Border = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
-            iCanonicalCellStyleFormatId = this.SaveToStylesheetCellStylesFormat(styleCanonical.ToHash());
+            iCanonicalCellStyleFormatId = InternalDataStoreFunctions.SaveToStylesheetCellStylesFormat(styleCanonical.ToHash(), this);
             this.TranslateStylesToStyleIds(ref styleCanonical);
 
             if (listStyleCellStyleFormat.Count > countStyleCellStyleFormat)
@@ -2759,7 +2759,7 @@ public partial class SLDocument
 
                     if (dictStyleNumberingFormat.Count > 0)
                     {
-                        if (dictStyleNumberingFormat.Count == 1 
+                        if (dictStyleNumberingFormat.Count == 1
                             && dictStyleNumberingFormatHash.ContainsKey(SLConstants.NumberFormatGeneral)
                             && dictStyleNumberingFormatHash[SLConstants.NumberFormatGeneral] == 0)
                         {
@@ -2777,7 +2777,7 @@ public partial class SLDocument
                             sw.Write("<x:numFmts count=\"{0}\">", listKeys.Count);
                             for (i = 0; i < listKeys.Count; ++i)
                             {
-                                sw.Write("<x:numFmt numFmtId=\"{0}\" formatCode=\"{1}\" />", listKeys[i], SLTool.XmlWrite(dictStyleNumberingFormat[listKeys[i]], gbThrowExceptionsIfAny));
+                                sw.Write("<x:numFmt numFmtId=\"{0}\" formatCode=\"{1}\" />", listKeys[i], SLTool.XmlWrite(dictStyleNumberingFormat[listKeys[i]], ThrowExceptionsIfAny));
                             }
                             sw.Write("</x:numFmts>");
                         }
@@ -2832,7 +2832,7 @@ public partial class SLDocument
                     styleCanonical.fontReal.FromHash(listStyleFont[0]);
                     styleCanonical.Fill.SetPatternType(PatternValues.None);
                     styleCanonical.Border = new SLBorder(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors);
-                    iCanonicalCellStyleFormatId = this.SaveToStylesheetCellStylesFormat(styleCanonical.ToHash());
+                    iCanonicalCellStyleFormatId = InternalDataStoreFunctions.SaveToStylesheetCellStylesFormat(styleCanonical.ToHash(), this);
                     this.TranslateStylesToStyleIds(ref styleCanonical);
 
                     sw.Write("<x:cellStyleXfs count=\"{0}\">", listStyleCellStyleFormat.Count);
